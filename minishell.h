@@ -89,6 +89,7 @@ int	is_builtin(t_cmd cmd);
 void	pipe_loop(t_data *data);
 int	built_pwd(t_cmd cmd);
 void	built_echo(t_cmd cmd, t_envar *env);
+void	built_env(t_envar *env);
 
 // UTILS INUTILS
 void	aff_lst(t_list *lst);
