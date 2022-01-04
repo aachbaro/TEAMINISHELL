@@ -15,17 +15,18 @@ t_envar *new_env(char **env)
 
 t_envar	*add_env(t_envar **lst, char *str)
 {
-	t_envar	tmp;
+	t_envar	*tmp;
 	t_envar *save;
 
 	save = *lst;
-	tmp.str = ft_strdup(str);
-	if (tmp.str == NULL)
+	tmp = malloc(sizeof(t_envar));
+	tmp->str = ft_strdup(str);
+	if (!tmp || !tmp->str)
 		return (NULL);
-	tmp.next = NULL;
+	tmp->next = NULL;
 	while ((*lst)->next)
 		*lst = (*lst)->next;
-	(*lst)->next = &tmp;
+	(*lst)->next = tmp;
 	*lst = save;
 	return (*lst);
 }
