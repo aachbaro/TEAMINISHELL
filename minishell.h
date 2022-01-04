@@ -106,6 +106,6 @@ void	tkn_clear(t_tkn **cmd);
 
 //env
 t_envar	*init_env(char **env);
-t_envar	add_env(t_envar **lst, char *str);
+t_envar	*add_env(t_envar **lst, char *str);
 
 #endif
