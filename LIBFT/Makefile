@@ -34,45 +34,45 @@ SRCS	= ft_atoi.c \
 		 ft_toupper.c \
 		 get_next_line.c \
 		 get_next_line_utils.c \
+		 ft_lstnew.c \
+		 ft_lstadd_front.c \
+		 ft_lstsize.c \
+		 ft_lstlast.c \
+		 ft_lstadd_back.c \
+		 ft_lstdelone.c \
+		 ft_lstclear.c \
+		 ft_lstiter.c \
+		 ft_lstmap.c
 
-BONUS	= ft_lstnew.c \
-		  ft_lstadd_front.c \
-		  ft_lstsize.c \
-		  ft_lstlast.c \
-		  ft_lstadd_back.c \
-		  ft_lstdelone.c \
-		  ft_lstclear.c \
-		  ft_lstiter.c \
-		  ft_lstmap.c
+OBJS = ${SRCS:.c=.o}
+DIROBJ = objs/
+DIROBJS = $(addprefix $(DIROBJ), $(OBJS))
 
-OBJS	= ${SRCS:.c=.o}
+NAME = libft.a
 
-OBJBONUS = ${BONUS:.c=.o}
+CC = gcc
 
-NAME	= libft.a
+CFLAGS = -Wall -Wextra -Werror -Iincludes
 
-CC		= gcc
+LIB = ar -rcs
 
-CFLAGS	= -Wall -Wextra -Werror -Iincludes
+all:${NAME}
 
-RM		= rm -f
-
-LIB		= ar -rcs
-
-$(NAME):		${OBJS}
-				${LIB} ${NAME} ${OBJS}
-
-all:			${NAME}
+%.o:%.c
+	@mkdir -p $(DIROBJ)
+	@echo Compiling: $<
+	@$(CC) $(CFLAGS) -c $< -o $(DIROBJ)$@
+	
+$(NAME):${OBJS}
+	@echo Creating library $(NAME)
+	@${LIB} ${NAME} ${DIROBJS}
 
 clean:
-				${RM} ${OBJS} ${OBJBONUS}
+	rm -rf $(DIROBJ)
 
-fclean:			clean
-				${RM} ${NAME} ${OBJBONUS}
+fclean:clean
+	rm -f ${NAME}
 
-bonus:			${OBJS} ${OBJBONUS}
-				${LIB} ${NAME} ${OBJS} ${OBJBONUS}
+re:fclean all
 
-re:				fclean all
-
-.PHONY:			all clean fclean re
+.PHONY:all clean fclean re
