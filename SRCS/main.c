@@ -54,6 +54,7 @@ int	main(int ac, char **av, char **env)
 	data.over = 0;
 	if (!ac || !av)
 		return (0);
+	data.in_env = env;
 	data.env = init_env(env);
 	while(!data.over)
 	{

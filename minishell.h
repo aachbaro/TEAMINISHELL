@@ -62,6 +62,7 @@ typedef struct s_data
 	t_cmd	*cmds;
 	int		over;
 	t_envar	*env;
+	char	**in_env;
 }			t_data;
 
 // PARSER DE COMMANDE
@@ -86,7 +87,7 @@ int	exe_builtin(t_data *data, int cmd);
 void	exe_cmds(t_data *data);
 int	is_builtin(t_cmd cmd);
 void	pipe_loop(t_data *data);
-int	built_pwd(void);
+int	built_pwd(t_cmd cmd);
 void	built_echo(t_cmd cmd, t_envar *env);
 
 // UTILS INUTILS

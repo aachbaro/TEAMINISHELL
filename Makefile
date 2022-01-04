@@ -11,6 +11,8 @@ SRC = SRCS/main.c \
 	  SRCS/EXE/exec.c \
 	  SRCS/EXE/pipe_loop.c \
 	  SRCS/EXE/builtins.c \
+	  SRCS/UTILS/env_lst.c \
+
 
 LIBFT = -L./LIBFT -lft
 

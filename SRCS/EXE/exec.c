@@ -28,7 +28,7 @@ void	exe_path(t_data *data, int cmd)
 	else
 	{
 		if (execve(data->cmds[cmd].path, data->cmds[cmd].args,
-					data->env) == -1)
+					data->in_env) == -1)
 			perror(data->cmds[cmd].path);
 	}
 }
@@ -64,7 +64,7 @@ int	exe_builtin(t_data *data, int cmd)
 	if (!ft_strncmp(data->cmds[cmd].line, "echo", 4))
 		built_echo(data->cmds[cmd], data->env);
 	else if (!ft_strncmp(data->cmds[cmd].line, "pwd", 3))
-		built_pwd();
+		built_pwd(data->cmds[cmd]);
 	return (0);
 }
 

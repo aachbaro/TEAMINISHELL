@@ -16,7 +16,7 @@ int	built_pwd(t_cmd cmd)
 {
 	char	buf[1000];
 
-	if (cmd.tkn->next && cmd.tkn->next.type < 4)
+	if (cmd.tkn->next && cmd.tkn->next->type < 4)
 		return (-1);
 	getcwd(buf, 1000);
 	ft_putstr_fd(buf, 1);
@@ -62,10 +62,10 @@ void	print_dblquote(char *content, t_envar *env)
 
 void	built_echo(t_cmd cmd, t_envar *env)
 {
-	t_envar *cpy;
+	t_tkn	*cpy;
 	int	opt;
 
-	cpy = env->next;
+	cpy = cmd.tkn->next;
 	opt = 0;
 	while (cpy && cpy->type < 4 && !ft_strncmp(cpy->content, "-n", 2))
 	{
@@ -79,7 +79,7 @@ void	built_echo(t_cmd cmd, t_envar *env)
 			ft_putstr_fd(cpy->content, 1);
 		else if (cpy->type == TYPE_VAR)
 			print_var(cpy->content, env);
-		else if (cpy->type == TYPE_DBL_QUOTE)
+		else if (cpy->type == TYPE_DBLQUOTE)
 			print_dblquote(cpy->content, env);
 		cpy = cpy->next;
 	}
