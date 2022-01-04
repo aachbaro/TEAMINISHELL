@@ -52,9 +52,9 @@ int	main(int ac, char **av, char **env)
 	data.cmds = NULL;
 	data.old_line = NULL;
 	data.over = 0;
-	data.env = env;
 	if (!ac || !av)
 		return (0);
+	data.env = init_env(env);
 	while(!data.over)
 	{
 		if (data.cmds)

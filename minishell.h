@@ -23,6 +23,7 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include "LIBFT/libft.h"
+
 # define TYPE_NAME 0
 # define TYPE_QUOTE 1
 # define TYPE_DBLQUOTE 2
@@ -48,13 +49,19 @@ typedef struct s_cmd
 	t_tkn	*tkn;
 }			t_cmd;
 
+typedef struct s_envar
+{
+	char			*str;
+	struct s_envar	*next;
+}					t_envar;
+
 typedef struct s_data
 {
 	char	*line;
-	char 	*old_line;
+	char	*old_line;
 	t_cmd	*cmds;
-	int	over;
-	char 	**env;
+	int		over;
+	t_envar	*env;
 }			t_data;
 
 // PARSER DE COMMANDE
@@ -93,5 +100,9 @@ t_tkn	*tkn_new(char *content, int type);
 t_tkn	*tkn_last(t_tkn *cmd);
 void	tkn_addback(t_tkn **cmd, t_tkn *new);
 void	tkn_clear(t_tkn **cmd);
+
+//env
+t_envar	*init_env(char **env);
+t_envar	add_env(t_envar **lst, char *str);
 
 #endif
