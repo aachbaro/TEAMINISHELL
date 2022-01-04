@@ -35,26 +35,36 @@ void	exe_path(t_data *data, int cmd)
 
 int	is_builtin(t_cmd cmd)
 {
-	if (!ft_strncmp(cmd.line, "echo", 4) && ft_strlen(cmd.line) == 4)
+	if (!ft_strncmp(cmd.line, "echo", 4)
+			&& ft_strlen(cmd.tkn->content) == 4)
 		return (1);
-	if (!ft_strncmp(cmd.line, "cd", 2) && ft_strlen(cmd.line) == 2)
+	else if (!ft_strncmp(cmd.line, "cd", 2)
+			&& ft_strlen(cmd.tkn->content) == 2)
 		return (1);
-	if (!ft_strncmp(cmd.line, "pwd", 3) && ft_strlen(cmd.line) == 3)
+	else if (!ft_strncmp(cmd.line, "pwd", 3)
+			&& ft_strlen(cmd.tkn->content) == 3)
 		return (1);
-	if (!ft_strncmp(cmd.line, "export", 6) && ft_strlen(cmd.line) == 6)
+	else if (!ft_strncmp(cmd.line, "export", 6)
+			&& ft_strlen(cmd.tkn->content) == 6)
 		return (1);
-	if (!ft_strncmp(cmd.line, "unset", 5) && ft_strlen(cmd.line) == 5)
+	else if (!ft_strncmp(cmd.line, "unset", 5)
+			&& ft_strlen(cmd.tkn->content) == 5)
 		return (1);
-	if (!ft_strncmp(cmd.line, "env", 3) && ft_strlen(cmd.line) == 3)
+	else if (!ft_strncmp(cmd.line, "env", 3)
+			&& ft_strlen(cmd.tkn->content) == 3)
 		return (1);
-	if (!ft_strncmp(cmd.line, "exit", 4) && ft_strlen(cmd.line) == 4)
+	else if (!ft_strncmp(cmd.line, "exit", 4)
+			&& ft_strlen(cmd.tkn->content) == 4)
 		return (1);
 	return (0);
 }
 
 int	exe_builtin(t_data *data, int cmd)
 {
-	printf("%s : builtin en construssssion\n", data->cmds[cmd].tkn->content);
+	if (!ft_strncmp(data->cmds[cmd].line, "echo", 4))
+		built_echo(data->cmds[cmd], data->env);
+	else if (!ft_strncmp(data->cmds[cmd].line, "pwd", 3))
+		built_pwd();
 	return (0);
 }
 

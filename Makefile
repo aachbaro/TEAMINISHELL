@@ -10,6 +10,7 @@ SRC = SRCS/main.c \
 	  SRCS/UTILS/frag_manager.c \
 	  SRCS/EXE/exec.c \
 	  SRCS/EXE/pipe_loop.c \
+	  SRCS/EXE/builtins.c \
 
 LIBFT = -L./LIBFT -lft
 
