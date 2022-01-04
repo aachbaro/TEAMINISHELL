@@ -58,12 +58,12 @@ LIB = ar -rcs
 
 all:${NAME}
 
-%.o:%.c
+$(DIROBJ)%.o:%.c
 	@mkdir -p $(DIROBJ)
 	@echo Compiling: $<
-	@$(CC) $(CFLAGS) -c $< -o $(DIROBJ)$@
+	@$(CC) $(CFLAGS) -c $< -o $@
 	
-$(NAME):${OBJS}
+$(NAME):${DIROBJS}
 	@echo Creating library $(NAME)
 	@${LIB} ${NAME} ${DIROBJS}
 
