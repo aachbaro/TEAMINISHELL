@@ -30,7 +30,10 @@ OBJ = $(SRC:.c=.o)
 DIROBJ = objs/
 DIROBJS = $(addprefix $(DIROBJ), $(OBJ))
 
-all: $(NAME)
+all:LIBFT $(NAME)
+
+LIBFT:
+	@$(MAKE) -C ./LIBFT
 
 $(DIROBJ)%.o: %.c
 	@mkdir -p $(dir $@)
@@ -38,7 +41,6 @@ $(DIROBJ)%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(DIROBJS)
-	@$(MAKE) -C ./LIBFT
 	@echo Creating executable $(NAME)
 	@$(CC) $(DIROBJS) $(CFLAGS) -o $(NAME) $(INC) $(LIBFT) $(READLINE)
 
