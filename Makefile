@@ -13,7 +13,6 @@ SRC = SRCS/main.c \
 	  SRCS/EXE/exec.c \
 	  SRCS/EXE/pipe_loop.c \
 	  SRCS/EXE/builtins.c \
-	  SRCS/UTILS/env_lst.c \
 	  SRCS/SIGNALS/sig_config.c \
 	  SRCS/EXE/builtins2.c 
 
