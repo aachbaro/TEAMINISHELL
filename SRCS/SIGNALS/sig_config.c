@@ -1,14 +1,11 @@
 #include "../../minishell.h"
 
-void sigint_handler(int)
+void signal_handler(int sig)
 {
-	write(1, "\n", 1);
-	prompt(NULL);
-}
-
-void quitact_handler(int)
-{
-	write(1, "", 1);
+	if (sig == SIGQUIT)
+		write(1, "\033[2D\033[OK", 8);
+	if (sig == SIGINT)
+		printf("PROUT\n");
 }
 
 void	sig_config(void)
@@ -16,8 +13,8 @@ void	sig_config(void)
 	struct sigaction 	intact;
 	struct sigaction 	quitact;
 
-	intact.sa_handler = sigint_handler;
-	quitact.sa_handler = quitact_handler;
+	intact.sa_handler = signal_handler;
+	quitact.sa_handler = signal_handler;
 	sigaction(SIGINT, &intact, NULL);
 	sigaction(SIGQUIT, &quitact, NULL);
 }

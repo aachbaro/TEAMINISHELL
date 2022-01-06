@@ -63,10 +63,7 @@ int	main(int ac, char **av, char **env)
 			del_cmd(&data);
 		// PROMPT ET GESTION DE LHISTORIQUE
 		if (prompt(&data) == -1)
-		{
-			printf("TOTO\n");
 			break ;
-		}
 		//perror("prompt");
 		// PASSER DE LA LIGNE A PLUSIEURS COMMANDE DIVISEES
 		if (line_to_exe(&data) == -1)
