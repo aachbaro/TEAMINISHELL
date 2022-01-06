@@ -35,23 +35,21 @@ int	pars_morethan(t_data *data, int start, int cmd)
 	return (ret);
 }
 
-int	pars_var(t_data *data, int start, int cmd)
+char	*recup_var(t_data *data, int start, int cmd)
 {
-	t_tkn	*new;
-	int		i;
+	int	i;
 	char	*dup;
+	char	*ret;
 
 	i = start + 1;
 	while (!ft_strchr(" <>$\"'", data->cmds[cmd].line[i])
 			&& data->cmds[cmd].line[i])
 		i++;
-	dup = ft_strndup(data->cmds[cmd].line + start, i - start);
+	dup = ft_strndup(data->cmds[cmd].line + start + 1, i - start);
 	if (!dup)
-		return (-1);
-	new = tkn_new(dup, TYPE_VAR);
-	free(dup);
-	if (!new)
-		return (-1);
-	tkn_addback(&data->cmds[cmd].tkn, new);
-	return (i - start);
+		return (NULL);
+	ret = find_var(dup, data->env);
+	if (!ret)
+		return (NULL);
+	return (ret);
 }

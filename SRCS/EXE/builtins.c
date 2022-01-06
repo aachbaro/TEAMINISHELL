@@ -29,9 +29,13 @@ void	print_var(char *var, t_envar *env)
 	t_envar	*cpy;
 
 	cpy = env;
-	while (cpy && (ft_strncmp(var + 1, cpy->str, ft_strlen(var + 1))
-			&& cpy->str[ft_strlen(var + 1)] != '='))
+	while (cpy)
+	{
+		if (!ft_strncmp(var + 1, cpy->str, ft_strlen(var + 1))
+				&& cpy->str[ft_strlen(var + 1)] == '=')
+			break;
 		cpy = cpy->next;
+	}
 	ft_putstr_fd(cpy->str + ft_strlen(var + 1) + 1, 1);
 }
 
@@ -75,14 +79,25 @@ void	built_echo(t_cmd cmd, t_envar *env)
 	}
 	while (cpy && cpy->type < 4)
 	{
-		if (cpy->type <= TYPE_QUOTE)
+		if (cpy->type <= TYPE_DBLQUOTE)
 			ft_putstr_fd(cpy->content, 1);
 		else if (cpy->type == TYPE_VAR)
 			print_var(cpy->content, env);
-		else if (cpy->type == TYPE_DBLQUOTE)
-			print_dblquote(cpy->content, env);
 		cpy = cpy->next;
 	}
-	if (opt)
+	if (!opt)
 		write(1, "\n", 1);
+}
+
+void	built_env(t_envar *env)
+{
+	t_envar	*cpy;
+
+	cpy = env;
+	while (cpy)
+	{
+		ft_putstr_fd(cpy->str, 1);
+		write(1, "\n", 1);
+		cpy = cpy->next;
+	}
 }

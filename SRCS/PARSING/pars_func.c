@@ -54,27 +54,6 @@ int	pars_quote(t_data *data, int start, int cmd)
 	return (i - start + 1);
 }
 
-int	pars_dblquote(t_data *data, int start, int cmd)
-{
-	int		i;
-	t_tkn	*new;
-	char	*dup;
-
-	i = start + 1;
-	while (data->cmds[cmd].line[i] != '"'
-			&& data->cmds[cmd].line[i])
-		i++;
-	dup = ft_strndup(data->cmds[cmd].line + start + 1, i - start - 1);
-	if (!dup)
-		return (-1);
-	new = tkn_new(dup, TYPE_DBLQUOTE);
-	free(dup);
-	if (!new)
-		return (-1);
-	tkn_addback(&data->cmds[cmd].tkn, new);
-	return (i - start + 1);
-}
-
 int	pars_lessthan(t_data *data, int start, int cmd)
 {
 	t_tkn	*new;

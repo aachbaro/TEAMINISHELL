@@ -73,8 +73,6 @@ int	main(int ac, char **av, char **env)
 			perror("shell");
 		//pipe_loop(&data);
 		exe_cmds(&data);
-		if (!ft_strncmp(data.line, "exit", 4))
-			data.over = 1;
 		free(data.line);
 	}
 	free_all(&data);
