@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <errno.h>
 # include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -107,5 +108,8 @@ void	tkn_clear(t_tkn **cmd);
 //env
 t_envar	*init_env(char **env);
 t_envar	*add_env(t_envar **lst, char *str);
+
+//signals
+void	sig_config(void);
 
 #endif

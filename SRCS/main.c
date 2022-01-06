@@ -56,13 +56,18 @@ int	main(int ac, char **av, char **env)
 		return (0);
 	data.in_env = env;
 	data.env = init_env(env);
+	sig_config();
 	while(!data.over)
 	{
 		if (data.cmds)
 			del_cmd(&data);
 		// PROMPT ET GESTION DE LHISTORIQUE
 		if (prompt(&data) == -1)
-			perror("prompt");
+		{
+			printf("TOTO\n");
+			break ;
+		}
+		//perror("prompt");
 		// PASSER DE LA LIGNE A PLUSIEURS COMMANDE DIVISEES
 		if (line_to_exe(&data) == -1)
 			perror("shell");

@@ -72,6 +72,6 @@ void	free_all(t_data *data)
 {
 	if (data->old_line)
 		free(data->old_line);
-	if (data->cmds->line)
+	if (data->line && data->cmds->line)
 		del_cmd(data);
 }

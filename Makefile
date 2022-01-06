@@ -12,6 +12,7 @@ SRC = SRCS/main.c \
 	  SRCS/EXE/pipe_loop.c \
 	  SRCS/EXE/builtins.c \
 	  SRCS/UTILS/env_lst.c \
+	  SRCS/SIGNALS/sig_config.c \
 
 
 LIBFT = -L./LIBFT -lft
@@ -22,7 +23,7 @@ CC = gcc #clang
 
 INC = -I./minishell.h
 
-CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 
 RM = rm -rf
 
