@@ -9,7 +9,6 @@ SRC = SRCS/main.c \
 	  SRCS/PARSING/dblquote_shits.c \
 	  SRCS/UTILS/utils1.c \
 	  SRCS/UTILS/frag_manager.c \
-	  SRCS/UTILS/env_lst.c \
 	  SRCS/EXE/exec.c \
 	  SRCS/EXE/pipe_loop.c \
 	  SRCS/EXE/builtins.c \
