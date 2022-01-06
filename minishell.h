@@ -33,6 +33,15 @@
 # define TYPE_HRDOC 6
 # define TYPE_APPEND 7
 
+typedef struct s_dblquote_parser
+{
+	int	i;
+	int	j;
+	char	*str;
+	char	*tmp;
+	char	*tmp2;
+}		t_dblquote_parser;
+
 typedef struct s_tkn
 {
 	char			*content;
@@ -71,6 +80,10 @@ int		split_cmds(t_data *data, char *str);
 int		line_to_tokens(t_data *data);
 int		pars_alnum(t_data *data, int start, int cmd);
 int		pars_quote(t_data *data, int start, int cmd);
+int		get_dblquote_size(t_data *data, int start, int cmd);
+char		*recup_var(t_data *data, int start, int cmd);
+char		*find_var(char *var, t_envar *env);
+void		fill_dblquote(t_data *data, int start, int cmd);
 int		pars_dblquote(t_data *data, int start, int cmd);
 int		pars_lessthan(t_data *data, int start, int cmd);
 int		pars_morethan(t_data *data, int start, int cmd);
@@ -90,6 +103,7 @@ void	pipe_loop(t_data *data);
 int	built_pwd(t_cmd cmd);
 void	built_echo(t_cmd cmd, t_envar *env);
 void	built_env(t_envar *env);
+void	built_cd(t_cmd cmd);
 
 // UTILS INUTILS
 void	aff_lst(t_list *lst);

@@ -6,12 +6,14 @@ SRC = SRCS/main.c \
 	  SRCS/PARSING/pars_func2.c \
 	  SRCS/PARSING/tkn_to_exe.c \
 	  SRCS/PARSING/parser.c \
+	  SRCS/PARSING/dblquote_shits.c \
 	  SRCS/UTILS/utils1.c \
 	  SRCS/UTILS/frag_manager.c \
+	  SRCS/UTILS/env_lst.c \
 	  SRCS/EXE/exec.c \
 	  SRCS/EXE/pipe_loop.c \
 	  SRCS/EXE/builtins.c \
-	  SRCS/UTILS/env_lst.c \
+	  SRCS/EXE/builtins2.c \
 
 
 LIBFT = -L./LIBFT -lft

@@ -67,6 +67,8 @@ int	exe_builtin(t_data *data, int cmd)
 		built_pwd(data->cmds[cmd]);
 	else if (!ft_strncmp(data->cmds[cmd].line, "env", 3))
 		built_env(data->env);
+	else if (!ft_strncmp(data->cmds[cmd].line, "cd", 2))
+		built_cd(data->cmds[cmd]);
 	else if (!ft_strncmp(data->cmds[cmd].line, "exit", 4))
 		data->over = 1;
 	return (0);

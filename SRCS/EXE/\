@@ -14,29 +14,17 @@
 
 char	*find_var(char *var, t_envar *env)
 {
-	t_envar	*cpy;
-	char	*ret;
+	t_envar *cpy;
 
 	cpy = env;
 	while (cpy)
 	{
-		if (!ft_strncmp(var + 1, cpy->str, ft_strlen(var + 1))
-				&& cpy->str[ft_strlen(var + 1)] == '=')
-			break;
-		cpy = cpy->next;
+
 	}
-	if (cpy)
-	{
-		ret = ft_strdup(cpy->str + ft_strlen(var + 1) + 1);
-		if (!ret)
-			return (NULL);
-	}
-	else
-		ret = ft_strdup("");
-	return (ret);
+
 }
 
-void	built_cd(t_cmd cmd)
+void	built_cd(t_cmd cmd, t_envar *env)
 {
 	t_tkn	*cpy;
 	int	i;
@@ -50,10 +38,9 @@ void	built_cd(t_cmd cmd)
 	}
 	if (i != 2)
 	{
-		ft_putstr_fd("Shell: cd: Wrong number of arguments\n", 1);
+		ft_putstr_fd("-Shell: cd: Wrong number of arguments");
 		return ;
 	}
-	if (chdir(cmd.tkn->next->content) == -1)
-		perror("cd");
+	if (chdir(cmd.tkn->next->content))
+		
 }
-
