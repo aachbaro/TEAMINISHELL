@@ -62,7 +62,7 @@ int	is_builtin(t_cmd cmd)
 int	exe_builtin(t_data *data, int cmd)
 {
 	if (!ft_strncmp(data->cmds[cmd].line, "echo", 4))
-		built_echo(data->cmds[cmd], data->env);
+		built_echo(data->cmds[cmd]);
 	else if (!ft_strncmp(data->cmds[cmd].line, "pwd", 3))
 		built_pwd(data->cmds[cmd]);
 	else if (!ft_strncmp(data->cmds[cmd].line, "env", 3))

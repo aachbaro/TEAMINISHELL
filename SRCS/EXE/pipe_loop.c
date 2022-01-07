@@ -19,6 +19,7 @@ void	pipe_loop(t_data *data)
 	int	fds[2];
 	int	old_fds[2];
 	int	pid;
+	int	status;
 
 	i = 0;
 	while (data->cmds[i].line)
@@ -57,10 +58,12 @@ void	pipe_loop(t_data *data)
 				old_fds[0] = fds[0];
 				old_fds[1] = fds[1];
 			}
+			waitpid(pid, &status, 0);
+			kill(pid, SIGTERM);
 		}
 		i++;
 	}
-	if (i > 1)
+	if (i)
 	{
 		close(old_fds[0]);
 		close(old_fds[1]);

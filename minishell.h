@@ -102,7 +102,7 @@ void	exe_cmds(t_data *data);
 int	is_builtin(t_cmd cmd);
 void	pipe_loop(t_data *data);
 int	built_pwd(t_cmd cmd);
-void	built_echo(t_cmd cmd, t_envar *env);
+void	built_echo(t_cmd cmd);
 void	built_env(t_envar *env);
 void	built_cd(t_cmd cmd);
 

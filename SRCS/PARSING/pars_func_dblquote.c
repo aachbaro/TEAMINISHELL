@@ -12,6 +12,30 @@
 
 #include "../../minishell.h"
 
+char	*find_var(char *var, t_envar *env)
+{
+	t_envar	*cpy;
+	char	*ret;
+
+	cpy = env;
+	while (cpy)
+	{
+		if (!ft_strncmp(var + 1, cpy->str, ft_strlen(var + 1))
+				&& cpy->str[ft_strlen(var + 1)] == '=')
+			break;
+		cpy = cpy->next;
+	}
+	if (cpy)
+	{
+		ret = ft_strdup(cpy->str + ft_strlen(var + 1) + 1);
+		if (!ret)
+			return (NULL);
+	}
+	else
+		ret = ft_strdup("");
+	return (ret);
+}
+
 int	pars_var(t_data *data, int start, int cmd)
 {
 	t_tkn	*new;

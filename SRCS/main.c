@@ -68,8 +68,8 @@ int	main(int ac, char **av, char **env)
 		// PASSER DE LA LIGNE A PLUSIEURS COMMANDE DIVISEES
 		if (line_to_exe(&data) == -1)
 			perror("shell");
-		//pipe_loop(&data);
-		exe_cmds(&data);
+		pipe_loop(&data);
+		//exe_cmds(&data);
 		free(data.line);
 	}
 	free_all(&data);
