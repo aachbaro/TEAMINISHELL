@@ -1,46 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   built_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 18:50:08 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/12/14 19:06:12 by aachbaro         ###   ########.fr       */
+/*   Created: 2022/01/14 17:25:11 by ababaei           #+#    #+#             */
+/*   Updated: 2022/01/14 18:27:32 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*find_var(char *var, t_envar *env)
+/*
+ * builtin env
+ * display all the environnement variables
+ */
+
+void	built_env(t_envar *env)
 {
-	t_envar *cpy;
+	t_envar	*cpy;
 
 	cpy = env;
 	while (cpy)
 	{
-
-	}
-
-}
-
-void	built_cd(t_cmd cmd, t_envar *env)
-{
-	t_tkn	*cpy;
-	int	i;
-
-	cpy = cmd.tkn;
-	i = 0;
-	while (cpy && cpy->type < TYPE_QUOTE)
-	{
-		i++;
+		ft_putstr_fd(cpy->str, 1);
+		write(1, "\n", 1);
 		cpy = cpy->next;
 	}
-	if (i != 2)
-	{
-		ft_putstr_fd("-Shell: cd: Wrong number of arguments");
-		return ;
-	}
-	if (chdir(cmd.tkn->next->content))
-		
 }

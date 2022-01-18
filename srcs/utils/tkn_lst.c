@@ -6,11 +6,17 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 13:53:44 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/12/17 17:05:08 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/01/14 17:05:02 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+/*
+ * token chained list utilities:
+ * Those functions help creating, adding, deleting 
+ * node in the token chained list.
+ */
 
 t_tkn	*tkn_new(char *content, int type)
 {

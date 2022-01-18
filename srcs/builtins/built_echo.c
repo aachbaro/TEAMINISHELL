@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   built_echo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 18:50:08 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/12/14 19:06:12 by aachbaro         ###   ########.fr       */
+/*   Created: 2022/01/14 17:23:21 by ababaei           #+#    #+#             */
+/*   Updated: 2022/01/14 18:27:21 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	built_pwd(t_cmd cmd)
-{
-	char	buf[1000];
-
-	if (cmd.tkn->next && cmd.tkn->next->type < 4)
-		return (-1);
-	getcwd(buf, 1000);
-	ft_putstr_fd(buf, 1);
-	ft_putchar_fd('\n', 1);
-	return (0);
-}
+/* 
+ * builtin echo
+ * display a line of text
+ */
 
 void	built_echo(t_cmd cmd)
 {
@@ -45,38 +38,4 @@ void	built_echo(t_cmd cmd)
 	}
 	if (!opt)
 		write(1, "\n", 1);
-}
-
-void	built_env(t_envar *env)
-{
-	t_envar	*cpy;
-
-	cpy = env;
-	while (cpy)
-	{
-		ft_putstr_fd(cpy->str, 1);
-		write(1, "\n", 1);
-		cpy = cpy->next;
-	}
-}
-
-void	built_cd(t_cmd cmd)
-{
-	t_tkn	*cpy;
-	int	i;
-
-	cpy = cmd.tkn;
-	i = 0;
-	while (cpy && cpy->type < TYPE_QUOTE)
-	{
-		i++;
-		cpy = cpy->next;
-	}
-	if (i != 2)
-	{
-		ft_putstr_fd("Shell: cd: Wrong number of arguments\n", 1);
-		return ;
-	}
-	if (chdir(cmd.tkn->next->content) == -1)
-		perror("cd");
 }

@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/12/22 16:52:14 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/01/14 18:18:14 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <fcntl.h>
-# include "LIBFT/libft.h"
+# include "libft/libft.h"
 
 # define TYPE_NAME 0
 # define TYPE_QUOTE 1
@@ -91,6 +91,7 @@ int		pars_morethan(t_data *data, int start, int cmd);
 int		pars_var(t_data *data, int start, int cmd);
 int		tkn_to_exe(t_data *data, int cmd);
 int		line_to_exe(t_data *data);
+int		inputing(t_data *data);
 
 // ELSE
 int	prompt(t_data *data);
@@ -113,6 +114,9 @@ void	del_tab(char **tab);
 void	del_cmd(t_data *data);
 char	*ft_strndup(const char *s, int n);
 void	free_all(t_data *data);
+
+//INIT
+void	shell_start(t_data *data, char **env);
 
 // FRAG UTILS
 t_tkn	*tkn_new(char *content, int type);

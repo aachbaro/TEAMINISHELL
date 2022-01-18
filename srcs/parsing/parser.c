@@ -6,25 +6,28 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 16:46:10 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/12/17 18:11:36 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/01/14 16:37:53 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+/*
+ * On fait un split de la ligne sur les pipe
+ * Puis creer une liste chainee de token pour chaque "mot" de la commande
+ * a la fin on a un tableau de commande qui contien pour chaque element:
+ * la commande en entier en char*, le path de la commande, 
+ * les arguments et la liste chainee de tkn, chaque tkn a un char* du "mot"
+ * et le type du mot entre par rxemple "<<" ou une variable "$"
+ * ces structures sont remplie dans les fonction line to token puis
+ * tkn to exe, dans tkn\
+ */
 
 int	line_to_exe(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	// On fait un split de la ligne sur les pipe
-	// Puis creer une liste chainee de token pour chaque "mot" de la commande
-	// a la fin on a un tableau de commande qui contien pour chaque element:
-	// la commande en entier en char*, le path de la commande, 
-	// les arguments et la liste chainee de tkn, chaque tkn a un char* du "mot"
-	// et le type du mot entre par rxemple "<<" ou une variable "$"
-	// ces structures sont remplie dans les fonction line to token puis
-	// tkn to exe, dans tkn  
 	if (line_to_tokens(data) == -1)
 		return (-1);
 	while (data->cmds[i].line)
