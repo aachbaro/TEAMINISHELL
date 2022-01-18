@@ -20,8 +20,13 @@ void	pipe_loop(t_data *data)
 	int	old_fds[2];
 	int	pid;
 	int	status;
+	int	old_out;
+	int	old_in;
 
 	i = 0;
+	old_out = dup(STDOUT_FILENO);
+	old_in = dup(STDIN_FILENO);
+	status = 0;
 	while (data->cmds[i].line)
 	{
 		if (data->cmds[i + 1].line)
@@ -68,4 +73,8 @@ void	pipe_loop(t_data *data)
 		close(old_fds[0]);
 		close(old_fds[1]);
 	}
+	dup2(old_out, STDOUT_FILENO);
+	dup2(old_in, STDIN_FILENO);
+	close(old_out);
+	close(old_in);
 }
