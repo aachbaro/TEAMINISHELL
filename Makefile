@@ -1,26 +1,35 @@
 NAME = minishell
 
-SRC = SRCS/main.c \
-	  SRCS/PARSING/line_to_tkn.c \
-	  SRCS/PARSING/pars_func.c \
-	  SRCS/PARSING/tkn_to_exe.c \
-	  SRCS/PARSING/parser.c \
-	  SRCS/PARSING/pars_func_dblquote.c \
-	  SRCS/UTILS/utils1.c \
-	  SRCS/UTILS/frag_manager.c \
-	  SRCS/UTILS/env_lst.c \
-	  SRCS/EXE/exec.c \
-	  SRCS/EXE/pipe_loop.c \
-	  SRCS/EXE/builtins.c \
-	  SRCS/SIGNALS/sig_config.c \
+SRC = srcs/main.c \
+	  srcs/parsing/line_to_tkn.c \
+	  srcs/parsing/pars_func.c \
+	  srcs/parsing/tkn_to_exe.c \
+	  srcs/parsing/parser.c \
+	  srcs/parsing/wait_input.c \
+	  srcs/parsing/pars_func_dblquote.c \
+	  srcs/utils/utils1.c \
+	  srcs/utils/tkn_lst.c \
+	  srcs/utils/debug.c \
+	  srcs/utils/delete_cmd.c \
+	  srcs/utils/delete_tab.c \
+	  srcs/utils/free_all.c \
+	  srcs/env_utils/env_lst.c \
+	  srcs/exe/exec.c \
+	  srcs/exe/pipe_loop.c \
+	  srcs/signals/sig_config.c \
+	  srcs/builtins/built_cd.c \
+	  srcs/builtins/built_echo.c \
+	  srcs/builtins/built_env.c \
+	  srcs/builtins/built_pwd.c \
+	  srcs/init/shell_start.c
 
-LIBFT = -L./LIBFT -lft
+libft = -Llibft/ -lft
 
 READLINE = -L/usr/local/lib -I/usr/local/include -lreadline
 
 CC = gcc #clang
 
-INC = -I./minishell.h
+INC = -Iminishell.h
 
 CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 
@@ -30,10 +39,10 @@ OBJ = $(SRC:.c=.o)
 DIROBJ = objs/
 DIROBJS = $(addprefix $(DIROBJ), $(OBJ))
 
-all:MLIBFT $(NAME)
+all:LIBFT $(NAME)
 
-MLIBFT:
-	@$(MAKE) -C ./LIBFT
+LIBFT:
+	@$(MAKE) -C libft/
 
 $(DIROBJ)%.o: %.c
 	@mkdir -p $(dir $@)
@@ -42,14 +51,14 @@ $(DIROBJ)%.o: %.c
 
 $(NAME): $(DIROBJS) 
 	@echo Creating executable $(NAME)
-	@$(CC) $(DIROBJS) $(CFLAGS) -o $(NAME) $(INC) $(LIBFT) $(READLINE)
+	@$(CC) $(DIROBJS) $(CFLAGS) -o $(NAME) $(INC) $(libft) $(READLINE)
 
 clean:
 	@$(RM) $(DIROBJ)
-	@$(MAKE) clean -C ./LIBFT
+	@$(MAKE) clean -C libft/
 
 fclean: clean
-	@$(MAKE) fclean -C ./LIBFT
+	@$(MAKE) fclean -C libft/
 	@$(RM) $(SAVE)
 	@$(RM) $(NAME)
 
