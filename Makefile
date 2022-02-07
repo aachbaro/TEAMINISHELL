@@ -16,6 +16,7 @@ SRC = srcs/main.c \
 	  srcs/utils/delete_tab.c \
 	  srcs/utils/free_all.c \
 	  srcs/env_utils/env_lst.c \
+	  srcs/env_utils/free_envar.c \
 	  srcs/env_utils/ft_isexported.c \
 	  srcs/exe/exec.c \
 	  srcs/exe/pipe_loop.c \

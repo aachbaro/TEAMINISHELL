@@ -133,7 +133,7 @@ int		built_pwd(t_cmd cmd);
 void	built_echo(t_cmd cmd);
 void	built_env(t_envar *env);
 void	built_cd(t_cmd cmd);
-void	built_unset(t_cmd cmd, t_envar *env);
+int	built_unset(t_cmd cmd, t_envar **env);
 int	is_builtin(t_cmd cmd);
 int	pipe_loop(t_data *data);
 void    save_initial_fds(t_pipetools *pipes);
@@ -169,6 +169,7 @@ t_envar	*init_env(char **env);
 t_envar	*add_env(t_envar **lst, char *str);
 void	delete_env(t_envar **lst, char *name);
 int		ft_isexported(t_envar *lst, char *name);
+void	free_envar(t_envar *var);
 
 //signals
 void	sig_config(void);
