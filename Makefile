@@ -7,9 +7,9 @@ SRC = srcs/main.c \
 	  srcs/parsing/parser.c \
 	  srcs/parsing/wait_input.c \
 	  srcs/parsing/pars_func_dblquote.c \
-	  srcs/utils/utils1.c \
+	  srcs/debug/utils1.c \
 	  srcs/utils/tkn_lst.c \
-	  srcs/utils/debug.c \
+	  srcs/debug/debug.c \
 	  srcs/utils/delete_cmd.c \
 	  srcs/utils/delete_tab.c \
 	  srcs/utils/free_all.c \
@@ -21,6 +21,7 @@ SRC = srcs/main.c \
 	  srcs/builtins/built_echo.c \
 	  srcs/builtins/built_env.c \
 	  srcs/builtins/built_pwd.c \
+	  srcs/builtins/built_unset.c \
 	  srcs/init/shell_start.c
 
 libft = -Llibft/ -lft

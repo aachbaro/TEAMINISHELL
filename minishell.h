@@ -62,6 +62,8 @@ typedef struct s_cmd
 typedef struct s_envar
 {
 	char			*str;
+	char			*key;
+	char			*value;
 	struct s_envar	*next;
 }					t_envar;
 
@@ -98,14 +100,15 @@ int	prompt(t_data *data);
 
 // EXECUTION
 void	exe_path(t_data *data, int cmd);
-int	exe_builtin(t_data *data, int cmd);
+int		exe_builtin(t_data *data, int cmd);
 void	exe_cmds(t_data *data);
-int	is_builtin(t_cmd cmd);
+int		is_builtin(t_cmd cmd);
 void	pipe_loop(t_data *data);
-int	built_pwd(t_cmd cmd);
+int		built_pwd(t_cmd cmd);
 void	built_echo(t_cmd cmd);
 void	built_env(t_envar *env);
 void	built_cd(t_cmd cmd);
+void	built_unset(t_cmd cmd, t_envar *env);
 
 // UTILS INUTILS
 void	aff_lst(t_list *lst);

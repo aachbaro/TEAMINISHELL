@@ -44,7 +44,8 @@ int	prompt(t_data *data)
 	// On recupere la commande entree par l'utilsateur
 	data->line = readline("~>");
 	// Check si on doit rentrer la ligen dans lhistorique
-	printf("DEBUG::%s::\n", data->line);
+	data->env = data->env->next;
+	printf("DEBUG::%s\n%s\n%s::\n", data->line, data->env->key, data->env->value);
 	if (!data->line)
 		return (-1);
 	if (!data->old_line || (ft_strncmp(data->line, data->old_line,
