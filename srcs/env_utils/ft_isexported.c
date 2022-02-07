@@ -1,41 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_echo.c                                       :+:      :+:    :+:   */
+/*   ft_isexported.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 17:23:21 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/20 12:40:33 by ababaei          ###   ########.fr       */
+/*   Created: 2022/01/20 16:18:23 by ababaei           #+#    #+#             */
+/*   Updated: 2022/02/01 16:16:00 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/* 
- * builtin echo
- * display a line of text
+/*
+ * this function returns 0 if the var is not find in the environnement
+ * and 1 if it does
  */
 
-void	built_echo(t_cmd cmd)
+int	ft_isexported(t_envar *lst, char *name)
 {
-	t_tkn	*cpy;
-	int	opt;
+	int i;
 
-	cpy = cmd.tkn->next;
-	opt = 0;
-	while (cpy && cpy->type < 4 && !ft_strncmp(cpy->content, "-n", 2))
+	i = 0;
+	if (!lst || !name)
+		return (0);
+	while(name[i] != '=')
+		i++;	
+	while (lst->next)
 	{
-		if (!ft_strncmp(cpy->content, "-n", 2))
-			opt = 1;
-		cpy = cpy->next;
+		if (!ft_strncmp(lst->str, name, i))
+			return (1);
+		lst = lst->next;
 	}
-	while (cpy && cpy->type < 4)
-	{
-		if (cpy->type <= TYPE_VAR)
-			ft_putstr_fd(cpy->content, 1);
-		cpy = cpy->next;
-	}
-	if (!opt)
-		write(1, "\n", 1);
+	return (0);
 }

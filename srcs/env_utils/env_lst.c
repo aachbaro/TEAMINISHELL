@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:54:20 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/18 11:11:02 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/01/20 16:17:45 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,22 @@ t_envar	*init_env(char **env)
 	while (env[++i])
 		add_env(&envlst, env[i]);
 	return (envlst);
+}
+
+void	delete_env(t_envar **lst, char *name)
+{
+	t_envar *tmp;
+
+	while (ft_strncmp((*lst)->str, name, ft_strlen(name)))
+	{
+		tmp = *lst;
+		*lst = (*lst)->next;
+	}
+	if (!(*lst) || *((*lst)->str + 1) != '=')
+		return ;
+	if ((*lst)->str)
+		free((*lst)->str);
+	tmp->next = (*lst)->next;
+	free(*lst);
+	*lst = tmp;
 }

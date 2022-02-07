@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:56:38 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/12/17 18:18:22 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/01 16:26:59 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	exe_builtin(t_data *data, int cmd)
 		built_env(data->env);
 	else if (!ft_strncmp(data->cmds[cmd].line, "cd", 2))
 		built_cd(data->cmds[cmd]);
+	else if (!ft_strncmp(data->cmds[cmd].line, "export", 2))
+		built_export(data->cmds[cmd], data->env);
 	else if (!ft_strncmp(data->cmds[cmd].line, "exit", 4))
 		data->over = 1;
 	return (0);
