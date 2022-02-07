@@ -27,6 +27,7 @@ t_tkn	*tkn_new(char *content, int type)
 		return (NULL);
 	new->content = ft_strdup(content);
 	new->type = type;
+	new->space = 0;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

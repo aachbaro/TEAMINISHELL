@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_start.c                                      :+:      :+:    :+:   */
+/*   display_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 15:21:01 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/14 18:27:56 by ababaei          ###   ########.fr       */
+/*   Created: 2022/02/01 17:00:40 by ababaei           #+#    #+#             */
+/*   Updated: 2022/02/01 20:43:41 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
-
 /*
- * shell starter
- * assign starter values, create environnement, and config signal handlers
+ * Display the environnement variables
+ * either with env or export builtins with the flag
+ * flag 0 -> env builtin
+ * flag 1 -> export builtin, put "declare -x " before every var
  */
 
-void	shell_start(t_data *data, char **env)
+void	display_env(t_envar *env, int flag)
 {
-	data->cmds = NULL;
-	data->prev_input = NULL;
-	data->over = 0;
-	data->in_env = env;
-	data->env = init_env(env);
-	sig_config();
+	while (env)
+	{
+		if (flag)
+			
+	}
 }

@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_start.c                                      :+:      :+:    :+:   */
+/*   built_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 15:21:01 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/14 18:27:56 by ababaei          ###   ########.fr       */
+/*   Created: 2022/01/20 12:28:31 by ababaei           #+#    #+#             */
+/*   Updated: 2022/02/01 16:24:54 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 /*
- * shell starter
- * assign starter values, create environnement, and config signal handlers
- */
+ * Let you export a variable in your environnement
+ 
 
-void	shell_start(t_data *data, char **env)
+void	change_env(t_envar *env, char *from, char *to)
 {
-	data->cmds = NULL;
-	data->prev_input = NULL;
-	data->over = 0;
-	data->in_env = env;
-	data->env = init_env(env);
-	sig_config();
+	
+}*/
+
+void	built_export(t_cmd cmd, t_envar *env)
+{
+	t_tkn	*cpy;
+		
+	printf("TOTO\n");
+	cpy = cmd.tkn->next;
+	if (cpy->next || cpy->type > 3)
+		return ; // msg erreur type export [name[=value]...]
+	if (ft_isexported(env, cpy->content))
+		printf("CACA\n");
 }

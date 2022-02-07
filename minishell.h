@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/01/14 18:18:14 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/01 16:22:11 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ typedef struct s_dblquote_parser
 
 typedef struct s_tkn
 {
-	char			*content;
-	int				type;
+	char		*content;
+	int		type;
+	int		space;
 	struct s_tkn	*prev;
 	struct s_tkn	*next;
-}					t_tkn;
+}			t_tkn;
 
 typedef struct s_cmd
 {
@@ -67,14 +68,33 @@ typedef struct s_envar
 	struct s_envar	*next;
 }					t_envar;
 
+typedef struct s_redirtools
+{
+	int	save_stdin;
+	int	save_stdout;
+	int	fd_in;
+	int	fd_out;
+}		t_redirtools;
+
+typedef struct s_pipetools
+{
+	int		fds[2];
+	int		old_fds[2];
+	int		pid;
+	int		status;
+	int		save_stdin;
+	int		save_stdout;
+	t_redirtools	redir;
+}			t_pipetools;
+
 typedef struct s_data
 {
-	char	*line;
-	char	*old_line;
-	t_cmd	*cmds;
+	char		*usr_input;
+	char		*prev_input;
+	t_cmd		*cmds;
 	int		over;
-	t_envar	*env;
-	char	**in_env;
+	t_envar		*env;
+	char		**in_env;
 }			t_data;
 
 // PARSER DE COMMANDE
@@ -93,6 +113,11 @@ int		pars_morethan(t_data *data, int start, int cmd);
 int		pars_var(t_data *data, int start, int cmd);
 int		tkn_to_exe(t_data *data, int cmd);
 int		line_to_exe(t_data *data);
+int		input_to_tokens(t_data *data);
+int		redir_in_tkns(t_data *data);
+int		set_redir(t_cmd *cmd);
+int		spaces_between_tkns(t_data *data);
+int		merge_tokens(t_cmd *cmd);
 int		inputing(t_data *data);
 
 // ELSE
@@ -102,6 +127,7 @@ int	prompt(t_data *data);
 void	exe_path(t_data *data, int cmd);
 int		exe_builtin(t_data *data, int cmd);
 void	exe_cmds(t_data *data);
+<<<<<<< HEAD
 int		is_builtin(t_cmd cmd);
 void	pipe_loop(t_data *data);
 int		built_pwd(t_cmd cmd);
@@ -109,6 +135,24 @@ void	built_echo(t_cmd cmd);
 void	built_env(t_envar *env);
 void	built_cd(t_cmd cmd);
 void	built_unset(t_cmd cmd, t_envar *env);
+=======
+int	is_builtin(t_cmd cmd);
+int	pipe_loop(t_data *data);
+void    save_initial_fds(t_pipetools *pipes);
+void    child_process(t_pipetools *pipes, t_data *data, int i);
+void    parent_process(t_pipetools *pipes, t_data *data, int i);
+void    restaure_initial_fds(t_pipetools *pipes , int i);
+int	built_pwd(t_cmd cmd);
+void	built_echo(t_cmd cmd);
+void	built_env(t_envar *env);
+void	built_cd(t_cmd cmd);
+int	init_fds_redir(t_cmd cmd, t_redirtools *redir);
+void	restaure_fds_redir(t_redirtools *redir);
+int	get_fds_redir(t_cmd, t_redirtools *redir);
+int	init_redin(t_tkn tkn);
+int	init_redout(t_tkn tkn);
+void	built_export(t_cmd cmd, t_envar *env);
+>>>>>>> 7fbb44dd4719b80f22e85d74e84e6634f3af684c
 
 // UTILS INUTILS
 void	aff_lst(t_list *lst);
@@ -121,7 +165,7 @@ void	free_all(t_data *data);
 //INIT
 void	shell_start(t_data *data, char **env);
 
-// FRAG UTILS
+// TKN UTILS
 t_tkn	*tkn_new(char *content, int type);
 t_tkn	*tkn_last(t_tkn *cmd);
 void	tkn_addback(t_tkn **cmd, t_tkn *new);
@@ -130,6 +174,8 @@ void	tkn_clear(t_tkn **cmd);
 //env
 t_envar	*init_env(char **env);
 t_envar	*add_env(t_envar **lst, char *str);
+void	delete_env(t_envar **lst, char *name);
+int		ft_isexported(t_envar *lst, char *name);
 
 //signals
 void	sig_config(void);

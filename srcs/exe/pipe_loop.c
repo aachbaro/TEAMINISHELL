@@ -12,69 +12,92 @@
 
 #include "../../minishell.h"
 
-// Code de test pour mettre les bons fd avec une loop sur les differnts pipe
-void	pipe_loop(t_data *data)
+int	pipe_loop(t_data *data)
 {
-	int	i;
-	int	fds[2];
-	int	old_fds[2];
-	int	pid;
-	int	status;
-	int	old_out;
-	int	old_in;
+	int		i;
+	t_pipetools	pipes;
 
 	i = 0;
-	old_out = dup(STDOUT_FILENO);
-	old_in = dup(STDIN_FILENO);
-	status = 0;
+	save_initial_fds(&pipes);
 	while (data->cmds[i].line)
 	{
 		if (data->cmds[i + 1].line)
-			pipe(fds);
-		pid = fork();
-		if (pid == 0)
+			pipe(pipes.fds);
+		pipes.pid = fork();
+		if (pipes.pid == -1)
 		{
-			if (i)
-			{
-				dup2(old_fds[0], 0);
-				close(old_fds[0]);
-				close(old_fds[1]);
-			}
-			if (data->cmds[i + 1].line)
-			{
-				close(fds[0]);
-				dup2(fds[1], 1);
-				close(fds[1]);
-			}
-			if (is_builtin(data->cmds[i]))
-				exe_builtin(data, i);
-			else
-				exe_path(data,i);
+			perror("fork");
+			return (-1);
 		}
+		else if (pipes.pid == 0)
+			child_process(&pipes, data, i);
 		else
-		{
-			if (i)
-			{
-				close(old_fds[0]);
-				close(old_fds[1]);
-			}
-			if (data->cmds[i + 1].line)
-			{
-				old_fds[0] = fds[0];
-				old_fds[1] = fds[1];
-			}
-			waitpid(pid, &status, 0);
-			kill(pid, SIGTERM);
-		}
+			parent_process(&pipes, data, i);
 		i++;
 	}
+	restaure_initial_fds(&pipes, i);
+	return (0);
+}
+
+void	save_initial_fds(t_pipetools *pipes)
+{
+	pipes->save_stdout = dup(STDOUT_FILENO);
+	pipes->save_stdin = dup(STDIN_FILENO);
+}
+
+void	child_process(t_pipetools *pipes, t_data *data, int i)
+{
 	if (i)
 	{
-		close(old_fds[0]);
-		close(old_fds[1]);
+		dup2(pipes->old_fds[0], 0);
+		close(pipes->old_fds[0]);
+		close(pipes->old_fds[1]);
 	}
-	dup2(old_out, STDOUT_FILENO);
-	dup2(old_in, STDIN_FILENO);
-	close(old_out);
-	close(old_in);
+	if (data->cmds[i + 1].line)
+	{
+		close(pipes->fds[0]);
+		dup2(pipes->fds[1], 1);
+		close(pipes->fds[1]);
+	}
+	if (init_fds_redir(data->cmds[i], &pipes->redir) == -1)
+		exit(0);
+	if (is_builtin(data->cmds[i]))
+	{
+		exe_builtin(data, i);
+		free_all(data);
+		exit(0);
+	}
+	else
+		if (execve(data->cmds[i].path, data->cmds[i].args,
+			data->in_env) == -1)
+			perror(data->cmds[i].path);
+}
+
+void	parent_process(t_pipetools *pipes, t_data *data, int i)
+{
+	if (i)
+	{
+		close(pipes->old_fds[0]);
+		close(pipes->old_fds[1]);
+	}
+	if (data->cmds[i + 1].line)
+	{
+		pipes->old_fds[0] = pipes->fds[0];
+		pipes->old_fds[1] = pipes->fds[1];
+	}
+	wait(&pipes->status);
+	restaure_fds_redir(&pipes->redir);
+}
+
+void	restaure_initial_fds(t_pipetools *pipes , int i)
+{
+	if (i > 1)
+	{
+		close(pipes->old_fds[0]);
+		close(pipes->old_fds[1]);
+	}
+	dup2(pipes->save_stdin, STDIN_FILENO);
+	dup2(pipes->save_stdout, STDOUT_FILENO);
+	close(pipes->save_stdin);
+	close(pipes->save_stdout);
 }

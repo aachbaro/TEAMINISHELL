@@ -56,6 +56,8 @@ int	pars_var(t_data *data, int start, int cmd)
 	new = tkn_new(var, TYPE_VAR);
 	if (!new)
 		return (-1);
+	if (data->cmds[cmd].line[i] == ' ')
+		new->space = 1;
 	tkn_addback(&data->cmds[cmd].tkn, new);
 	return (i - start);
 }
@@ -125,6 +127,8 @@ int	pars_dblquote(t_data *data, int start, int cmd)
 	new = tkn_new(pars.str, TYPE_DBLQUOTE);
 	if (!new)
 		return (-1);
+	if (data->cmds[cmd].line[pars.i + 1] == ' ')
+		new->space = 1;
 	free(pars.str);
 	tkn_addback(&data->cmds[cmd].tkn, new);
 	return (pars.i - start + 1);

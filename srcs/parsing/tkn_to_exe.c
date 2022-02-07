@@ -71,11 +71,10 @@ char	**get_args(t_cmd cmd)
 
 	cpy = cmd.tkn;
 	i = 0;
-	// La on chope tous les arguments a la suite avant de tomber sur une
-	// redirection
-	while (cpy && cpy->type < TYPE_REDIN)
+	while (cpy)
 	{
-		i++;
+		if (cpy->type <= TYPE_VAR)
+			i++;
 		cpy = cpy->next;
 	}
 	tab = malloc(sizeof(char *) * (i + 1));
@@ -83,12 +82,15 @@ char	**get_args(t_cmd cmd)
 		return (NULL);
 	cpy = cmd.tkn;
 	i = 0;
-	while (cpy && cpy->type < TYPE_REDIN)
+	while (cpy)
 	{
-		tab[i] = ft_strdup(cpy->content);
-		if (!tab[i])
-			return (NULL);
-		i++;
+		if (cpy->type <= TYPE_VAR)
+		{
+			tab[i] = ft_strdup(cpy->content);
+			if (!tab[i])
+				return (NULL);
+			i++;
+		}
 		cpy = cpy->next;
 	}
 	tab[i] = NULL;
@@ -97,14 +99,14 @@ char	**get_args(t_cmd cmd)
 
 int	tkn_to_exe(t_data *data, int cmd)
 {
-	// En premier je cherche le bon path avec la fonction get path plus haut
-	// Peut etre a revoir et checker avant si cest un builtin pour pas chercher
-	// le path si on est pas cense lutiliser.
-	data->cmds[cmd].path = get_path(data->cmds[cmd].tkn->content);
+	t_tkn	*cpy;
+
+	cpy = data->cmds[cmd].tkn;
+	while (cpy->type > TYPE_VAR)
+		cpy = cpy->next;
+	data->cmds[cmd].path = get_path(cpy->content);
 	if (!data->cmds[cmd].path)
 		return (-1);
-	// Ensuite remplir le tableau dargument (bien checker les structures
-	// pour comprendre ce quon rempli dans le parsing)
 	data->cmds[cmd].args = get_args(data->cmds[cmd]);
 	if (!data->cmds[cmd].args)
 		return (-1);

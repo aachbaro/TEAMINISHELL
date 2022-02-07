@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:23:21 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/14 18:27:21 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/01/20 12:40:33 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ void	built_echo(t_cmd cmd)
 			opt = 1;
 		cpy = cpy->next;
 	}
-	while (cpy && cpy->type < 4)
+	while (cpy)
 	{
-		if (cpy->type <= TYPE_DBLQUOTE || cpy->type == TYPE_VAR)
+		if (cpy->type <= TYPE_VAR)
 			ft_putstr_fd(cpy->content, 1);
+		ft_putchar_fd(' ', 1);
 		cpy = cpy->next;
 	}
 	if (!opt)

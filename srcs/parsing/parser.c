@@ -28,7 +28,7 @@ int	line_to_exe(t_data *data)
 	int	i;
 
 	i = 0;
-	if (line_to_tokens(data) == -1)
+	if (input_to_tokens(data) == -1)
 		return (-1);
 	while (data->cmds[i].line)
 	{
@@ -42,19 +42,24 @@ int	line_to_exe(t_data *data)
 int	prompt(t_data *data)
 {
 	// On recupere la commande entree par l'utilsateur
-	data->line = readline("~>");
+	data->usr_input = readline("~>");
 	// Check si on doit rentrer la ligen dans lhistorique
+<<<<<<< HEAD
 	data->env = data->env->next;
 	printf("DEBUG::%s\n%s\n%s::\n", data->line, data->env->key, data->env->value);
 	if (!data->line)
+=======
+	printf("DEBUG::%s::\n", data->usr_input);
+	if (!data->usr_input)
+>>>>>>> 7fbb44dd4719b80f22e85d74e84e6634f3af684c
 		return (-1);
-	if (!data->old_line || (ft_strncmp(data->line, data->old_line,
-		ft_strlen(data->line)) || ft_strlen(data->old_line)
-			!= ft_strlen(data->line)))
-		add_history(data->line);
-	free(data->old_line);
-	data->old_line = ft_strdup(data->line);
-	if (!data->old_line)
+	if (!data->prev_input || (ft_strncmp(data->usr_input, data->prev_input,
+		ft_strlen(data->usr_input)) || ft_strlen(data->prev_input)
+			!= ft_strlen(data->usr_input)))
+		add_history(data->usr_input);
+	free(data->prev_input);
+	data->prev_input = ft_strdup(data->usr_input);
+	if (!data->prev_input)
 		return (-1);
 	return (0);
 }
