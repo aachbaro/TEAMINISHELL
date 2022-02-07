@@ -10,11 +10,9 @@ void signal_handler(int sig)
 
 void	sig_config(void)
 {
-	struct sigaction 	intact;
 	struct sigaction 	quitact;
 
-	intact.sa_handler = signal_handler;
 	quitact.sa_handler = signal_handler;
-	sigaction(SIGINT, &intact, NULL);
+	signal(SIGINT, SIG_IGN);
 	sigaction(SIGQUIT, &quitact, NULL);
 }

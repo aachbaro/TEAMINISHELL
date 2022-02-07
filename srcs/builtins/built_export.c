@@ -1,42 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_echo.c                                       :+:      :+:    :+:   */
+/*   built_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 17:23:21 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/20 12:40:33 by ababaei          ###   ########.fr       */
+/*   Created: 2022/01/20 12:28:31 by ababaei           #+#    #+#             */
+/*   Updated: 2022/02/01 16:24:54 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/* 
- * builtin echo
- * display a line of text
- */
+/*
+ * Let you export a variable in your environnement
+ 
 
-void	built_echo(t_cmd cmd)
+void	change_env(t_envar *env, char *from, char *to)
+{
+	
+}*/
+
+void	built_export(t_cmd cmd, t_envar *env)
 {
 	t_tkn	*cpy;
-	int	opt;
-
+		
+	printf("TOTO\n");
 	cpy = cmd.tkn->next;
-	opt = 0;
-	while (cpy && cpy->type < 4 && !ft_strncmp(cpy->content, "-n", 2))
-	{
-		if (!ft_strncmp(cpy->content, "-n", 2))
-			opt = 1;
-		cpy = cpy->next;
-	}
-	while (cpy)
-	{
-		if (cpy->type <= TYPE_VAR)
-			ft_putstr_fd(cpy->content, 1);
-		ft_putchar_fd(' ', 1);
-		cpy = cpy->next;
-	}
-	if (!opt)
-		write(1, "\n", 1);
+	if (cpy->next || cpy->type > 3)
+		return ; // msg erreur type export [name[=value]...]
+	if (ft_isexported(env, cpy->content))
+		printf("CACA\n");
 }

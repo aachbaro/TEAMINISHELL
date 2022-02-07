@@ -16,6 +16,7 @@ SRC = srcs/main.c \
 	  srcs/utils/delete_tab.c \
 	  srcs/utils/free_all.c \
 	  srcs/env_utils/env_lst.c \
+	  srcs/env_utils/ft_isexported.c \
 	  srcs/exe/exec.c \
 	  srcs/exe/pipe_loop.c \
 	  srcs/exe/redirection_handler.c \
@@ -24,6 +25,7 @@ SRC = srcs/main.c \
 	  srcs/builtins/built_echo.c \
 	  srcs/builtins/built_env.c \
 	  srcs/builtins/built_pwd.c \
+	  srcs/builtins/built_export.c \
 	  srcs/init/shell_start.c
 
 libft = -Llibft/ -lft

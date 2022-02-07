@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/01/14 18:18:14 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/01 16:22:11 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int		redir_in_tkns(t_data *data);
 int		set_redir(t_cmd *cmd);
 int		spaces_between_tkns(t_data *data);
 int		merge_tokens(t_cmd *cmd);
+int		inputing(t_data *data);
 
 // ELSE
 int	prompt(t_data *data);
@@ -139,6 +140,7 @@ void	restaure_fds_redir(t_redirtools *redir);
 int	get_fds_redir(t_cmd, t_redirtools *redir);
 int	init_redin(t_tkn tkn);
 int	init_redout(t_tkn tkn);
+void	built_export(t_cmd cmd, t_envar *env);
 
 // UTILS INUTILS
 void	aff_lst(t_list *lst);
@@ -151,7 +153,7 @@ void	free_all(t_data *data);
 //INIT
 void	shell_start(t_data *data, char **env);
 
-// FRAG UTILS
+// TKN UTILS
 t_tkn	*tkn_new(char *content, int type);
 t_tkn	*tkn_last(t_tkn *cmd);
 void	tkn_addback(t_tkn **cmd, t_tkn *new);
@@ -160,6 +162,8 @@ void	tkn_clear(t_tkn **cmd);
 //env
 t_envar	*init_env(char **env);
 t_envar	*add_env(t_envar **lst, char *str);
+void	delete_env(t_envar **lst, char *name);
+int		ft_isexported(t_envar *lst, char *name);
 
 //signals
 void	sig_config(void);
