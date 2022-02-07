@@ -18,8 +18,8 @@
 
 void	free_all(t_data *data)
 {
-	if (data->old_line)
-		free(data->old_line);
-	if (data->line && data->cmds->line)
+	if (data->prev_input)
+		free(data->prev_input);
+	if (data->usr_input && data->cmds->line)
 		del_cmd(data);
 }

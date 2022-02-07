@@ -45,11 +45,12 @@ typedef struct s_dblquote_parser
 
 typedef struct s_tkn
 {
-	char			*content;
-	int				type;
+	char		*content;
+	int		type;
+	int		space;
 	struct s_tkn	*prev;
 	struct s_tkn	*next;
-}					t_tkn;
+}			t_tkn;
 
 typedef struct s_cmd
 {
@@ -65,14 +66,33 @@ typedef struct s_envar
 	struct s_envar	*next;
 }					t_envar;
 
+typedef struct s_redirtools
+{
+	int	save_stdin;
+	int	save_stdout;
+	int	fd_in;
+	int	fd_out;
+}		t_redirtools;
+
+typedef struct s_pipetools
+{
+	int		fds[2];
+	int		old_fds[2];
+	int		pid;
+	int		status;
+	int		save_stdin;
+	int		save_stdout;
+	t_redirtools	redir;
+}			t_pipetools;
+
 typedef struct s_data
 {
-	char	*line;
-	char	*old_line;
-	t_cmd	*cmds;
+	char		*usr_input;
+	char		*prev_input;
+	t_cmd		*cmds;
 	int		over;
-	t_envar	*env;
-	char	**in_env;
+	t_envar		*env;
+	char		**in_env;
 }			t_data;
 
 // PARSER DE COMMANDE
@@ -91,7 +111,11 @@ int		pars_morethan(t_data *data, int start, int cmd);
 int		pars_var(t_data *data, int start, int cmd);
 int		tkn_to_exe(t_data *data, int cmd);
 int		line_to_exe(t_data *data);
-int		inputing(t_data *data);
+int		input_to_tokens(t_data *data);
+int		redir_in_tkns(t_data *data);
+int		set_redir(t_cmd *cmd);
+int		spaces_between_tkns(t_data *data);
+int		merge_tokens(t_cmd *cmd);
 
 // ELSE
 int	prompt(t_data *data);
@@ -101,11 +125,20 @@ void	exe_path(t_data *data, int cmd);
 int	exe_builtin(t_data *data, int cmd);
 void	exe_cmds(t_data *data);
 int	is_builtin(t_cmd cmd);
-void	pipe_loop(t_data *data);
+int	pipe_loop(t_data *data);
+void    save_initial_fds(t_pipetools *pipes);
+void    child_process(t_pipetools *pipes, t_data *data, int i);
+void    parent_process(t_pipetools *pipes, t_data *data, int i);
+void    restaure_initial_fds(t_pipetools *pipes , int i);
 int	built_pwd(t_cmd cmd);
 void	built_echo(t_cmd cmd);
 void	built_env(t_envar *env);
 void	built_cd(t_cmd cmd);
+int	init_fds_redir(t_cmd cmd, t_redirtools *redir);
+void	restaure_fds_redir(t_redirtools *redir);
+int	get_fds_redir(t_cmd, t_redirtools *redir);
+int	init_redin(t_tkn tkn);
+int	init_redout(t_tkn tkn);
 
 // UTILS INUTILS
 void	aff_lst(t_list *lst);

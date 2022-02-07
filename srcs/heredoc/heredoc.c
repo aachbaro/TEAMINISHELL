@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_start.c                                      :+:      :+:    :+:   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 15:21:01 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/14 18:27:56 by ababaei          ###   ########.fr       */
+/*   Created: 2021/12/22 16:34:17 by aachbaro          #+#    #+#             */
+/*   Updated: 2021/12/22 16:53:31 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-/*
- * shell starter
- * assign starter values, create environnement, and config signal handlers
- */
-
-void	shell_start(t_data *data, char **env)
+int	init_heredoc(t_tkn tkn)
 {
-	data->cmds = NULL;
-	data->prev_input = NULL;
-	data->over = 0;
-	data->in_env = env;
-	data->env = init_env(env);
-	sig_config();
+	int	fd;
+
+	fd = open("heredoc", O_CREAT | O_APPEND
 }

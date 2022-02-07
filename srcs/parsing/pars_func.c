@@ -29,6 +29,8 @@ int	pars_alnum(t_data *data, int start, int cmd)
 	free(dup);
 	if (!new)
 		return (-1);
+	if (data->cmds[cmd].line[i] == ' ')
+		new->space = 1;
 	tkn_addback(&data->cmds[cmd].tkn, new);
 	return (i - start);
 }
@@ -50,6 +52,8 @@ int	pars_quote(t_data *data, int start, int cmd)
 	free(dup);
 	if (!new)
 		return (-1);
+	if (data->cmds[cmd].line[i + 1] == ' ')
+		new->space = 1;
 	tkn_addback(&data->cmds[cmd].tkn, new);
 	return (i - start + 1);
 }

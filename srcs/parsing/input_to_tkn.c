@@ -67,10 +67,6 @@ int	str_to_tokens(char *str, t_data *data, int cmd)
 	int		j;
 	
 	i = 0;
-	// Transforamation en token
-	// Je parcours la chaine et en fonction du crarctere que je rencontre
-	// Jappelle une fonction qui va remplir avec le bon type le token de la
-	// liste chainee.
 	while (str[i])
 	{
 		if (ft_strchr(" ", str[i]))
@@ -94,16 +90,16 @@ int	str_to_tokens(char *str, t_data *data, int cmd)
 	return (0);
 }
 
-int	line_to_tokens(t_data *data)
+int	input_to_tokens(t_data *data)
 {
 	int	i;
 
 	i = 0;
 	// Dans un premier temps je check que y ai pas derreur dans les quotes
-	if (check_quote(data->line))
+	if (check_quote(data->usr_input))
 		return (-1);
 	// Ensuite je split sur le pipe
-	if (split_cmds(data, data->line) == -1)
+	if (split_cmds(data, data->usr_input) == -1)
 		return (-1);
 	// Ensuite je rempli la liste chainee de tkn a partir de chaque commandes
 	while (data->cmds[i].line)
@@ -113,5 +109,9 @@ int	line_to_tokens(t_data *data)
 			return (-1);
 		i++;
 	}
+	if (spaces_between_tkns(data) == -1)
+		return (-1);
+	if (redir_in_tkns(data) == -1)
+		return (-1);
 	return (0);
 }

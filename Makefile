@@ -1,21 +1,24 @@
 NAME = minishell
 
 SRC = srcs/main.c \
-	  srcs/parsing/line_to_tkn.c \
+	  srcs/parsing/input_to_tkn.c \
 	  srcs/parsing/pars_func.c \
 	  srcs/parsing/tkn_to_exe.c \
 	  srcs/parsing/parser.c \
 	  srcs/parsing/wait_input.c \
 	  srcs/parsing/pars_func_dblquote.c \
-	  srcs/utils/utils1.c \
+	  srcs/parsing/redir_in_tkns.c \
+	  srcs/parsing/handle_spaces.c \
+	  srcs/debug/utils1.c \
 	  srcs/utils/tkn_lst.c \
-	  srcs/utils/debug.c \
+	  srcs/debug/debug.c \
 	  srcs/utils/delete_cmd.c \
 	  srcs/utils/delete_tab.c \
 	  srcs/utils/free_all.c \
 	  srcs/env_utils/env_lst.c \
 	  srcs/exe/exec.c \
 	  srcs/exe/pipe_loop.c \
+	  srcs/exe/redirection_handler.c \
 	  srcs/signals/sig_config.c \
 	  srcs/builtins/built_cd.c \
 	  srcs/builtins/built_echo.c \
