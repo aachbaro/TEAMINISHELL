@@ -127,32 +127,25 @@ int	prompt(t_data *data);
 void	exe_path(t_data *data, int cmd);
 int		exe_builtin(t_data *data, int cmd);
 void	exe_cmds(t_data *data);
-<<<<<<< HEAD
 int		is_builtin(t_cmd cmd);
-void	pipe_loop(t_data *data);
+int	pipe_loop(t_data *data);
 int		built_pwd(t_cmd cmd);
 void	built_echo(t_cmd cmd);
 void	built_env(t_envar *env);
 void	built_cd(t_cmd cmd);
 void	built_unset(t_cmd cmd, t_envar *env);
-=======
 int	is_builtin(t_cmd cmd);
 int	pipe_loop(t_data *data);
 void    save_initial_fds(t_pipetools *pipes);
 void    child_process(t_pipetools *pipes, t_data *data, int i);
 void    parent_process(t_pipetools *pipes, t_data *data, int i);
 void    restaure_initial_fds(t_pipetools *pipes , int i);
-int	built_pwd(t_cmd cmd);
-void	built_echo(t_cmd cmd);
-void	built_env(t_envar *env);
-void	built_cd(t_cmd cmd);
 int	init_fds_redir(t_cmd cmd, t_redirtools *redir);
 void	restaure_fds_redir(t_redirtools *redir);
 int	get_fds_redir(t_cmd, t_redirtools *redir);
 int	init_redin(t_tkn tkn);
 int	init_redout(t_tkn tkn);
 void	built_export(t_cmd cmd, t_envar *env);
->>>>>>> 7fbb44dd4719b80f22e85d74e84e6634f3af684c
 
 // UTILS INUTILS
 void	aff_lst(t_list *lst);
