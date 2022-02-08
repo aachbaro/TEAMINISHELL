@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:54:20 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/20 16:17:45 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/08 14:34:00 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_envar	*init_env(char **env)
 		return (NULL);
 	while (env[++i])
 		add_env(&envlst, env[i]);
+	printf("____________\n%s\n", envlst->str);
 	return (envlst);
 }
 
