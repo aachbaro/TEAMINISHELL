@@ -18,15 +18,15 @@
  * We have here several function to create, delete and add to the env chained list
  */
 
-t_envar *fill_envar(t_envar *lst, char *str)
+t_envar *fill_envar(t_envar **lst, char *str)
 {
 	char *key;
 	char *value;
 	unsigned int i;
 
 	i = 0;
-	lst->str = ft_strdup(str);
-	if (!lst->str)
+	(*lst)->str = ft_strdup(str);
+	if (!(*lst)->str)
 		return (NULL);
 	while (str[i] != '=')
 		i++;
@@ -36,9 +36,9 @@ t_envar *fill_envar(t_envar *lst, char *str)
 	value = ft_strdup(str + i + 1);
 	if (!value)
 		return (NULL);
-	lst->key = key;
-	lst->value = value;
-	return (lst);
+	(*lst)->key = key;
+	(*lst)->value = value;
+	return (*lst);
 }
 
 t_envar	*add_env(t_envar **lst, char *str)
@@ -50,7 +50,7 @@ t_envar	*add_env(t_envar **lst, char *str)
 	tmp = malloc(sizeof(t_envar));
 	if (!tmp)
 		return (NULL);
-	tmp = fill_envar(tmp, str);
+	fill_envar(&tmp, str);
 	if (!tmp)
 		return (NULL);
 	tmp->next = NULL;
@@ -70,11 +70,12 @@ t_envar	*init_env(char **env)
 	envlst = malloc(sizeof(t_envar));
 	if (!envlst)
 		return (NULL);
-	envlst = fill_envar(envlst, env[0]);
+	fill_envar(&envlst, env[0]);
 	if (!envlst)
 		return (NULL);
 	while (env[++i])
 		add_env(&envlst, env[i]);
+	printf("\n___________%s\n", envlst->str);
 	return (envlst);
 }
 

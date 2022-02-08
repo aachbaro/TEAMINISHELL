@@ -152,7 +152,6 @@ void	aff_lst(t_list *lst);
 void	delst(void	*content);
 void	del_tab(char **tab);
 void	del_cmd(t_data *data);
-char	*ft_strndup(const char *s, int n);
 void	free_all(t_data *data);
 
 //INIT
