@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 16:46:10 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/01/14 16:37:53 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/08 16:42:53 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	prompt(t_data *data)
 	// On recupere la commande entree par l'utilsateur
 	data->usr_input = readline("~>");
 	// Check si on doit rentrer la ligen dans lhistorique
-	data->env = data->env->next;
+	//data->env = data->env->next;
 	printf("DEBUG::%s::\n", data->usr_input);
 	if (!data->usr_input)
 		return (-1);
