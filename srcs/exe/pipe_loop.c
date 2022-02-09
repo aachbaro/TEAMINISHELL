@@ -65,6 +65,10 @@ void	child_process(t_pipetools *pipes, t_data *data, int i)
 	{
 		exe_builtin(data, i);
 		free_all(data);
+		close(pipes->redir.save_stdin);
+		close(pipes->redir.save_stdout);
+		close(pipes->save_stdin);
+		close(pipes->save_stdout);
 		exit(0);
 	}
 	else
@@ -87,6 +91,8 @@ void	parent_process(t_pipetools *pipes, t_data *data, int i)
 	}
 	wait(&pipes->status);
 	restaure_fds_redir(&pipes->redir);
+	if (!ft_strncmp(data->cmds[i].line, "exit", 4))
+		data->over = 1;
 }
 
 void	restaure_initial_fds(t_pipetools *pipes , int i)
