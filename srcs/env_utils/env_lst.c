@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:54:20 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/20 16:17:45 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/08 16:51:59 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@
  * We have here several function to create, delete and add to the env chained list
  */
 
-t_envar *fill_envar(t_envar *lst, char *str)
+t_envar *fill_envar(t_envar **lst, char *str)
 {
 	char *key;
 	char *value;
 	unsigned int i;
 
 	i = 0;
-	lst->str = ft_strdup(str);
-	if (!lst->str)
+	(*lst)->str = ft_strdup(str);
+	if (!(*lst)->str)
 		return (NULL);
 	while (str[i] != '=')
 		i++;
@@ -36,9 +36,9 @@ t_envar *fill_envar(t_envar *lst, char *str)
 	value = ft_strdup(str + i + 1);
 	if (!value)
 		return (NULL);
-	lst->key = key;
-	lst->value = value;
-	return (lst);
+	(*lst)->key = key;
+	(*lst)->value = value;
+	return (*lst);
 }
 
 t_envar	*add_env(t_envar **lst, char *str)
@@ -50,7 +50,7 @@ t_envar	*add_env(t_envar **lst, char *str)
 	tmp = malloc(sizeof(t_envar));
 	if (!tmp)
 		return (NULL);
-	tmp = fill_envar(tmp, str);
+	fill_envar(&tmp, str);
 	if (!tmp)
 		return (NULL);
 	tmp->next = NULL;
@@ -68,9 +68,6 @@ t_envar	*init_env(char **env)
 
 	i = -1;
 	envlst = malloc(sizeof(t_envar));
-	if (!envlst)
-		return (NULL);
-	envlst = fill_envar(envlst, env[0]);
 	if (!envlst)
 		return (NULL);
 	while (env[++i])
