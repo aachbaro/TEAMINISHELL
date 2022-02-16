@@ -52,11 +52,13 @@ int	get_fds_redir(t_cmd cmd, t_redirtools *redir)
 	redir->fd_out = -42;
 	while (cpy)
 	{
-		if (cpy->type == TYPE_REDIN)
+		if (cpy->type == TYPE_REDIN || cpy->type == TYPE_HRDOC)
 		{
 			if (redir->fd_in != -42)
 				close(redir->fd_in);
 			redir->fd_in = init_redin(*cpy);
+			if (cpy->type == TYPE_HRDOC)
+				unlink(cpy->content);
 		}
 		else if (cpy->type == TYPE_REDOUT || cpy->type == TYPE_APPEND)
 		{

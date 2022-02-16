@@ -91,7 +91,7 @@ void	parent_process(t_pipetools *pipes, t_data *data, int i)
 	}
 	wait(&pipes->status);
 	restaure_fds_redir(&pipes->redir);
-	if (!ft_strncmp(data->cmds[i].line, "exit", 4))
+	//if (!ft_strncmp(data->cmds[i].line, "exit", 4))
 		data->over = 1;
 }
 

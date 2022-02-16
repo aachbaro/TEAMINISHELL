@@ -9,6 +9,7 @@ SRC = srcs/main.c \
 	  srcs/parsing/pars_func_dblquote.c \
 	  srcs/parsing/redir_in_tkns.c \
 	  srcs/parsing/handle_spaces.c \
+	  srcs/redirections/heredoc.c \
 	  srcs/debug/utils1.c \
 	  srcs/utils/tkn_lst.c \
 	  srcs/debug/debug.c \
@@ -20,7 +21,7 @@ SRC = srcs/main.c \
 	  srcs/env_utils/ft_isexported.c \
 	  srcs/exe/exec.c \
 	  srcs/exe/pipe_loop.c \
-	  srcs/exe/redirection_handler.c \
+	  srcs/redirections/redirection_handler.c \
 	  srcs/signals/sig_config.c \
 	  srcs/builtins/built_cd.c \
 	  srcs/builtins/built_echo.c \
@@ -28,7 +29,8 @@ SRC = srcs/main.c \
 	  srcs/builtins/built_pwd.c \
 	  srcs/builtins/built_unset.c \
 	  srcs/builtins/built_export.c \
-	  srcs/init/shell_start.c
+	  srcs/init/shell_start.c \
+	  srcs/exe/exec_builtins.c
 
 libft = -Llibft/ -lft
 
@@ -38,7 +40,7 @@ CC = gcc #clang
 
 INC = -Iminishell.h
 
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
 
 RM = rm -rf
 

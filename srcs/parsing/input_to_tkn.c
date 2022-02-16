@@ -12,6 +12,32 @@
 
 #include "../../minishell.h"
 
+int	input_to_tokens(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	// Dans un premier temps je check que y ai pas derreur dans les quotes
+	if (check_quote(data->usr_input))
+		return (-1);
+	// Ensuite je split sur le pipe
+	if (split_cmds(data, data->usr_input) == -1)
+		return (-1);
+	// Ensuite je rempli la liste chainee de tkn a partir de chaque commandes
+	while (data->cmds[i].line)
+	{
+		data->cmds[i].tkn = NULL;
+		if (str_to_tokens(data->cmds[i].line, data, i) == -1)
+			return (-1);
+		i++;
+	}
+	if (spaces_between_tkns(data) == -1)
+		return (-1);
+	if (redir_in_tkns(data) == -1)
+		return (-1);
+	return (0);
+}
+
 int	check_quote(char *str)
 {
 	int	i;
@@ -90,28 +116,4 @@ int	str_to_tokens(char *str, t_data *data, int cmd)
 	return (0);
 }
 
-int	input_to_tokens(t_data *data)
-{
-	int	i;
 
-	i = 0;
-	// Dans un premier temps je check que y ai pas derreur dans les quotes
-	if (check_quote(data->usr_input))
-		return (-1);
-	// Ensuite je split sur le pipe
-	if (split_cmds(data, data->usr_input) == -1)
-		return (-1);
-	// Ensuite je rempli la liste chainee de tkn a partir de chaque commandes
-	while (data->cmds[i].line)
-	{
-		data->cmds[i].tkn = NULL;
-		if (str_to_tokens(data->cmds[i].line, data, i) == -1)
-			return (-1);
-		i++;
-	}
-	if (spaces_between_tkns(data) == -1)
-		return (-1);
-	if (redir_in_tkns(data) == -1)
-		return (-1);
-	return (0);
-}

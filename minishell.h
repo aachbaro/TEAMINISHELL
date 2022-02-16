@@ -92,6 +92,7 @@ typedef struct s_data
 	char		*usr_input;
 	char		*prev_input;
 	t_cmd		*cmds;
+	int		heredoc_id;
 	int		over;
 	t_envar		*env;
 	char		**in_env;
@@ -119,6 +120,11 @@ int		set_redir(t_cmd *cmd);
 int		spaces_between_tkns(t_data *data);
 int		merge_tokens(t_cmd *cmd);
 int		inputing(t_data *data);
+int		str_to_tokens(char *str, t_data *data, int cmd);
+int		set_heredoc(t_cmd *cmd, int *heredoc_id);
+int		init_heredoc(t_tkn *tkn, int heredoc_id);
+char		*filename_generator(int heredoc_id);
+int		heredoc_loop(int fd, char *delim);
 
 // ELSE
 int	prompt(t_data *data);
@@ -167,8 +173,9 @@ void	tkn_clear(t_tkn **cmd);
 t_envar	*init_env(char **env);
 t_envar	*add_env(t_envar **lst, char *str);
 void	delete_env(t_envar **lst, char *name);
-int		ft_isexported(t_envar *lst, char *name);
+t_envar	*find_envar(t_envar **lst, char *name);
 void	free_envar(t_envar *var);
+int	ft_isexported(t_envar *lst, char *name);
 
 //signals
 void	sig_config(void);

@@ -67,7 +67,8 @@ t_envar	*init_env(char **env)
 	int i;
 
 	i = -1;
-	envlst = malloc(sizeof(t_envar));
+	//envlst = malloc(sizeof(t_envar));
+	envlst = NULL;
 	if (!envlst)
 		return (NULL);
 	while (env[++i])

@@ -17,9 +17,12 @@ int	redir_in_tkns(t_data *data)
 	int	i;
 
 	i = 0;
+	data->heredoc_id = 0;
 	while (data->cmds[i].line)
 	{
 		if (set_redir(&data->cmds[i]) == -1)
+			return (-1);
+		if (set_heredoc(&data->cmds[i], &data->heredoc_id) == -1)
 			return (-1);
 		i++;
 	}
@@ -53,5 +56,26 @@ int	set_redir(t_cmd *cmd)
 		}
 		cpy = cpy->next;
 	}
+	return (0);
+}
+
+int	set_heredoc(t_cmd *cmd, int *heredoc_id)
+{
+	t_tkn *cpy;
+	int	hd_id;
+
+	cpy = cmd->tkn;
+	hd_id = *heredoc_id;
+	while (cpy)
+	{
+		if (cpy->type == TYPE_HRDOC)
+		{
+			if (init_heredoc(cpy, hd_id) == -1)
+				return (-1);
+			hd_id++;
+		}
+		cpy = cpy->next;
+	}
+	*heredoc_id = hd_id;
 	return (0);
 }
