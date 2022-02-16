@@ -14,6 +14,10 @@
 
 int	init_fds_redir(t_cmd cmd, t_redirtools *redir)
 {
+	redir->save_stdin = 0;
+	redir->save_stdout = 0;
+	redir->fd_in = 0;
+	redir->fd_out = 0;
 	if (get_fds_redir(cmd, redir) == -1)
 		return (-1);
 	if (redir->fd_in != -42)

@@ -18,17 +18,16 @@
 
 void	free_all(t_data *data)
 {
-	t_envar *tmp;
+	t_envar	*cpy;
 
 	if (data->prev_input)
 		free(data->prev_input);
 	if (data->usr_input && data->cmds->line)
 		del_cmd(data);
-	while (data->env->next)
+	while (data->env)
 	{
-		tmp = data->env->next;
+		cpy = data->env->next;
 		free_envar(data->env);
-		data->env = tmp;
+		data->env = cpy;
 	}
-	free_envar(data->env);
 }
