@@ -54,6 +54,11 @@ t_envar	*add_env(t_envar **lst, char *str)
 	if (!tmp)
 		return (NULL);
 	tmp->next = NULL;
+	if (*lst == NULL)
+	{
+		*lst = tmp;
+		return (*lst);
+	}
 	while ((*lst)->next)
 		*lst = (*lst)->next;
 	(*lst)->next = tmp;
@@ -66,12 +71,13 @@ t_envar	*init_env(char **env)
 	t_envar	*envlst;
 	int i;
 
-	i = -1;
-	envlst = malloc(sizeof(t_envar));
-	if (!envlst)
-		return (NULL);
-	while (env[++i])
+	i = 0;
+	envlst = NULL;
+	while (env[i])
+	{
 		add_env(&envlst, env[i]);
+		i++;
+	}	
 	return (envlst);
 }
 

@@ -61,6 +61,7 @@ int	is_builtin(t_cmd cmd)
 
 int	exe_builtin(t_data *data, int cmd)
 {
+	add_env(&(data->env), "CACA=PROUT");
 	if (!ft_strncmp(data->cmds[cmd].line, "echo", 4))
 		built_echo(data->cmds[cmd]);
 	else if (!ft_strncmp(data->cmds[cmd].line, "pwd", 3))
@@ -70,7 +71,7 @@ int	exe_builtin(t_data *data, int cmd)
 	else if (!ft_strncmp(data->cmds[cmd].line, "cd", 2))
 		built_cd(data->cmds[cmd]);
 	else if (!ft_strncmp(data->cmds[cmd].line, "export", 2))
-		built_export(data->cmds[cmd], data->env);
+		built_export(data->cmds[cmd], data);
 	else if (!ft_strncmp(data->cmds[cmd].line, "exit", 4))
 		data->over = 1;
 	return (0);

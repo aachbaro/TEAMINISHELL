@@ -145,7 +145,7 @@ void	restaure_fds_redir(t_redirtools *redir);
 int	get_fds_redir(t_cmd, t_redirtools *redir);
 int	init_redin(t_tkn tkn);
 int	init_redout(t_tkn tkn);
-void	built_export(t_cmd cmd, t_envar *env);
+void	built_export(t_cmd cmd, t_data *data);
 
 // UTILS INUTILS
 void	aff_lst(t_list *lst);
@@ -167,7 +167,7 @@ void	tkn_clear(t_tkn **cmd);
 t_envar	*init_env(char **env);
 t_envar	*add_env(t_envar **lst, char *str);
 void	delete_env(t_envar **lst, char *name);
-int		ft_isexported(t_envar *lst, char *name);
+t_envar	*find_envar(t_envar **lst, char *name);
 void	free_envar(t_envar *var);
 
 //signals
