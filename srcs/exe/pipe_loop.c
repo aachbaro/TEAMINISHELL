@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:34:17 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/12/22 16:53:31 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/18 13:12:37 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	parent_process(t_pipetools *pipes, t_data *data, int i)
 	wait(&pipes->status);
 	restaure_fds_redir(&pipes->redir);
 	//if (!ft_strncmp(data->cmds[i].line, "exit", 4))
-		data->over = 1;
+	//	data->over = 1;
 }
 
 void	restaure_initial_fds(t_pipetools *pipes , int i)

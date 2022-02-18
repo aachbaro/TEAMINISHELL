@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/01 16:22:11 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/18 13:32:51 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ int		exe_builtin(t_data *data, int cmd);
 void	exe_cmds(t_data *data);
 int		is_builtin(t_cmd cmd);
 int	pipe_loop(t_data *data);
+int	exe_simple_cmd(t_data *data);
 int		built_pwd(t_cmd cmd);
 void	built_echo(t_cmd cmd);
 void	built_env(t_envar *env);

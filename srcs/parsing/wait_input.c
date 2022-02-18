@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/08 16:52:57 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/18 13:37:51 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ int	inputing(t_data *data)
 		// PASSER DE LA LIGNE A PLUSIEURS COMMANDE DIVISEES
 		if (line_to_exe(data) == -1)
 			perror("shell");
-		pipe_loop(data);
+		if (data->cmds[1].line == NULL && is_builtin(data->cmds[0]))
+			exe_simple_cmd(data);
+		else
+			pipe_loop(data);
 		//aff_tkn(*data);
 		//exe_cmds(&data);
 		free(data->usr_input);
