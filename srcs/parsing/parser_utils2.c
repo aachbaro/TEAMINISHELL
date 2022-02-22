@@ -1,16 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/17 16:46:10 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/12/17 18:11:36 by aachbaro         ###   ########.fr       */
+/*   Created: 2022/02/22 11:37:04 by aachbaro          #+#    #+#             */
+/*   Updated: 2022/02/22 11:40:51 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+char	*recup_var(t_data *data, int start, int cmd)
+{
+	int	i;
+	char	*dup;
+	char	*ret;
+
+	i = start + 1;
+	while (!ft_strchr(" <>$\"'", data->cmds[cmd].line[i])
+			&& data->cmds[cmd].line[i])
+		i++;
+	dup = ft_strndup(data->cmds[cmd].line + start + 1, i - start);
+	if (!dup)
+		return (NULL);
+	ret = find_var(dup, data->env);
+	if (!ret)
+		return (NULL);
+	return (ret);
+}
 
 char	*find_var(char *var, t_envar *env)
 {
@@ -34,32 +53,6 @@ char	*find_var(char *var, t_envar *env)
 	else
 		ret = ft_strdup("");
 	return (ret);
-}
-
-int	pars_var(t_data *data, int start, int cmd)
-{
-	t_tkn	*new;
-	int		i;
-	char	*dup;
-	char	*var;
-
-	i = start + 1;
-	while (!ft_strchr(" <>$\"'", data->cmds[cmd].line[i])
-			&& data->cmds[cmd].line[i])
-		i++;
-	dup = ft_strndup(data->cmds[cmd].line + start, i - start);
-	if (!dup)
-		return (-1);
-	var = find_var(dup, data->env);
-	if (!var)
-		return (-1);
-	new = tkn_new(var, TYPE_VAR);
-	if (!new)
-		return (-1);
-	if (data->cmds[cmd].line[i] == ' ')
-		new->space = 1;
-	tkn_addback(&data->cmds[cmd].tkn, new);
-	return (i - start);
 }
 
 int	get_tmp_dbl(t_data *data, int cmd, t_dblquote_parser *pars)
@@ -107,29 +100,4 @@ int	in_loop(t_data *data, int cmd, t_dblquote_parser *pars)
 		return (-1);
 	pars->i = pars->j;
 	return (0);
-}
-
-int	pars_dblquote(t_data *data, int start, int cmd)
-{
-	t_dblquote_parser	pars;
-	t_tkn			*new;
-
-	pars.i = start + 1;
-	pars.str = ft_strdup("");
-	if (!pars.str)
-		return (-1);
-	while (data->cmds[cmd].line[pars.i]
-			&& data->cmds[cmd].line[pars.i] != '"')
-	{
-		if (in_loop(data, cmd, &pars) == -1)
-			return (-1);
-	}
-	new = tkn_new(pars.str, TYPE_DBLQUOTE);
-	if (!new)
-		return (-1);
-	if (data->cmds[cmd].line[pars.i + 1] == ' ')
-		new->space = 1;
-	free(pars.str);
-	tkn_addback(&data->cmds[cmd].tkn, new);
-	return (pars.i - start + 1);
 }

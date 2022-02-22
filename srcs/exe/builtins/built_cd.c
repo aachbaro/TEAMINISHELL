@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_export.c                                     :+:      :+:    :+:   */
+/*   built_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 12:28:31 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/01 16:24:54 by ababaei          ###   ########.fr       */
+/*   Created: 2022/01/14 17:26:43 by ababaei           #+#    #+#             */
+/*   Updated: 2022/02/22 11:58:35 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../../minishell.h"
 
 /*
- * Let you export a variable in your environnement
- 
+ * builtin cd
+ * This function changes active directory
+ */
 
-void	change_env(t_envar *env, char *from, char *to)
-{
-	
-}*/
-
-void	built_export(t_cmd cmd, t_envar *env)
+void	built_cd(t_cmd cmd)
 {
 	t_tkn	*cpy;
-		
-	printf("TOTO\n");
-	cpy = cmd.tkn->next;
-	if (cpy->next || cpy->type > 3)
-		return ; // msg erreur type export [name[=value]...]
-	if (ft_isexported(env, cpy->content))
-		printf("CACA\n");
+	int	i;
+
+	cpy = cmd.tkn;
+	i = 0;
+	while (cpy && cpy->type < TYPE_QUOTE)
+	{
+		i++;
+		cpy = cpy->next;
+	}
+	if (i != 2)
+	{
+		ft_putstr_fd("Shell: cd: Wrong number of arguments\n", 1);
+		return ;
+	}
+	if (chdir(cmd.tkn->next->content) == -1)
+		perror("cd");
 }

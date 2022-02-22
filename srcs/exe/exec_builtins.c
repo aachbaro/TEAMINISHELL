@@ -6,11 +6,21 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:56:38 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/18 13:33:05 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/22 12:30:37 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+int	exe_simple_cmd(t_data *data)
+{
+	t_redirtools	redir;
+	if (init_fds_redir(data->cmds[0], &redir) == -1)
+		return (-1);
+	exe_builtin(data, 0);
+	restaure_fds_redir(&redir);
+	return (-1);
+}
 
 int	is_builtin(t_cmd cmd)
 {
@@ -55,12 +65,3 @@ int	exe_builtin(t_data *data, int cmd)
 	return (0);
 }
 
-int	exe_simple_cmd(t_data *data)
-{
-	t_redirtools	redir;
-	if (init_fds_redir(data->cmds[0], &redir) == -1)
-		return (-1);
-	exe_builtin(data, 0);
-	restaure_fds_redir(&redir);
-	return (-1);
-}

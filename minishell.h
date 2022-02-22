@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/18 13:32:51 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/22 12:05:06 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,29 +102,33 @@ typedef struct s_data
 int 	check_quote(char *str);
 int		split_cmds(t_data *data, char *str);
 int		line_to_tokens(t_data *data);
-int		pars_alnum(t_data *data, int start, int cmd);
-int		pars_quote(t_data *data, int start, int cmd);
+int		tkn_alnum(t_data *data, int start, int cmd);
+int		tkn_quote(t_data *data, int start, int cmd);
 int		get_dblquote_size(t_data *data, int start, int cmd);
 char		*recup_var(t_data *data, int start, int cmd);
 char		*find_var(char *var, t_envar *env);
 void		fill_dblquote(t_data *data, int start, int cmd);
-int		pars_dblquote(t_data *data, int start, int cmd);
-int		pars_lessthan(t_data *data, int start, int cmd);
-int		pars_morethan(t_data *data, int start, int cmd);
-int		pars_var(t_data *data, int start, int cmd);
+int		tkn_dblquote(t_data *data, int start, int cmd);
+int		tkn_lessthan(t_data *data, int start, int cmd);
+int		tkn_morethan(t_data *data, int start, int cmd);
+int		tkn_var(t_data *data, int start, int cmd);
 int		tkn_to_exe(t_data *data, int cmd);
-int		line_to_exe(t_data *data);
+int		input_to_exe(t_data *data);
 int		input_to_tokens(t_data *data);
 int		redir_in_tkns(t_data *data);
 int		set_redir(t_cmd *cmd);
 int		spaces_between_tkns(t_data *data);
 int		merge_tokens(t_cmd *cmd);
 int		inputing(t_data *data);
-int		str_to_tokens(char *str, t_data *data, int cmd);
+int		cmd_to_tokens(char *str, t_data *data, int cmd);
 int		set_heredoc(t_cmd *cmd, int *heredoc_id);
 int		init_heredoc(t_tkn *tkn, int heredoc_id);
 char		*filename_generator(int heredoc_id);
 int		heredoc_loop(int fd, char *delim);
+char		**get_args(t_cmd cmd);
+char		*get_path(char *cmd);
+char 		*get_possible_path(char *cmd, char *str);
+int		in_loop(t_data *data, int cmd, t_dblquote_parser *pars);
 
 // ELSE
 int	prompt(t_data *data);
@@ -142,7 +146,7 @@ void	built_env(t_envar *env);
 void	built_cd(t_cmd cmd);
 int	built_unset(t_cmd cmd, t_envar **env);
 int	is_builtin(t_cmd cmd);
-int	pipe_loop(t_data *data);
+int	exec_pipe(t_data *data);
 void    save_initial_fds(t_pipetools *pipes);
 void    child_process(t_pipetools *pipes, t_data *data, int i);
 void    parent_process(t_pipetools *pipes, t_data *data, int i);

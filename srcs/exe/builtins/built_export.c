@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_pwd.c                                        :+:      :+:    :+:   */
+/*   built_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 17:21:29 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/14 18:27:42 by ababaei          ###   ########.fr       */
+/*   Created: 2022/01/20 12:28:31 by ababaei           #+#    #+#             */
+/*   Updated: 2022/02/22 11:59:18 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../../minishell.h"
 
 /*
- * builtin pwd
- * function that we had to recode
- * it tells the directory where we are
- */
+ * Let you export a variable in your environnement
+ 
 
-int	built_pwd(t_cmd cmd)
+void	change_env(t_envar *env, char *from, char *to)
 {
-	char	buf[1000];
+	
+}*/
 
-	if (cmd.tkn->next && cmd.tkn->next->type < 4)
-		return (-1);
-	getcwd(buf, 1000);
-	ft_putstr_fd(buf, 1);
-	ft_putchar_fd('\n', 1);
-	return (0);
+void	built_export(t_cmd cmd, t_envar *env)
+{
+	t_tkn	*cpy;
+		
+	printf("TOTO\n");
+	cpy = cmd.tkn->next;
+	if (cpy->next || cpy->type > 3)
+		return ; // msg erreur type export [name[=value]...]
+	if (ft_isexported(env, cpy->content))
+		printf("CACA\n");
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_loop.c                                        :+:      :+:    :+:   */
+/*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/22 16:34:17 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/18 13:12:37 by aachbaro         ###   ########.fr       */
+/*   Created: 2022/02/22 12:04:37 by aachbaro          #+#    #+#             */
+/*   Updated: 2022/02/22 12:05:26 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	pipe_loop(t_data *data)
+int	exec_pipe(t_data *data)
 {
 	int		i;
 	t_pipetools	pipes;
@@ -91,8 +91,6 @@ void	parent_process(t_pipetools *pipes, t_data *data, int i)
 	}
 	wait(&pipes->status);
 	restaure_fds_redir(&pipes->redir);
-	//if (!ft_strncmp(data->cmds[i].line, "exit", 4))
-	//	data->over = 1;
 }
 
 void	restaure_initial_fds(t_pipetools *pipes , int i)

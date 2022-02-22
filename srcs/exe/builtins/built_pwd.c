@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_env.c                                        :+:      :+:    :+:   */
+/*   built_pwd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 17:25:11 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/14 18:27:32 by ababaei          ###   ########.fr       */
+/*   Created: 2022/01/14 17:21:29 by ababaei           #+#    #+#             */
+/*   Updated: 2022/02/22 11:59:32 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../../minishell.h"
 
 /*
- * builtin env
- * display all the environnement variables
+ * builtin pwd
+ * function that we had to recode
+ * it tells the directory where we are
  */
 
-void	built_env(t_envar *env)
+int	built_pwd(t_cmd cmd)
 {
-	t_envar	*cpy;
+	char	buf[1000];
 
-	cpy = env;
-	while (cpy)
-	{
-		ft_putstr_fd(cpy->str, 1);
-		write(1, "\n", 1);
-		cpy = cpy->next;
-	}
+	if (cmd.tkn->next && cmd.tkn->next->type < 4)
+		return (-1);
+	getcwd(buf, 1000);
+	ft_putstr_fd(buf, 1);
+	ft_putchar_fd('\n', 1);
+	return (0);
 }

@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   built_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 12:56:38 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/01 16:26:59 by ababaei          ###   ########.fr       */
+/*   Created: 2022/01/14 17:25:11 by ababaei           #+#    #+#             */
+/*   Updated: 2022/02/22 11:59:01 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
-/*
-int	exec_simple_cmd(t_data *data)
-{
+#include "../../../minishell.h"
 
-	return (0);
-}*/
+/*
+ * builtin env
+ * display all the environnement variables
+ */
+
+void	built_env(t_envar *env)
+{
+	t_envar	*cpy;
+
+	cpy = env;
+	while (cpy)
+	{
+		ft_putstr_fd(cpy->str, 1);
+		write(1, "\n", 1);
+		cpy = cpy->next;
+	}
+}

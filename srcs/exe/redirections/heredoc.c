@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/22 16:34:17 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/12/22 16:53:31 by aachbaro         ###   ########.fr       */
+/*   Created: 2022/02/22 11:57:22 by aachbaro          #+#    #+#             */
+/*   Updated: 2022/02/22 11:57:35 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../../minishell.h"
 
 int	init_heredoc(t_tkn *tkn, int heredoc_id)
 {
