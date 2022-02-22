@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/22 12:05:06 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:47:59 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ char		**get_args(t_cmd cmd);
 char		*get_path(char *cmd);
 char 		*get_possible_path(char *cmd, char *str);
 int		in_loop(t_data *data, int cmd, t_dblquote_parser *pars);
+int		merge_tokens2(t_tkn *cpy);
 
 // ELSE
 int	prompt(t_data *data);
@@ -157,6 +158,8 @@ int	get_fds_redir(t_cmd, t_redirtools *redir);
 int	init_redin(t_tkn tkn);
 int	init_redout(t_tkn tkn);
 void	built_export(t_cmd cmd, t_data *data);
+void	empty_input(t_data *data);
+char	*get_cmd_name(t_cmd cmd);
 
 // UTILS INUTILS
 void	aff_lst(t_list *lst);

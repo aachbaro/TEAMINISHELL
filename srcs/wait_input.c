@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/22 12:17:28 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/22 14:49:15 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,20 @@ int	inputing(t_data *data)
 	{
 		if (data->cmds)
 			del_cmd(data);
-		// PROMPT ET GESTION DE LHISTORIQUE
 		if (prompt(data) == -1)
 			break ;
-		//perror("prompt");
-		// PASSER DE LA LIGNE A PLUSIEURS COMMANDE DIVISEES
 		if (input_to_exe(data) == -1)
 			perror("shell");
-		if (data->cmds[1].line == NULL && is_builtin(data->cmds[0]))
-			exe_simple_cmd(data);
-		else
-			exec_pipe(data);
+		if (data->cmds->line)
+		{
+			if (data->cmds[1].line == NULL 
+					&& is_builtin(data->cmds[0]))
+				exe_simple_cmd(data);
+			else
+				exec_pipe(data);
+		}
 		free(data->usr_input);
 	}
-	printf("\njusqu'ici touvabene\n");
 	free_all(data);
 	return (EXIT_SUCCESS);
 }
