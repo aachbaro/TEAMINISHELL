@@ -6,13 +6,13 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:04:37 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/12/17 17:06:06 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/22 11:39:31 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	pars_alnum(t_data *data, int start, int cmd)
+int	tkn_alnum(t_data *data, int start, int cmd)
 {
 	int		i;
 	t_tkn	*new;
@@ -35,7 +35,7 @@ int	pars_alnum(t_data *data, int start, int cmd)
 	return (i - start);
 }
 
-int	pars_quote(t_data *data, int start, int cmd)
+int	tkn_quote(t_data *data, int start, int cmd)
 {
 	int		i;
 	t_tkn	*new;
@@ -58,7 +58,7 @@ int	pars_quote(t_data *data, int start, int cmd)
 	return (i - start + 1);
 }
 
-int	pars_lessthan(t_data *data, int start, int cmd)
+int	tkn_lessthan(t_data *data, int start, int cmd)
 {
 	t_tkn	*new;
 	int		ret;
@@ -81,7 +81,7 @@ int	pars_lessthan(t_data *data, int start, int cmd)
 	return (ret);
 }
 
-int	pars_morethan(t_data *data, int start, int cmd)
+int	tkn_morethan(t_data *data, int start, int cmd)
 {
 	t_tkn	*new;
 	int		ret;
@@ -104,21 +104,28 @@ int	pars_morethan(t_data *data, int start, int cmd)
 	return (ret);
 }
 
-char	*recup_var(t_data *data, int start, int cmd)
+int	tkn_var(t_data *data, int start, int cmd)
 {
-	int	i;
+	t_tkn	*new;
+	int		i;
 	char	*dup;
-	char	*ret;
+	char	*var;
 
 	i = start + 1;
 	while (!ft_strchr(" <>$\"'", data->cmds[cmd].line[i])
 			&& data->cmds[cmd].line[i])
 		i++;
-	dup = ft_strndup(data->cmds[cmd].line + start + 1, i - start);
+	dup = ft_strndup(data->cmds[cmd].line + start, i - start);
 	if (!dup)
-		return (NULL);
-	ret = find_var(dup, data->env);
-	if (!ret)
-		return (NULL);
-	return (ret);
+		return (-1);
+	var = find_var(dup, data->env);
+	if (!var)
+		return (-1);
+	new = tkn_new(var, TYPE_VAR);
+	if (!new)
+		return (-1);
+	if (data->cmds[cmd].line[i] == ' ')
+		new->space = 1;
+	tkn_addback(&data->cmds[cmd].tkn, new);
+	return (i - start);
 }

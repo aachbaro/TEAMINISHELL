@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   redirection_handler.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 12:56:38 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/12/17 18:18:22 by aachbaro         ###   ########.fr       */
+/*   Created: 2022/02/22 11:56:57 by aachbaro          #+#    #+#             */
+/*   Updated: 2022/02/22 11:57:05 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../../minishell.h"
 
 int	init_fds_redir(t_cmd cmd, t_redirtools *redir)
 {
@@ -52,11 +52,13 @@ int	get_fds_redir(t_cmd cmd, t_redirtools *redir)
 	redir->fd_out = -42;
 	while (cpy)
 	{
-		if (cpy->type == TYPE_REDIN)
+		if (cpy->type == TYPE_REDIN || cpy->type == TYPE_HRDOC)
 		{
 			if (redir->fd_in != -42)
 				close(redir->fd_in);
 			redir->fd_in = init_redin(*cpy);
+			if (cpy->type == TYPE_HRDOC)
+				unlink(cpy->content);
 		}
 		else if (cpy->type == TYPE_REDOUT || cpy->type == TYPE_APPEND)
 		{

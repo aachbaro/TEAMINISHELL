@@ -1,16 +1,65 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wait_input.c                                       :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/14 18:20:46 by ababaei          ###   ########.fr       */
+/*   Created: 2021/12/14 16:43:26 by aachbaro          #+#    #+#             */
+/*   Updated: 2022/02/22 11:32:13 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+int	check_quote(char *str)
+{
+	int	i;
+	int	smpl;
+	int	dbl;
+
+	smpl = 0;
+	dbl = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' && dbl == 0 && smpl == 0)
+			smpl = 1;
+		else if (str[i] == '\'' && dbl == 0 && smpl == 1)
+			smpl = 0;
+		else if (str[i] == '"' && smpl == 0 && dbl == 0)
+			dbl = 1;
+		else if (str[i] == '"' && smpl == 0 && dbl == 1)
+			dbl = 0;
+		i++;
+	}
+	return (dbl + smpl);
+}
+
+int	split_cmds(t_data *data, char *str)
+{
+	char	**tab;
+	int		i;
+
+	i = 0;
+	tab = ft_split(str, '|');
+	while (tab[i])
+		i++;
+	data->cmds = malloc(sizeof(t_cmd) * (i + 1));
+	if (!data->cmds)
+		return (-1);
+	i = 0;
+	while (tab[i])
+	{
+		data->cmds[i].line = ft_strdup(tab[i]);
+		if (!data->cmds[i].line)
+			return (-1);
+		i++;
+	}
+	data->cmds[i].line = NULL;
+	del_tab(tab);
+	return (0);
+}
 
 int	spaces_between_tkns(t_data *data)
 {
@@ -63,3 +112,4 @@ int	merge_tokens(t_cmd *cmd)
 	}
 	return (0);
 }
+
