@@ -6,11 +6,11 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:25:11 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/14 18:27:32 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/22 11:59:01 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../../minishell.h"
 
 /*
  * builtin env

@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 12:54:05 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/12/17 17:06:17 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/22 11:26:13 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,20 +95,4 @@ char	**get_args(t_cmd cmd)
 	}
 	tab[i] = NULL;
 	return (tab);
-}
-
-int	tkn_to_exe(t_data *data, int cmd)
-{
-	t_tkn	*cpy;
-
-	cpy = data->cmds[cmd].tkn;
-	while (cpy->type > TYPE_VAR)
-		cpy = cpy->next;
-	data->cmds[cmd].path = get_path(cpy->content);
-	if (!data->cmds[cmd].path)
-		return (-1);
-	data->cmds[cmd].args = get_args(data->cmds[cmd]);
-	if (!data->cmds[cmd].args)
-		return (-1);
-	return (0);
 }

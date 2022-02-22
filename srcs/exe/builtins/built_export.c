@@ -6,11 +6,11 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:28:31 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/01 16:24:54 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/22 11:59:18 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../../minishell.h"
 
 /*
  * Let you export a variable in your environnement
