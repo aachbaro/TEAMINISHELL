@@ -25,6 +25,7 @@ SRC = srcs/main.c \
 	  srcs/utils/free_all.c \
 	  srcs/utils/tkn_lst.c \
 	  srcs/env_utils/env_lst.c \
+	  srcs/env_utils/display_env.c \
 	  srcs/env_utils/free_envar.c \
 	  srcs/env_utils/find_envar.c \
 	  srcs/signals/sig_config.c \
@@ -39,7 +40,7 @@ CC = gcc #clang
 
 INC = -Iminishell.h
 
-CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 
 RM = rm -rf
 

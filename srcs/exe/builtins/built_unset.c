@@ -12,7 +12,7 @@ void	remove_var(t_envar **env, char *name)
 
 	curr = *env;
 	prev = *env;
-	while (curr->next)
+	while (*env)
 	{
 		if (ft_strcmp(curr->key, name) == 0)
 		{

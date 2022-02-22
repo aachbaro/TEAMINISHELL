@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:28:31 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/22 11:59:18 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:23:40 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,38 +39,42 @@ t_envar	*change_env(t_envar **envar, char *to)
 	i = 0;
 	while (to[i] != '=')
 		i++;
+	free((*envar)->str);
 	free((*envar)->value);
-	(*envar)->value = ft_strndup(to, i);
+	(*envar)->str = ft_strdup(to);
+	(*envar)->value = ft_strdup(to + i + 1);
 	if ((*envar)->value == NULL)
 		return (NULL);
 	return (*envar);
 }
 
-void	built_export(t_cmd cmd, t_data *data)
+int	built_export(t_cmd cmd, t_data *data)
 {
 	t_tkn	*cpy;
 	t_envar *tmp;
 
 	if (cmd.tkn->next == NULL)	
-		printf("TOTO\n"); // here print env with declare -x
+		display_env(data->env, 1); // here print env with declare -x
 	cpy = cmd.tkn->next;
-	if (cpy->type > 3)
-		return ; // msg erreur type export [name[=value]...]
+	if (cpy && cpy->type > 3)
+	{
+		ft_putstr_fd("minishel: export: syntax error\n", 2);
+		return (EXIT_FAILURE); // msg erreur type export [name[=value]...]
+	}
 	while (cpy)
 	{
 		if (!check_key(cpy->content))
 		{
 			printf("ID [%s] non valide\n", cpy->content);
-			break ;
+			cpy = cpy->next;
+			continue ;
 		}
-		tmp = find_envar(&(data->env), cpy->content);
-		printf("{{%p}}\n", tmp);
+		tmp = find_envar(data->env, cpy->content);
 		if (tmp)
 			change_env(&tmp, cpy->content);
 		else
-		{
 			add_env(&(data->env), cpy->content);
-		}	
 		cpy = cpy->next;
 	}
+	return (EXIT_SUCCESS);
 }

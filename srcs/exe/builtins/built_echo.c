@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:23:21 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/22 11:58:49 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/22 14:28:58 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * display a line of text
  */
 
-void	built_echo(t_cmd cmd)
+int	built_echo(t_cmd cmd)
 {
 	t_tkn	*cpy;
 	int	opt;
@@ -39,4 +39,5 @@ void	built_echo(t_cmd cmd)
 	}
 	if (!opt)
 		write(1, "\n", 1);
+	return (EXIT_SUCCESS);
 }
