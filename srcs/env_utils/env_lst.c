@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:54:20 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/08 16:51:59 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/22 13:13:21 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ t_envar	*add_env(t_envar **lst, char *str)
 	if (!tmp)
 		return (NULL);
 	tmp->next = NULL;
+	if (*lst == NULL)
+	{
+		*lst = tmp;
+		return (*lst);
+	}
 	while ((*lst)->next)
 		*lst = (*lst)->next;
 	(*lst)->next = tmp;
@@ -66,13 +71,13 @@ t_envar	*init_env(char **env)
 	t_envar	*envlst;
 	int i;
 
-	i = -1;
-	//envlst = malloc(sizeof(t_envar));
+	i = 0;
 	envlst = NULL;
-	if (!envlst)
-		return (NULL);
-	while (env[++i])
+	while (env[i])
+	{
 		add_env(&envlst, env[i]);
+		i++;
+	}	
 	return (envlst);
 }
 

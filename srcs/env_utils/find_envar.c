@@ -13,24 +13,24 @@
 #include "../../minishell.h"
 
 /*
- * this function returns 0 if the var is not find in the environnement
- * and 1 if it does
+ * this function returns a ptr on the env variable if its founnd in environnement,
+ * and NULL if not.
  */
 
-int	ft_isexported(t_envar *lst, char *name)
+t_envar	*find_envar(t_envar **lst, char *name)
 {
 	int i;
 
 	i = 0;
-	if (!lst || !name)
-		return (0);
+	if (!*lst || !name)
+		return (NULL);
 	while(name[i] != '=')
 		i++;	
-	while (lst->next)
+	while ((*lst)->next)
 	{
-		if (!ft_strncmp(lst->str, name, i))
-			return (1);
-		lst = lst->next;
+		if (!ft_strncmp((*lst)->str, name, i))
+			return (*lst);
+		*lst = (*lst)->next;
 	}
-	return (0);
+	return (NULL);
 }

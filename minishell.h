@@ -156,7 +156,7 @@ void	restaure_fds_redir(t_redirtools *redir);
 int	get_fds_redir(t_cmd, t_redirtools *redir);
 int	init_redin(t_tkn tkn);
 int	init_redout(t_tkn tkn);
-void	built_export(t_cmd cmd, t_envar *env);
+void	built_export(t_cmd cmd, t_data *data);
 
 // UTILS INUTILS
 void	aff_lst(t_list *lst);
