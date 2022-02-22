@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:56:38 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/01 16:26:59 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/22 12:26:26 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	is_builtin(t_cmd cmd)
 
 int	exe_builtin(t_data *data, int cmd)
 {
-	add_env(&(data->env), "CACA=PROUT");
 	if (!ft_strncmp(data->cmds[cmd].line, "echo", 4))
 		built_echo(data->cmds[cmd]);
 	else if (!ft_strncmp(data->cmds[cmd].line, "pwd", 3))
