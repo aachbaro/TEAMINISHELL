@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/22 16:47:59 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/24 16:57:18 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_tkn
 	char		*content;
 	int		type;
 	int		space;
+	int		quotes;
 	struct s_tkn	*prev;
 	struct s_tkn	*next;
 }			t_tkn;
@@ -121,10 +122,12 @@ int		spaces_between_tkns(t_data *data);
 int		merge_tokens(t_cmd *cmd);
 int		inputing(t_data *data);
 int		cmd_to_tokens(char *str, t_data *data, int cmd);
-int		set_heredoc(t_cmd *cmd, int *heredoc_id);
-int		init_heredoc(t_tkn *tkn, int heredoc_id);
+int		set_heredoc(t_cmd *cmd, int *heredoc_id, t_data *data);
+int		init_heredoc(t_tkn *tkn, int heredoc_id, t_envar *envar);
 char		*filename_generator(int heredoc_id);
-int		heredoc_loop(int fd, char *delim);
+int		heredoc_loop(int fd, char *delim, t_envar *env, int quotes);
+char		*treat_heredoc_input(char *input, t_envar *env);
+char		*var_name(char *str);
 char		**get_args(t_cmd cmd);
 char		*get_path(char *cmd);
 char 		*get_possible_path(char *cmd, char *str);

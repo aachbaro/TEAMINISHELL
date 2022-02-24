@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:56:38 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/22 16:26:02 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/23 15:58:56 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,24 @@ int	exe_simple_cmd(t_data *data)
 
 int	is_builtin(t_cmd cmd)
 {
-	if (!ft_strncmp(get_cmd_name(cmd), "echo", 4)
-			&& ft_strlen(cmd.tkn->content) == 4)
+	char	*name;
+
+	name = get_cmd_name(cmd);
+	if (!name)
+		return (0);
+	if (!ft_strncmp(name, "echo", 4) && ft_strlen(name) == 4)
 		return (1);
-	else if (!ft_strncmp(get_cmd_name(cmd), "cd", 2)
-			&& ft_strlen(cmd.tkn->content) == 2)
+	else if (!ft_strncmp(name, "cd", 2) && ft_strlen(name) == 2)
 		return (1);
-	else if (!ft_strncmp(get_cmd_name(cmd), "pwd", 3)
-			&& ft_strlen(cmd.tkn->content) == 3)
+	else if (!ft_strncmp(name, "pwd", 3) && ft_strlen(name) == 3)
 		return (1);
-	else if (!ft_strncmp(get_cmd_name(cmd), "export", 6)
-			&& ft_strlen(cmd.tkn->content) == 6)
+	else if (!ft_strncmp(name, "export", 6) && ft_strlen(name) == 6)
 		return (1);
-	else if (!ft_strncmp(get_cmd_name(cmd), "unset", 5)
-			&& ft_strlen(cmd.tkn->content) == 5)
+	else if (!ft_strncmp(name, "unset", 5) && ft_strlen(name) == 5)
 		return (1);
-	else if (!ft_strncmp(get_cmd_name(cmd), "env", 3)
-			&& ft_strlen(cmd.tkn->content) == 3)
+	else if (!ft_strncmp(name, "env", 3) && ft_strlen(name) == 3)
 		return (1);
-	else if (!ft_strncmp(get_cmd_name(cmd), "exit", 4)
-			&& ft_strlen(cmd.tkn->content) == 4)
+	else if (!ft_strncmp(name, "exit", 4) && ft_strlen(name) == 4)
 		return (1);
 	return (0);
 }

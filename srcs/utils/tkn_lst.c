@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   frag_manager.c                                     :+:      :+:    :+:   */
+/*   tkn_lst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 13:53:44 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/01/14 17:05:02 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/24 13:43:32 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_tkn	*tkn_new(char *content, int type)
 	new->content = ft_strdup(content);
 	new->type = type;
 	new->space = 0;
+	new->quotes = 0;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:04:37 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/22 12:05:26 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/23 18:31:56 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,19 @@ void	child_process(t_pipetools *pipes, t_data *data, int i)
 		exit(0);
 	}
 	else
-		if (execve(data->cmds[i].path, data->cmds[i].args,
-			data->in_env) == -1)
+	{
+		if (data->cmds[i].path && execve(data->cmds[i].path,
+			data->cmds[i].args, data->in_env) == -1)
+		{
 			perror(data->cmds[i].path);
+			free_all(data);
+			close(pipes->redir.save_stdin);
+			close(pipes->redir.save_stdout);
+			close(pipes->save_stdin);
+			close(pipes->save_stdout);
+			exit(0);
+		}
+	}
 }
 
 void	parent_process(t_pipetools *pipes, t_data *data, int i)
