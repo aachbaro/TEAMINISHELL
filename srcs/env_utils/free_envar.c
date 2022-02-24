@@ -7,11 +7,8 @@
 
 void	free_envar(t_envar *var)
 {
-//	if (var && var->str && var->key && var->value)
-//	{
 		free(var->str);
 		free(var->key);
 		free(var->value);
 		free(var);
-//	}
 }

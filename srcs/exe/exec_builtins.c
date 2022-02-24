@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:56:38 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/22 13:46:55 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/24 13:50:28 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	exe_builtin(t_data *data, int cmd)
 		built_export(data->cmds[cmd], data);
 	else if (!ft_strncmp(data->cmds[cmd].line, "exit", 4))
 		data->over = 1;
+	else if (!ft_strncmp(data->cmds[cmd].line, "unset", 4))
+		built_unset(data->cmds[cmd], data);
 	return (0);
 }
 

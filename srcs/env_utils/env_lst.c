@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:54:20 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/22 17:13:44 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/24 16:51:24 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ t_envar	*init_env(char **env)
 	return (envlst);
 }
 
+/* USE REMOVE_VAR INSTEAD
 int	delete_env(t_envar **lst, char *name)
 {
 	t_envar *tmp;
@@ -98,4 +99,25 @@ int	delete_env(t_envar **lst, char *name)
 	free(*lst);
 	*lst = tmp;
 	return (EXIT_SUCCESS);
+}*/
+
+int	remove_var(t_envar **env, char *key)
+{
+	t_envar *curr;
+	t_envar *prev;
+
+	curr = *env;
+	prev = *env;
+	while (*env)
+	{
+		if (ft_strcmp(curr->key, key) == 0)
+		{
+			prev->next = curr->next;
+			free_envar(curr);
+			return (EXIT_SUCCESS);
+		}
+		prev = curr;
+		curr = curr->next;
+	}
+	return (EXIT_FAILURE);
 }

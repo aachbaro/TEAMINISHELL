@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 11:04:03 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/01/14 18:30:31 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/24 15:18:33 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char				*ft_strchr(const char *s, int c);
 char				*ft_strdup(const char *s);
 char				*ft_strjoin(char const *s1, char const *s2);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
+char				*ft_strcat(char *dst, const char *src);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 size_t				ft_strlen(const char *str);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));

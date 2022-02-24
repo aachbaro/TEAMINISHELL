@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/22 17:12:31 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/24 17:39:57 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,19 +143,19 @@ int	exe_simple_cmd(t_data *data);
 int		built_pwd(t_cmd cmd);
 int		built_echo(t_cmd cmd);
 int		built_env(t_envar *env);
-int		built_cd(t_cmd cmd);
-int	built_unset(t_cmd cmd, t_envar **env);
-int	is_builtin(t_cmd cmd);
-int	exec_pipe(t_data *data);
+int		built_cd(t_cmd cmd, t_data *data);
+int		built_unset(t_cmd cmd, t_data *data);
+int		is_builtin(t_cmd cmd);
+int		exec_pipe(t_data *data);
 void    save_initial_fds(t_pipetools *pipes);
 void    child_process(t_pipetools *pipes, t_data *data, int i);
 void    parent_process(t_pipetools *pipes, t_data *data, int i);
 void    restaure_initial_fds(t_pipetools *pipes , int i);
-int	init_fds_redir(t_cmd cmd, t_redirtools *redir);
+int		init_fds_redir(t_cmd cmd, t_redirtools *redir);
 void	restaure_fds_redir(t_redirtools *redir);
-int	get_fds_redir(t_cmd, t_redirtools *redir);
-int	init_redin(t_tkn tkn);
-int	init_redout(t_tkn tkn);
+int		get_fds_redir(t_cmd, t_redirtools *redir);
+int		init_redin(t_tkn tkn);
+int		init_redout(t_tkn tkn);
 int		built_export(t_cmd cmd, t_data *data);
 
 // UTILS INUTILS
@@ -177,11 +177,13 @@ void	tkn_clear(t_tkn **cmd);
 //env
 t_envar	*init_env(char **env);
 t_envar	*add_env(t_envar **lst, char *str);
-int	delete_env(t_envar **lst, char *name);
+//int	delete_env(t_envar **lst, char *name);
+int		remove_var(t_envar **env, char *key);
 t_envar	*find_envar(t_envar *lst, char *name);
 void	free_envar(t_envar *var);
 int	ft_isexported(t_envar *lst, char *name);
 void	display_env(t_envar *env, int flag);
+t_envar	*change_env(t_envar **envar, char *to);
 
 //signals
 void	sig_config(void);
