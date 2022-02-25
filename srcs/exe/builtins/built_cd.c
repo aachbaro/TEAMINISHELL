@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:26:43 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/24 17:41:37 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/24 20:45:41 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	built_cd(t_cmd cmd, t_data *data)
 		ft_putstr_fd("Shell: cd: Wrong number of arguments\n", 2);
 		return (EXIT_FAILURE);
 	}
-	change_env(&oldpwd, getcwd(NULL, 10000));
+	change_env(&oldpwd, ft_strjoin("OLDPWD=", getcwd(NULL, 10000)));
 	if (chdir(cmd.tkn->next->content) == -1)
 		perror("cd");
-	change_env(&pwd, getcwd(NULL, 10000));
+	change_env(&pwd, ft_strjoin("PWD=", (getcwd(NULL, 10000))));
 	return (EXIT_SUCCESS);
 }

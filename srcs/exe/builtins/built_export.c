@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:28:31 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/24 17:36:22 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/24 20:42:49 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	handle_var(t_envar **env, t_envar *var, t_tkn *cpy)
 		change_env(&var, cpy->content);
 	else
 		add_env(env, cpy->content);
-	
 }
 
 int	built_export(t_cmd cmd, t_data *data)
