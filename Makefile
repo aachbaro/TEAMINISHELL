@@ -28,7 +28,9 @@ SRC = srcs/main.c \
 	  srcs/env_utils/display_env.c \
 	  srcs/env_utils/free_envar.c \
 	  srcs/env_utils/find_envar.c \
+	  srcs/env_utils/lst_to_tab.c \
 	  srcs/env_utils/change_env.c \
+	  srcs/env_utils/env_size.c \
 	  srcs/signals/sig_config.c \
 	  srcs/debug/utils1.c \
 	  srcs/debug/debug.c \

@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/24 17:39:57 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/27 18:12:25 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,8 @@ void	free_envar(t_envar *var);
 int	ft_isexported(t_envar *lst, char *name);
 void	display_env(t_envar *env, int flag);
 t_envar	*change_env(t_envar **envar, char *to);
+char	**lst_to_tab(t_envar *env);
+int		env_size(t_envar *env);
 
 //signals
 void	sig_config(void);
