@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:54:20 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/22 13:13:21 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/24 16:51:24 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ t_envar	*init_env(char **env)
 	return (envlst);
 }
 
-void	delete_env(t_envar **lst, char *name)
+/* USE REMOVE_VAR INSTEAD
+int	delete_env(t_envar **lst, char *name)
 {
 	t_envar *tmp;
 
@@ -91,10 +92,32 @@ void	delete_env(t_envar **lst, char *name)
 		*lst = (*lst)->next;
 	}
 	if (!(*lst) || *((*lst)->str + 1) != '=')
-		return ;
+		return (EXIT_FAILURE);
 	if ((*lst)->str)
 		free((*lst)->str);
 	tmp->next = (*lst)->next;
 	free(*lst);
 	*lst = tmp;
+	return (EXIT_SUCCESS);
+}*/
+
+int	remove_var(t_envar **env, char *key)
+{
+	t_envar *curr;
+	t_envar *prev;
+
+	curr = *env;
+	prev = *env;
+	while (*env)
+	{
+		if (ft_strcmp(curr->key, key) == 0)
+		{
+			prev->next = curr->next;
+			free_envar(curr);
+			return (EXIT_SUCCESS);
+		}
+		prev = curr;
+		curr = curr->next;
+	}
+	return (EXIT_FAILURE);
 }

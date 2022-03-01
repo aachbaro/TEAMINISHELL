@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:25:11 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/22 11:59:01 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/22 14:22:36 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@
  * display all the environnement variables
  */
 
-void	built_env(t_envar *env)
+int	built_env(t_envar *env)
 {
 	t_envar	*cpy;
 
 	cpy = env;
-	while (cpy)
+	if (!cpy)
 	{
-		ft_putstr_fd(cpy->str, 1);
-		write(1, "\n", 1);
-		cpy = cpy->next;
+		ft_putstr_fd("minishell: env: No such file or directory\n", 2);
+		return (EXIT_FAILURE);
 	}
+	display_env(env, 0);
+	return (EXIT_SUCCESS);
 }
