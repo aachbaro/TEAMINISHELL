@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/24 17:41:38 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:24:06 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	set_redir(t_cmd *cmd)
 			tmp = cpy->next;
 			free(cpy->content);
 			cpy->content = ft_strdup(cpy->next->content);
+			cpy->quotes += cpy->next->quotes;
 			if (!cpy->content)
 				return (-1);
 			if (cpy->next->next)

@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:57:22 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/24 17:01:09 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:13:03 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	init_heredoc(t_tkn *tkn, int heredoc_id, t_envar *env)
 		free(heredoc_name);
 		return (-1);
 	}
-	printf("%d\n", tkn->quotes);
 	if (heredoc_loop(fd, tkn->content, env, tkn->quotes) == -1)
 	{
 		close(fd);
@@ -97,6 +96,8 @@ char	*treat_heredoc_input(char *input, t_envar *env)
 
 	pars.i = 0;
 	pars.str = NULL;
+	if (input[0] == 0)
+		return (ft_strdup(""));
 	while (input[pars.i])
 	{
 		pars.j = pars.i;
