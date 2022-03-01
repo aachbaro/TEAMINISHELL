@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 17:36:27 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/27 18:51:53 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/01 13:23:45 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**lst_to_tab(t_envar *env)
 	if (!tab)
 		return (NULL);
 	tab[size] = NULL;
-	while (tab[i])
+	while (env)
 	{
 		tab[i] = ft_strdup(env->str);
 		if (!tab[i])
