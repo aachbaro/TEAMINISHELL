@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:43:26 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/22 11:32:13 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:41:58 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ int	spaces_between_tkns(t_data *data)
 int	merge_tokens(t_cmd *cmd)
 {
 	t_tkn	*cpy;
-	t_tkn	*tmp;
-	char	*str;
 
 	cpy = cmd->tkn;
 	while (cpy)
@@ -87,25 +85,8 @@ int	merge_tokens(t_cmd *cmd)
 		if (!cpy->space && cpy->next && cpy->next->type <= TYPE_VAR
 				&& cpy->type <= TYPE_VAR)
 		{
-			tmp = cpy->next;
-			str = ft_strjoin(cpy->content, tmp->content);
-			if (!str)
+			if (merge_tokens2(cpy) == -1)
 				return (-1);
-			free(cpy->content);
-			cpy->content = ft_strdup(str);
-			free(str);
-			if (!cpy->content)
-				return (-1);
-			cpy->space = tmp->space;
-			if (tmp->next)
-			{
-				tmp->next->prev = tmp->prev;
-				cpy->next = tmp->next;
-			}
-			else
-				cpy->next = NULL;
-			free(tmp->content);
-			free(tmp);
 		}
 		else
 			cpy = cpy->next;
@@ -113,3 +94,29 @@ int	merge_tokens(t_cmd *cmd)
 	return (0);
 }
 
+int	merge_tokens2(t_tkn *cpy)
+{
+	t_tkn	*tmp;
+	char	*str;
+
+	tmp = cpy->next;
+	str = ft_strjoin(cpy->content, tmp->content);
+	if (!str)
+		return (-1);
+	free(cpy->content);
+	cpy->content = ft_strdup(str);
+	free(str);
+	if (!cpy->content)
+		return (-1);
+	cpy->space = tmp->space;
+	if (tmp->next)
+	{
+		tmp->next->prev = tmp->prev;
+		cpy->next = tmp->next;
+	}
+	else
+		cpy->next = NULL;
+	free(tmp->content);
+	free(tmp);
+	return (0);
+}

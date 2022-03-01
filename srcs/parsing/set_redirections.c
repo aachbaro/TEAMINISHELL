@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wait_input.c                                       :+:      :+:    :+:   */
+/*   set_redirections.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/14 18:20:46 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/24 17:41:38 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	redir_in_tkns(t_data *data)
 	{
 		if (set_redir(&data->cmds[i]) == -1)
 			return (-1);
-		if (set_heredoc(&data->cmds[i], &data->heredoc_id) == -1)
+		if (set_heredoc(&data->cmds[i], &data->heredoc_id, data) == -1)
 			return (-1);
 		i++;
 	}
@@ -59,7 +59,7 @@ int	set_redir(t_cmd *cmd)
 	return (0);
 }
 
-int	set_heredoc(t_cmd *cmd, int *heredoc_id)
+int	set_heredoc(t_cmd *cmd, int *heredoc_id, t_data *data)
 {
 	t_tkn *cpy;
 	int	hd_id;
@@ -70,7 +70,7 @@ int	set_heredoc(t_cmd *cmd, int *heredoc_id)
 	{
 		if (cpy->type == TYPE_HRDOC)
 		{
-			if (init_heredoc(cpy, hd_id) == -1)
+			if (init_heredoc(cpy, hd_id, data->env) == -1)
 				return (-1);
 			hd_id++;
 		}

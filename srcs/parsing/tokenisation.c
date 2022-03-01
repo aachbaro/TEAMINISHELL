@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pars_func.c                                        :+:      :+:    :+:   */
+/*   tokenisation.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:04:37 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/22 11:39:31 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:35:27 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	tkn_quote(t_data *data, int start, int cmd)
 		return (-1);
 	if (data->cmds[cmd].line[i + 1] == ' ')
 		new->space = 1;
+	new->quotes = 1;
 	tkn_addback(&data->cmds[cmd].tkn, new);
 	return (i - start + 1);
 }
@@ -121,7 +122,11 @@ int	tkn_var(t_data *data, int start, int cmd)
 	var = find_var(dup, data->env);
 	if (!var)
 		return (-1);
-	new = tkn_new(var, TYPE_VAR);
+	if (data->cmds[cmd].tkn && (tkn_last(data->cmds[cmd].tkn))->type == 6)
+		new = tkn_new(dup, TYPE_VAR);
+	else
+		new = tkn_new(var, TYPE_VAR);
+	free(dup);
 	if (!new)
 		return (-1);
 	if (data->cmds[cmd].line[i] == ' ')

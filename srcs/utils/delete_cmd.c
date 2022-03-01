@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:42:29 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/14 18:25:03 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/02/23 16:03:26 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ void	del_cmd(t_data *data)
 	i = 0;
 	while (data->cmds[i].line)
 	{
-		free(data->cmds[i].line);
-		free(data->cmds[i].path);
-		del_tab(data->cmds[i].args);
+		if (data->cmds[i].line)
+			free(data->cmds[i].line);
+		if (data->cmds[i].path)
+			free(data->cmds[i].path);
+		if (data->cmds[i].args)
+			del_tab(data->cmds[i].args);
 		tkn_clear(&data->cmds[i].tkn);
 		i++;
 	}

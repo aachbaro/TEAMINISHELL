@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:37:04 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/22 11:40:51 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:05:23 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,24 @@ int	in_loop(t_data *data, int cmd, t_dblquote_parser *pars)
 		return (-1);
 	pars->i = pars->j;
 	return (0);
+}
+
+void	empty_input(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->cmds[i].line)
+		i++;
+	if (i == 1)
+	{
+		i = 0;
+		while (data->cmds[0].line[i] == ' ')
+			i++;
+		if (data->cmds[0].line[i] == 0)
+		{
+			free(data->cmds[0].line);
+			data->cmds[0].line = NULL;
+		}
+	}
 }

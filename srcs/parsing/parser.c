@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 16:46:10 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/22 11:52:50 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:41:52 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,12 @@ int	input_to_tokens(t_data *data)
 		return (-1);
 	if (split_cmds(data, data->usr_input) == -1)
 		return (-1);
+	empty_input(data);
 	while (data->cmds[i].line)
 	{
 		data->cmds[i].tkn = NULL;
+		data->cmds[i].path = NULL;
+		data->cmds[i].args = NULL;
 		if (cmd_to_tokens(data->cmds[i].line, data, i) == -1)
 			return (-1);
 		i++;
@@ -96,14 +99,16 @@ int	tkn_to_exe(t_data *data, int cmd)
 	t_tkn	*cpy;
 
 	cpy = data->cmds[cmd].tkn;
-	while (cpy->type > TYPE_VAR)
+	while (cpy && cpy->type > TYPE_VAR)
 		cpy = cpy->next;
-	data->cmds[cmd].path = get_path(cpy->content);
-	if (!data->cmds[cmd].path)
-		return (-1);
-	data->cmds[cmd].args = get_args(data->cmds[cmd]);
-	if (!data->cmds[cmd].args)
-		return (-1);
+	if (cpy)
+	{
+		data->cmds[cmd].path = get_path(cpy->content);
+		if (!data->cmds[cmd].path)
+			return (-1);
+		data->cmds[cmd].args = get_args(data->cmds[cmd]);
+		if (!data->cmds[cmd].args)
+			return (-1);
+	}
 	return (0);
 }
-

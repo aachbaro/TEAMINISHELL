@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:56:38 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/24 20:12:05 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/01 11:24:18 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,46 +24,57 @@ int	exe_simple_cmd(t_data *data)
 
 int	is_builtin(t_cmd cmd)
 {
-	if (!ft_strncmp(cmd.line, "echo", 4)
-			&& ft_strlen(cmd.tkn->content) == 4)
+	char	*name;
+
+	name = get_cmd_name(cmd);
+	if (!name)
+		return (0);
+	if (!ft_strncmp(name, "echo", 4) && ft_strlen(name) == 4)
 		return (1);
-	else if (!ft_strncmp(cmd.line, "cd", 2)
-			&& ft_strlen(cmd.tkn->content) == 2)
+	else if (!ft_strncmp(name, "cd", 2) && ft_strlen(name) == 2)
 		return (1);
-	else if (!ft_strncmp(cmd.line, "pwd", 3)
-			&& ft_strlen(cmd.tkn->content) == 3)
+	else if (!ft_strncmp(name, "pwd", 3) && ft_strlen(name) == 3)
 		return (1);
-	else if (!ft_strncmp(cmd.line, "export", 6)
-			&& ft_strlen(cmd.tkn->content) == 6)
+	else if (!ft_strncmp(name, "export", 6) && ft_strlen(name) == 6)
 		return (1);
-	else if (!ft_strncmp(cmd.line, "unset", 5)
-			&& ft_strlen(cmd.tkn->content) == 5)
+	else if (!ft_strncmp(name, "unset", 5) && ft_strlen(name) == 5)
 		return (1);
-	else if (!ft_strncmp(cmd.line, "env", 3)
-			&& ft_strlen(cmd.tkn->content) == 3)
+	else if (!ft_strncmp(name, "env", 3) && ft_strlen(name) == 3)
 		return (1);
-	else if (!ft_strncmp(cmd.line, "exit", 4)
-			&& ft_strlen(cmd.tkn->content) == 4)
+	else if (!ft_strncmp(name, "exit", 4) && ft_strlen(name) == 4)
 		return (1);
 	return (0);
 }
 
 int	exe_builtin(t_data *data, int cmd)
 {
-	if (!ft_strncmp(data->cmds[cmd].line, "echo", 4))
+	if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "echo", 4))
 		built_echo(data->cmds[cmd]);
-	else if (!ft_strncmp(data->cmds[cmd].line, "pwd", 3))
+	else if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "pwd", 3))
 		built_pwd(data->cmds[cmd]);
-	else if (!ft_strncmp(data->cmds[cmd].line, "env", 3))
+	else if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "env", 3))
 		built_env(data->env);
-	else if (!ft_strncmp(data->cmds[cmd].line, "cd", 2))
-		built_cd(data->cmds[cmd], data);
-	else if (!ft_strncmp(data->cmds[cmd].line, "export", 2))
+	else if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "cd", 2))
+		built_cd(data->cmds[cmd]);
+	else if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "export", 2))
 		built_export(data->cmds[cmd], data);
-	else if (!ft_strncmp(data->cmds[cmd].line, "exit", 4))
+	else if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "exit", 4))
 		data->over = 1;
 	else if (!ft_strncmp(data->cmds[cmd].line, "unset", 4))
 		built_unset(data->cmds[cmd], data);
 	return (0);
 }
 
+char	*get_cmd_name(t_cmd cmd)
+{
+	t_tkn	*cpy;
+
+	cpy = cmd.tkn;
+	while (cpy)
+	{
+		if (cpy->type < TYPE_REDIN)
+			return (cpy->content);
+		cpy = cpy->next;
+	}
+	return (NULL);
+}
