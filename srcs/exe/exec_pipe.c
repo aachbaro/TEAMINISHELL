@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:04:37 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/01 11:31:00 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/02 16:27:14 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	exec_pipe(t_data *data)
 		if (data->cmds[i + 1].line)
 			pipe(pipes.fds);
 		pipes.pid = fork();
+		g_g.status = 1; // 1 for forked process
 		if (pipes.pid == -1)
 		{
 			perror("fork");

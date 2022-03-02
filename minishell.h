@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/01 11:27:00 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/02 16:37:54 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,14 @@ typedef struct s_data
 	t_envar		*env;
 	char		**in_env;
 }			t_data;
+
+typedef struct s_glob
+{
+	int exit_status;
+	int status;
+}	t_glob;
+
+extern t_glob g_g;
 
 // PARSER DE COMMANDE
 int 	check_quote(char *str);
