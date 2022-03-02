@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/09 14:51:39 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/02 16:41:38 by aachbaro         ###   ########.fr       */
+/*   Created: 2022/03/02 14:09:10 by aachbaro          #+#    #+#             */
+/*   Updated: 2022/03/02 15:23:37 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-t_glob	g_glob;
-//sig_atomic_t	g_status;
-
-int	main(int ac, char **av, char **envp)
+int	ft_error(char *msg, int exit_num)
 {
-	t_data	data;
-	int i = 0;
-
-	g_glob.exit = 0;
-	if (ac != 1 || !av)
-		return (EXIT_FAILURE);
-	while (envp[i])
-		i++;
-	shell_start(&data, envp);
-	return (inputing(&data));
+	if (msg)
+		ft_putstr_fd(msg, 2);
+	g_glob.exit = exit_num;
+	return (EXIT_FAILURE);
 }

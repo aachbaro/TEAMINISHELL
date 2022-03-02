@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/01 15:10:36 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/02 16:53:23 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@
 # define TYPE_REDOUT 5
 # define TYPE_HRDOC 6
 # define TYPE_APPEND 7
+
+typedef struct s_glob
+{
+	int	exit;
+}		t_glob;
+
+extern t_glob	g_glob;
 
 typedef struct s_dblquote_parser
 {
@@ -97,6 +104,8 @@ typedef struct s_data
 	int		over;
 	t_envar		*env;
 	char		**in_env;
+	int		exit_status;
+	int		last_exit_status;
 }			t_data;
 
 // PARSER DE COMMANDE
@@ -107,7 +116,7 @@ int		tkn_alnum(t_data *data, int start, int cmd);
 int		tkn_quote(t_data *data, int start, int cmd);
 int		get_dblquote_size(t_data *data, int start, int cmd);
 char		*recup_var(t_data *data, int start, int cmd);
-char		*find_var(char *var, t_envar *env);
+char		*find_var(char *var, t_envar *env, int exit_status);
 void		fill_dblquote(t_data *data, int start, int cmd);
 int		tkn_dblquote(t_data *data, int start, int cmd);
 int		tkn_lessthan(t_data *data, int start, int cmd);
@@ -170,6 +179,7 @@ void	delst(void	*content);
 void	del_tab(char **tab);
 void	del_cmd(t_data *data);
 void	free_all(t_data *data);
+int	ft_error(char *msg, int exit_num);
 
 //INIT
 void	shell_start(t_data *data, char **env);

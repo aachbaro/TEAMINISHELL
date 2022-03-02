@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:56:38 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/01 11:32:25 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/02 17:39:17 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 int	exe_simple_cmd(t_data *data)
 {
 	t_redirtools	redir;
+
 	if (init_fds_redir(data->cmds[0], &redir) == -1)
 		return (-1);
-	exe_builtin(data, 0);
+	g_glob.exit = exe_builtin(data, 0);
 	restaure_fds_redir(&redir);
-	return (-1);
+	return (0);
 }
 
 int	is_builtin(t_cmd cmd)
@@ -48,21 +49,24 @@ int	is_builtin(t_cmd cmd)
 
 int	exe_builtin(t_data *data, int cmd)
 {
+	int	ret;
+
+	ret = 0;
 	if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "echo", 4))
-		built_echo(data->cmds[cmd]);
+		ret = built_echo(data->cmds[cmd]);
 	else if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "pwd", 3))
-		built_pwd(data->cmds[cmd]);
+		ret = built_pwd(data->cmds[cmd]);
 	else if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "env", 3))
-		built_env(data->env);
+		ret = built_env(data->env);
 	else if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "cd", 2))
-		built_cd(data->cmds[cmd], data);
+		ret = built_cd(data->cmds[cmd], data);
 	else if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "export", 2))
-		built_export(data->cmds[cmd], data);
+		ret = built_export(data->cmds[cmd], data);
 	else if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "exit", 4))
 		data->over = 1;
 	else if (!ft_strncmp(data->cmds[cmd].line, "unset", 4))
-		built_unset(data->cmds[cmd], data);
-	return (0);
+		ret = built_unset(data->cmds[cmd], data);
+	return (ret);
 }
 
 char	*get_cmd_name(t_cmd cmd)

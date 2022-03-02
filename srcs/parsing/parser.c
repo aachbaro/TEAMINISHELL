@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 16:46:10 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/24 17:41:52 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:07:15 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ int	input_to_tokens(t_data *data)
 	if (check_quote(data->usr_input))
 		return (-1);
 	if (split_cmds(data, data->usr_input) == -1)
+	{
+		data->exit_status = -1;
 		return (-1);
+	}
 	empty_input(data);
 	while (data->cmds[i].line)
 	{
@@ -59,9 +62,9 @@ int	input_to_tokens(t_data *data)
 		i++;
 	}
 	if (spaces_between_tkns(data) == -1)
-		return (-1);
+		return (ft_error("Error: malloc failed\n", -1));
 	if (redir_in_tkns(data) == -1)
-		return (-1);
+		return (ft_error("Error: malloc failed\n", -1));
 	return (0);
 }
 
@@ -88,7 +91,7 @@ int	cmd_to_tokens(char *str, t_data *data, int cmd)
 		else
 			j = tkn_alnum(data, i, cmd);
 		if (j == -1)
-			return (-1);
+			return (ft_error("Error: malloc failed\n", -1));
 		i += j;
 	}
 	return (0);
@@ -105,10 +108,10 @@ int	tkn_to_exe(t_data *data, int cmd)
 	{
 		data->cmds[cmd].path = get_path(cpy->content);
 		if (!data->cmds[cmd].path)
-			return (-1);
+			return (ft_error("Error: malloc failed\n", -1));
 		data->cmds[cmd].args = get_args(data->cmds[cmd]);
 		if (!data->cmds[cmd].args)
-			return (-1);
+			return (ft_error("Error: malloc failed\n", -1));
 	}
 	return (0);
 }

@@ -34,6 +34,7 @@ SRC = srcs/main.c \
 	  srcs/signals/sig_config.c \
 	  srcs/debug/utils1.c \
 	  srcs/debug/debug.c \
+	  srcs/utils/exit.c
 
 libft = -Llibft/ -lft
 
