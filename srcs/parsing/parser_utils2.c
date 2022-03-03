@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:37:04 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/02 16:56:32 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/03 16:11:25 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char	*find_var(char *var, t_envar *env, int exit_status)
 	char	*ret;
 
 	cpy = env;
+	if (!ft_strncmp(var, "$", 1) && ft_strlen(var) == 1)
+		return ("$");
 	if (!ft_strncmp(var, "$?", ft_strlen(var)))
 		return (ft_itoa(exit_status));
 	while (cpy)
