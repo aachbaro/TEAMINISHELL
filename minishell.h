@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/02 16:53:23 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/03 14:57:17 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_glob
 	int	exit;
 }		t_glob;
 
-extern t_glob	g_glob;
+extern t_glob	g_g;
 
 typedef struct s_dblquote_parser
 {
@@ -105,7 +105,6 @@ typedef struct s_data
 	t_envar		*env;
 	char		**in_env;
 	int		exit_status;
-	int		last_exit_status;
 }			t_data;
 
 // PARSER DE COMMANDE
@@ -132,10 +131,10 @@ int		merge_tokens(t_cmd *cmd);
 int		inputing(t_data *data);
 int		cmd_to_tokens(char *str, t_data *data, int cmd);
 int		set_heredoc(t_cmd *cmd, int *heredoc_id, t_data *data);
-int		init_heredoc(t_tkn *tkn, int heredoc_id, t_envar *envar);
+int		init_heredoc(t_tkn *tkn, int heredoc_id, t_data *data);
 char		*filename_generator(int heredoc_id);
-int		heredoc_loop(int fd, char *delim, t_envar *env, int quotes);
-char		*treat_heredoc_input(char *input, t_envar *env);
+int		heredoc_loop(int fd, char *delim, t_data *data, int quotes);
+char		*treat_heredoc_input(char *input, t_data *data);
 char		*var_name(char *str);
 char		**get_args(t_cmd cmd);
 char		*get_path(char *cmd);

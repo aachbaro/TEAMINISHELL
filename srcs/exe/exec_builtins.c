@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:56:38 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/02 17:39:17 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/03 14:59:27 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	exe_simple_cmd(t_data *data)
 
 	if (init_fds_redir(data->cmds[0], &redir) == -1)
 		return (-1);
-	g_glob.exit = exe_builtin(data, 0);
+	g_g.exit = exe_builtin(data, 0);
 	restaure_fds_redir(&redir);
 	return (0);
 }

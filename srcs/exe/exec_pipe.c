@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:04:37 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/02 17:33:15 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/03 14:59:51 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	parent_process(t_pipetools *pipes, t_data *data, int i)
 	}
 	wait(&pipes->status);
 	if (WIFEXITED(pipes->status))
-		g_glob.exit = WEXITSTATUS(pipes->status);
+		g_g.exit = WEXITSTATUS(pipes->status);
 	restaure_fds_redir(&pipes->redir);
 }
 

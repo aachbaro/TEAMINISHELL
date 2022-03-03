@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/02 17:33:59 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/03 15:04:56 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	inputing(t_data *data)
 {
 	while(!data->over)
 	{
-		g_glob.exit = 0;
+		g_g.exit = 0;
 		if (data->cmds)
 			del_cmd(data);
 		if (prompt(data) == -1)
 			continue ;
 		input_to_exe(data);
-		if (data->cmds->line && !g_glob.exit)
+		if (data->cmds->line && !g_g.exit)
 		{
 			if (data->cmds[1].line == NULL 
 					&& is_builtin(data->cmds[0]))
@@ -38,7 +38,7 @@ int	inputing(t_data *data)
 			else
 				exec_pipe(data);
 		}
-		data->exit_status = g_glob.exit;
+		data->exit_status = g_g.exit;
 		free(data->usr_input);
 	}
 	free_all(data);

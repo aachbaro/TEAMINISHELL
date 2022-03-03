@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/01 13:24:06 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/03 13:33:56 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	set_heredoc(t_cmd *cmd, int *heredoc_id, t_data *data)
 	{
 		if (cpy->type == TYPE_HRDOC)
 		{
-			if (init_heredoc(cpy, hd_id, data->env) == -1)
+			if (init_heredoc(cpy, hd_id, data) == -1)
 				return (-1);
 			hd_id++;
 		}
