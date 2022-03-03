@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/09 14:51:39 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/03 15:30:29 by ababaei          ###   ########.fr       */
+/*   Created: 2022/03/02 14:09:10 by aachbaro          #+#    #+#             */
+/*   Updated: 2022/03/03 15:04:10 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-t_glob	g_g;
-
-int	main(int ac, char **av, char **envp)
+int	ft_error(char *msg, int exit_num)
 {
-	t_data	data;
-
-	g_g.exit = 0;
-	if (ac != 1 || !av)
-		return (EXIT_FAILURE);
-	shell_start(&data, envp);
-	return (inputing(&data));
+	if (msg)
+		ft_putstr_fd(msg, 2);
+	g_g.exit = exit_num;
+	return (EXIT_FAILURE);
 }

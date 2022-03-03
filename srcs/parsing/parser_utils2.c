@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:37:04 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/22 16:05:23 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/02 16:56:32 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,20 @@ char	*recup_var(t_data *data, int start, int cmd)
 	dup = ft_strndup(data->cmds[cmd].line + start + 1, i - start);
 	if (!dup)
 		return (NULL);
-	ret = find_var(dup, data->env);
+	ret = find_var(dup, data->env, data->exit_status);
 	if (!ret)
 		return (NULL);
 	return (ret);
 }
 
-char	*find_var(char *var, t_envar *env)
+char	*find_var(char *var, t_envar *env, int exit_status)
 {
 	t_envar	*cpy;
 	char	*ret;
 
 	cpy = env;
+	if (!ft_strncmp(var, "$?", ft_strlen(var)))
+		return (ft_itoa(exit_status));
 	while (cpy)
 	{
 		if (!ft_strncmp(var + 1, cpy->str, ft_strlen(var + 1))
@@ -67,7 +69,7 @@ int	get_tmp_dbl(t_data *data, int cmd, t_dblquote_parser *pars)
 				pars->j - pars->i);
 		if (!pars->str)
 			return (-1);
-		pars->tmp = find_var(pars->str, data->env);
+		pars->tmp = find_var(pars->str, data->env, data->exit_status);
 		free(pars->str);
 		if (!pars->tmp)
 			return (-1);

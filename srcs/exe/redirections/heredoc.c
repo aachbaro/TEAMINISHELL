@@ -6,16 +6,17 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:57:22 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/03 14:44:53 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/03 15:31:45 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
 
-int	init_heredoc(t_tkn *tkn, int heredoc_id, t_envar *env)
+int	init_heredoc(t_tkn *tkn, int heredoc_id, t_data *data)
 {
-	int	fd;
-	char	*heredoc_name;
+	int		fd;
+	t_pipetools	forktool;
+	char		*heredoc_name;
 
 	heredoc_name = filename_generator(heredoc_id);
 	if (!heredoc_name)
@@ -26,19 +27,31 @@ int	init_heredoc(t_tkn *tkn, int heredoc_id, t_envar *env)
 		free(heredoc_name);
 		return (-1);
 	}
-	printf("%d\n", tkn->quotes);
-	if (heredoc_loop(fd, tkn->content, env, tkn->quotes) == -1)
+	forktool.pid = fork();
+	if (forktool.pid == -1)
 	{
 		close(fd);
 		return (-1);
 	}
+	else if (forktool.pid == 0)
+	{
+		g_g.status = 1;
+		if (heredoc_loop(fd, tkn->content, data, tkn->quotes) == -1)
+		{
+			close(fd);
+			return (-1);
+		}
+		exit(0);
+	}
+	else
+		wait(&forktool.status);
 	close(fd);
 	free(tkn->content);
 	tkn->content = heredoc_name;
 	return (0);
 }
 
-int	heredoc_loop(int fd, char *delim, t_envar *env, int quotes)
+int	heredoc_loop(int fd, char *delim, t_data *data, int quotes)
 {
 	int	end;
 	char	*input;
@@ -55,7 +68,7 @@ int	heredoc_loop(int fd, char *delim, t_envar *env, int quotes)
 		else
 		{
 			if (!quotes)
-				str = treat_heredoc_input(input, env);
+				str = treat_heredoc_input(input, data);
 			else
 				str = ft_strdup(input);
 			ft_putstr_fd(str, fd);
@@ -90,13 +103,15 @@ char	*filename_generator(int	heredoc_id)
 	return (ret);
 }
 
-char	*treat_heredoc_input(char *input, t_envar *env)
+char	*treat_heredoc_input(char *input, t_data *data)
 {
 	t_dblquote_parser	pars;
 	char			*var;
 
 	pars.i = 0;
 	pars.str = NULL;
+	if (input[0] == 0)
+		return (ft_strdup(""));
 	while (input[pars.i])
 	{
 		pars.j = pars.i;
@@ -117,7 +132,7 @@ char	*treat_heredoc_input(char *input, t_envar *env)
 			var = var_name(input + pars.j - 1);
 			if (!var)
 				return (NULL);
-			pars.tmp2 = find_var(var, env);
+			pars.tmp2 = find_var(var, data->env, data->exit_status);
 			pars.j += ft_strlen(var);
 			free(var);
 			if (!pars.tmp2)

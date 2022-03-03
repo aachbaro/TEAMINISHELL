@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/02 16:37:54 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/03 15:29:42 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,12 @@ typedef struct s_data
 	int		over;
 	t_envar		*env;
 	char		**in_env;
+	int		exit_status;
 }			t_data;
 
 typedef struct s_glob
 {
-	int exit_status;
+	int exit;
 	int status;
 }	t_glob;
 
@@ -115,7 +116,7 @@ int		tkn_alnum(t_data *data, int start, int cmd);
 int		tkn_quote(t_data *data, int start, int cmd);
 int		get_dblquote_size(t_data *data, int start, int cmd);
 char		*recup_var(t_data *data, int start, int cmd);
-char		*find_var(char *var, t_envar *env);
+char		*find_var(char *var, t_envar *env, int exit_status);
 void		fill_dblquote(t_data *data, int start, int cmd);
 int		tkn_dblquote(t_data *data, int start, int cmd);
 int		tkn_lessthan(t_data *data, int start, int cmd);
@@ -131,10 +132,10 @@ int		merge_tokens(t_cmd *cmd);
 int		inputing(t_data *data);
 int		cmd_to_tokens(char *str, t_data *data, int cmd);
 int		set_heredoc(t_cmd *cmd, int *heredoc_id, t_data *data);
-int		init_heredoc(t_tkn *tkn, int heredoc_id, t_envar *envar);
+int		init_heredoc(t_tkn *tkn, int heredoc_id, t_data *data);
 char		*filename_generator(int heredoc_id);
-int		heredoc_loop(int fd, char *delim, t_envar *env, int quotes);
-char		*treat_heredoc_input(char *input, t_envar *env);
+int		heredoc_loop(int fd, char *delim, t_data *data, int quotes);
+char		*treat_heredoc_input(char *input, t_data *data);
 char		*var_name(char *str);
 char		**get_args(t_cmd cmd);
 char		*get_path(char *cmd);
@@ -178,6 +179,7 @@ void	delst(void	*content);
 void	del_tab(char **tab);
 void	del_cmd(t_data *data);
 void	free_all(t_data *data);
+int	ft_error(char *msg, int exit_num);
 
 //INIT
 void	shell_start(t_data *data, char **env);

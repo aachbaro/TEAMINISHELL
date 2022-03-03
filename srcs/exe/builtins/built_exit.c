@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   built_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/09 14:51:39 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/03 15:30:29 by ababaei          ###   ########.fr       */
+/*   Created: 2022/03/03 14:04:19 by aachbaro          #+#    #+#             */
+/*   Updated: 2022/03/03 14:36:24 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../../minishell.h"
 
-t_glob	g_g;
-
-int	main(int ac, char **av, char **envp)
+int	built_exit(t_cmd cmd, t_data data)
 {
-	t_data	data;
+	t_tkn	*cpy;
+	int	i;
 
-	g_g.exit = 0;
-	if (ac != 1 || !av)
+	cpy = cmd.tkn;
+	i = 0;
+	while (cpy)
+	{
+		if (cpy->type <= TYPE_QUOTE)
+			i++;
+		cpy = cpy->next;
+	}
+	if (i > 2)
+	{
+		ft_putstr_fd("Shell: exit: too many arguments\n", 2);
 		return (EXIT_FAILURE);
-	shell_start(&data, envp);
-	return (inputing(&data));
+	}
+	data->over = 1;
+	i = 0;
+	while (
 }

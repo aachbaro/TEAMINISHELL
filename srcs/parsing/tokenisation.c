@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:04:37 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/24 17:35:27 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/02 16:53:40 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	tkn_var(t_data *data, int start, int cmd)
 	dup = ft_strndup(data->cmds[cmd].line + start, i - start);
 	if (!dup)
 		return (-1);
-	var = find_var(dup, data->env);
+	var = find_var(dup, data->env, data->exit_status);
 	if (!var)
 		return (-1);
 	if (data->cmds[cmd].tkn && (tkn_last(data->cmds[cmd].tkn))->type == 6)

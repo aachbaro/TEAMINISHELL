@@ -6,7 +6,7 @@
 /*   By: ababaei <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 12:00:42 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/03 14:54:59 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/03 15:35:48 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void signal_handler(int sig)
 		}
 		else 
 		{
-			g_g.exit_status = 128 + sig;
+			g_g.exit = 128 + sig;
 			ft_putchar_fd('\n',STDIN_FILENO);
 			rl_on_new_line();
 			rl_replace_line("",0);

@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:43:26 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/24 17:41:58 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/03 15:03:18 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ int	check_quote(char *str)
 		else if (str[i] == '"' && smpl == 0 && dbl == 1)
 			dbl = 0;
 		i++;
+	}
+	if (dbl + smpl != 0)
+	{
+		ft_putstr_fd("Syntax error: unclosed quotes", 2);
+		g_g.exit = 2;
 	}
 	return (dbl + smpl);
 }
@@ -87,6 +92,7 @@ int	merge_tokens(t_cmd *cmd)
 		{
 			if (merge_tokens2(cpy) == -1)
 				return (-1);
+
 		}
 		else
 			cpy = cpy->next;
@@ -109,6 +115,7 @@ int	merge_tokens2(t_tkn *cpy)
 	if (!cpy->content)
 		return (-1);
 	cpy->space = tmp->space;
+	cpy->quotes += tmp->quotes;
 	if (tmp->next)
 	{
 		tmp->next->prev = tmp->prev;

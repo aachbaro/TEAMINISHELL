@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/03 14:51:09 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/03 15:48:36 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,19 @@
 
 int	inputing(t_data *data)
 {
+	int ret;
+
+	ret = 0;
 	while(!data->over)
 	{
 		g_g.status = 0;
+		g_g.exit = 0;
 		if (data->cmds)
 			del_cmd(data);
 		if (prompt(data) == -1)
-			break ;
-		if (input_to_exe(data) == -1)
-			perror("shell");
-		if (data->cmds->line)
+			continue ;
+		ret = input_to_exe(data);
+		if (data->cmds->line && !ret)
 		{
 			if (data->cmds[1].line == NULL 
 					&& is_builtin(data->cmds[0]))
@@ -39,6 +42,7 @@ int	inputing(t_data *data)
 			else
 				exec_pipe(data);
 		}
+		data->exit_status = g_g.exit;
 		free(data->usr_input);
 	}
 	free_all(data);
@@ -48,7 +52,7 @@ int	inputing(t_data *data)
 int	prompt(t_data *data)
 {
 	// On recupere la commande entree par l'utilsateur
-	data->usr_input = readline("~>");
+	data->usr_input = readline("8=o-- ");
 	// Check si on doit rentrer la ligen dans lhistorique
 	//data->env = data->env->next;
 	printf("DEBUG::%s::\n", data->usr_input);
