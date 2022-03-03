@@ -6,7 +6,7 @@
 /*   By: ababaei <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 12:00:42 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/02 17:28:06 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/03 13:59:48 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	sig_config(void)
 	struct sigaction 	quitact;
 
 	quitact.sa_handler = signal_handler;
+	quitact.sa_flags = SA_RESTART;
 	signal(SIGQUIT, &signal_handler);
 	sigaction(SIGINT, &quitact, NULL);
 }
