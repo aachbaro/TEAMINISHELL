@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 15:21:01 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/02 14:17:46 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/03 16:21:53 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	shell_start(t_data *data, char **env)
 	data->cmds = NULL;
 	data->prev_input = NULL;
 	data->over = 0;
+	data->exit_status = 0;
 	data->env = init_env(env);
 	data->in_env = lst_to_tab(data->env);
 	tmp = find_envar(data->env, "SHLVL");

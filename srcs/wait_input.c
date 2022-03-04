@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/03 15:48:36 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/03 16:46:11 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	inputing(t_data *data)
 		if (data->cmds)
 			del_cmd(data);
 		if (prompt(data) == -1)
-			continue ;
+			break ;
 		ret = input_to_exe(data);
 		if (data->cmds->line && !ret)
 		{
