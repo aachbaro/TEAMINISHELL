@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:57:22 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/04 11:58:12 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/04 13:42:22 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,16 @@ int	init_heredoc(t_tkn *tkn, int heredoc_id, t_data *data)
 			close(fd);
 			return (-1);
 		}
+		close(fd);
+		printf("TOTO\n");
 		exit(0);
 	}
 	else
+	{
 		wait(&forktool.status);
+		if (WIFSIGNALED(forktool.status))
+			unlink(heredoc_name);
+	}
 	close(fd);
 	free(tkn->content);
 	tkn->content = heredoc_name;
