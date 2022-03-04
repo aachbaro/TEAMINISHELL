@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/03 16:46:11 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/04 13:13:29 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	inputing(t_data *data)
 		g_g.exit = 0;
 		if (data->cmds)
 			del_cmd(data);
+		if (data->heredoc_id)
+			continue ;
 		if (prompt(data) == -1)
 			break ;
 		ret = input_to_exe(data);

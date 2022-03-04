@@ -6,12 +6,16 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/03 13:33:56 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/04 13:23:37 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+/*
+ * redirection in tokens
+ * this functions checks for redir and is called in parser.c
+ */
 int	redir_in_tkns(t_data *data)
 {
 	int	i;

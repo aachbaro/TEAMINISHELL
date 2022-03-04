@@ -6,11 +6,16 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:57:22 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/03 15:31:45 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/04 11:58:12 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
+
+/*
+ * here document
+ * starts at init_heredoc which is called in set_redirections.c
+ */
 
 int	init_heredoc(t_tkn *tkn, int heredoc_id, t_data *data)
 {
