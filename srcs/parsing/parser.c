@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 16:46:10 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/03 16:49:33 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/05 13:59:07 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int	input_to_tokens(t_data *data)
 	}
 	if (spaces_between_tkns(data) == -1)
 		return (ft_error("1Error: malloc failed\n", -1));
-	if (redir_in_tkns(data) == -1)
-		return (ft_error("2Error: malloc failed\n", -1));
+	if (redir_in_tkns(data))
+		return (-1);
 	return (0);
 }
 

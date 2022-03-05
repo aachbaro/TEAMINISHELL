@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:04:37 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/05 14:33:30 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/05 15:55:21 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	exec_pipe(t_data *data)
 			g_g.status = 3;
 		else
 			g_g.status = 1; // 1 for forked process
+		signal(SIGQUIT, SIG_DFL);
+		signal(SIGQUIT, &signal_handler);
 		if (pipes.pid == -1)
 		{
 			perror("fork");
@@ -86,7 +88,7 @@ void	child_process(t_pipetools *pipes, t_data *data, int i)
 			close(pipes->redir.save_stdout);
 			close(pipes->save_stdin);
 			close(pipes->save_stdout);
-			exit(0);
+			//exit(0);
 		}
 	}
 }

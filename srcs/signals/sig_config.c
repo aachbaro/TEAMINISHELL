@@ -6,7 +6,7 @@
 /*   By: ababaei <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 12:00:42 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/05 15:04:54 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/05 15:57:49 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,7 @@
  * CTRL-c is SIGINT
  * CTRL-\ is SIGQUIT
  * CTRL-d is not a signal but rather send an EOF 
- *
-
-void	signal_err(void)
-{
-	
-}*/
+ */
 
 void signal_handler(int sig)
 {
@@ -33,6 +28,11 @@ void signal_handler(int sig)
 		{
 			ft_putchar_fd('\n',STDIN_FILENO);
 			return ;
+		}
+		else if (g_g.status == 2)
+		{
+			g_g.exit = 128 + sig;
+			exit(0);
 		}
 		else if (g_g.status == 3)
 			return ;
@@ -60,6 +60,6 @@ void	sig_config(void)
 
 	quitact.sa_handler = signal_handler;
 	quitact.sa_flags = SA_RESTART;
-	signal(SIGQUIT, &signal_handler);
+	signal(SIGQUIT, SIG_IGN);
 	sigaction(SIGINT, &quitact, NULL);
 }
