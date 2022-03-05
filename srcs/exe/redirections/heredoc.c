@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:57:22 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/04 13:42:22 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/04 14:25:22 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,13 @@ int	init_heredoc(t_tkn *tkn, int heredoc_id, t_data *data)
 	}
 	else if (forktool.pid == 0)
 	{
-		g_g.status = 1;
+		g_g.status = 2;
 		if (heredoc_loop(fd, tkn->content, data, tkn->quotes) == -1)
 		{
 			close(fd);
 			return (-1);
 		}
 		close(fd);
-		printf("TOTO\n");
 		exit(0);
 	}
 	else

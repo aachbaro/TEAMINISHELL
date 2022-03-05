@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:04:37 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/03 15:32:16 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/05 14:33:30 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	exec_pipe(t_data *data)
 		if (data->cmds[i + 1].line)
 			pipe(pipes.fds);
 		pipes.pid = fork();
-		g_g.status = 1; // 1 for forked process
+		if (!ft_strncmp(get_cmd_name(data->cmds[i]), "./minishell", 11))
+			g_g.status = 3;
+		else
+			g_g.status = 1; // 1 for forked process
 		if (pipes.pid == -1)
 		{
 			perror("fork");

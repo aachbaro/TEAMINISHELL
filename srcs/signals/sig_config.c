@@ -6,7 +6,7 @@
 /*   By: ababaei <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 12:00:42 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/03 15:35:48 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/05 15:04:54 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void signal_handler(int sig)
 			ft_putchar_fd('\n',STDIN_FILENO);
 			return ;
 		}
+		else if (g_g.status == 3)
+			return ;
 		else 
 		{
 			g_g.exit = 128 + sig;
@@ -43,10 +45,12 @@ void signal_handler(int sig)
 			rl_redisplay();
 		}
 	}
-	if (sig == SIGQUIT && g_g.status == 1)
+	if (sig == SIGQUIT)
 	{
-		/*g_g.status = 4;  dont display ^\ when ctrl-\*/
-		ft_putstr_fd("Quit (core dumped)\n", STDIN_FILENO);
+		if (g_g.status == 1)
+			ft_putstr_fd("Quit (core dumped)\n", STDIN_FILENO);
+		else if(g_g.status == 3 || g_g.status == 0)
+			return ;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/04 13:13:29 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/05 15:34:59 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int	inputing(t_data *data)
 		g_g.exit = 0;
 		if (data->cmds)
 			del_cmd(data);
-		if (data->heredoc_id)
-			continue ;
 		if (prompt(data) == -1)
 			break ;
 		ret = input_to_exe(data);
@@ -56,7 +54,6 @@ int	prompt(t_data *data)
 	// On recupere la commande entree par l'utilsateur
 	data->usr_input = readline("8=o-- ");
 	// Check si on doit rentrer la ligen dans lhistorique
-	//data->env = data->env->next;
 	printf("DEBUG::%s::\n", data->usr_input);
 	if (!data->usr_input)
 		return (-1);
