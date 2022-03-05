@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/03 15:29:42 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/05 15:00:09 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int		cmd_to_tokens(char *str, t_data *data, int cmd);
 int		set_heredoc(t_cmd *cmd, int *heredoc_id, t_data *data);
 int		init_heredoc(t_tkn *tkn, int heredoc_id, t_data *data);
 char		*filename_generator(int heredoc_id);
-int		heredoc_loop(int fd, char *delim, t_data *data, int quotes);
+void		heredoc_loop(int fd, char *delim, t_data *data, int quotes);
 char		*treat_heredoc_input(char *input, t_data *data);
 char		*var_name(char *str);
 char		**get_args(t_cmd cmd);
@@ -205,5 +205,6 @@ int		env_size(t_envar *env);
 
 //signals
 void	sig_config(void);
+void	signal_handler(int sig);
 
 #endif

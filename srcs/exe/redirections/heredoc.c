@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:57:22 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/04 13:33:20 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/05 14:36:05 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,16 @@ int	init_heredoc(t_tkn *tkn, int heredoc_id, t_data *data)
 	}
 	else if (forktool.pid == 0)
 	{
-		g_g.status = 1;
-		if (heredoc_loop(fd, tkn->content, data, tkn->quotes) == -1)
-		{
-			close(fd);
-			return (-1);
-		}
-		close(fd);
-		printf("TOTO\n");
-		exit(0);
+		g_g.status = 2;
+		heredoc_loop(fd, tkn->content, data, tkn->quotes);
 	}
 	else
 	{
 		wait(&forktool.status);
-		if (WIFSIGNALED(forktool.status))
+		if (g_g.exit == 130)
 			unlink(heredoc_name);
+		else if (forktool.status == 139)
+			ft_putstr_fd("warning: here-document delimited by end-of-file\n", 1);
 	}
 	close(fd);
 	free(tkn->content);
@@ -57,7 +52,7 @@ int	init_heredoc(t_tkn *tkn, int heredoc_id, t_data *data)
 	return (0);
 }
 
-int	heredoc_loop(int fd, char *delim, t_data *data, int quotes)
+void	heredoc_loop(int fd, char *delim, t_data *data, int quotes)
 {
 	int	end;
 	char	*input;
@@ -67,8 +62,8 @@ int	heredoc_loop(int fd, char *delim, t_data *data, int quotes)
 	while (!end)
 	{
 		input = readline("heredoc > ");
-		if (!input)
-			return (-1);
+		if (*input == EOF)
+			break ;
 		if (ft_strncmp(input, delim, ft_strlen(input) + 1) == 0)
 			end = 1;
 		else
@@ -83,7 +78,8 @@ int	heredoc_loop(int fd, char *delim, t_data *data, int quotes)
 		}
 		free(input);
 	}
-	return (0);
+	close(fd);
+	exit(0);
 }
 
 char	*filename_generator(int	heredoc_id)

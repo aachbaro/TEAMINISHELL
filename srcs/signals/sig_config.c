@@ -6,7 +6,7 @@
 /*   By: ababaei <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 12:00:42 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/03 15:35:48 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/05 15:04:39 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ void signal_handler(int sig)
 			ft_putchar_fd('\n',STDIN_FILENO);
 			return ;
 		}
+		else if (g_g.status == 2)
+		{
+			g_g.exit = 128 + sig;
+			exit(0);
+		}
 		else 
 		{
 			g_g.exit = 128 + sig;
@@ -56,6 +61,6 @@ void	sig_config(void)
 
 	quitact.sa_handler = signal_handler;
 	quitact.sa_flags = SA_RESTART;
-	signal(SIGQUIT, &signal_handler);
+	signal(SIGQUIT, SIG_IGN);
 	sigaction(SIGINT, &quitact, NULL);
 }
