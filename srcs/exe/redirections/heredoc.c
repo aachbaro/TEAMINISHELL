@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:57:22 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/05 15:57:09 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/05 16:15:21 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,11 @@ int	init_heredoc(t_tkn *tkn, int heredoc_id, t_data *data)
 	{
 		wait(&forktool.status);
 		if (g_g.exit == 130)
+		{
 			unlink(heredoc_name);
+			close(fd);
+			return (130);
+		}
 		else if (forktool.status == 139)
 			ft_putstr_fd("warning: here-document delimited by end-of-file\n", 1);
 	}

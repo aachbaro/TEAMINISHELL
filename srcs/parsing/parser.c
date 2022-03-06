@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 16:46:10 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/05 13:59:07 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/06 17:13:36 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	input_to_exe(t_data *data)
 	int	i;
 
 	i = 0;
-	if (input_to_tokens(data) == -1)
+	if (input_to_tokens(data))
 		return (-1);
 	while (data->cmds[i].line)
 	{
@@ -44,11 +44,14 @@ int	input_to_tokens(t_data *data)
 	int	i;
 
 	i = 0;
-	if (check_quote(data->usr_input))
+	if (check_quote(data->usr_input) || check_empty_pipe(data))
+	{
+		g_g.exit = 2;
 		return (-1);
+	}
 	if (split_cmds(data, data->usr_input) == -1)
 	{
-		data->exit_status = -1;
+		g_g.exit = -1;
 		return (-1);
 	}
 	empty_input(data);

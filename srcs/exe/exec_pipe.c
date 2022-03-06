@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:04:37 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/05 15:55:21 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/06 15:47:32 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	exec_pipe(t_data *data)
 	save_initial_fds(&pipes);
 	while (data->cmds[i].line)
 	{
+		pipes.fds[0] = 0;
+		pipes.fds[1] = 1;
 		if (data->cmds[i + 1].line)
 			pipe(pipes.fds);
 		pipes.pid = fork();
@@ -65,6 +67,8 @@ void	child_process(t_pipetools *pipes, t_data *data, int i)
 		dup2(pipes->fds[1], 1);
 		close(pipes->fds[1]);
 	}
+	else
+		dup2(pipes->save_stdout, STDOUT_FILENO);
 	if (init_fds_redir(data->cmds[i], &pipes->redir) == -1)
 		exit(0);
 	if (is_builtin(data->cmds[i]))
