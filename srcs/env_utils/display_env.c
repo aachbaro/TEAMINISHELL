@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:00:40 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/24 16:56:34 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/06 17:45:34 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 void	display_env(t_envar *env, int flag)
 {
-	t_envar *cpy;
+	t_envar	*cpy;
 
 	cpy = env;
 	while (cpy)

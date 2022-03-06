@@ -6,7 +6,7 @@
 /*   By: ababaei <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 17:35:53 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/24 21:07:30 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/06 17:45:21 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_envar	*change_env(t_envar **envar, char *to)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (to[i] != '=')

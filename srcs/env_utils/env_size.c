@@ -6,15 +6,15 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 18:09:32 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/27 18:13:28 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/06 17:41:16 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int env_size(t_envar *env)
+int	env_size(t_envar *env)
 {
-	int size;
+	int	size;
 
 	size = 0;
 	while (env)

@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:54:20 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/24 16:51:24 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/06 17:43:05 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 
 /*
  * environnement chained list tools
- * We have here several function to create, delete and add to the env chained list
+ * We have here several function to create, delete and 
+ * add to the env chained list
  */
 
-t_envar *fill_envar(t_envar **lst, char *str)
+t_envar	*fill_envar(t_envar **lst, char *str)
 {
-	char *key;
-	char *value;
-	unsigned int i;
+	char			*key;
+	char			*value;
+	unsigned int	i;
 
 	i = 0;
 	(*lst)->str = ft_strdup(str);
@@ -44,7 +45,7 @@ t_envar *fill_envar(t_envar **lst, char *str)
 t_envar	*add_env(t_envar **lst, char *str)
 {
 	t_envar	*tmp;
-	t_envar *save;
+	t_envar	*save;
 
 	save = *lst;
 	tmp = malloc(sizeof(t_envar));
@@ -69,7 +70,7 @@ t_envar	*add_env(t_envar **lst, char *str)
 t_envar	*init_env(char **env)
 {
 	t_envar	*envlst;
-	int i;
+	int		i;
 
 	i = 0;
 	envlst = NULL;
@@ -103,8 +104,8 @@ int	delete_env(t_envar **lst, char *name)
 
 int	remove_var(t_envar **env, char *key)
 {
-	t_envar *curr;
-	t_envar *prev;
+	t_envar	*curr;
+	t_envar	*prev;
 
 	curr = *env;
 	prev = *env;

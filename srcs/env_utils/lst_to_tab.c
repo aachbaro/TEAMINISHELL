@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 17:36:27 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/01 13:23:45 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/06 17:44:31 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 char	**free_tab(char **tab, int size)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < size)
@@ -34,10 +34,10 @@ char	**free_tab(char **tab, int size)
 
 char	**lst_to_tab(t_envar *env)
 {
-	char **tab;
-	int size;
-	int i;
-	
+	char	**tab;
+	int		size;
+	int		i;
+
 	size = env_size(env);
 	i = 0;
 	tab = calloc(size + 1, sizeof(char *));
@@ -48,7 +48,7 @@ char	**lst_to_tab(t_envar *env)
 	{
 		tab[i] = ft_strdup(env->str);
 		if (!tab[i])
-			return (free_tab(tab,i));
+			return (free_tab(tab, i));
 		i++;
 		env = env->next;
 	}

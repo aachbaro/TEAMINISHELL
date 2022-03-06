@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 15:58:08 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/14 18:24:25 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/06 17:40:44 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_splitted_cmd(t_data *data)
 {
-	int	i;
+	int		i;
 	t_tkn	*cpy;
 
 	i = 0;
