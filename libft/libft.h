@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 11:04:03 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/24 15:18:33 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/06 15:50:15 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);
 int					ft_isdigit(int c);
+int					ft_strisdigit(char *str);
 int					ft_isprint(int c);
 char				*ft_itoa(int n);
 void				*ft_memccpy(void *dest, const void *src, int c, size_t n);

@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/05 15:48:44 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/06 15:57:46 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	inputing(t_data *data)
 		free(data->usr_input);
 	}
 	free_all(data);
-	return (EXIT_SUCCESS);
+	return (g_g.exit);
 }
 
 int	prompt(t_data *data)

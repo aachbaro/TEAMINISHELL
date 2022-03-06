@@ -17,6 +17,7 @@ SRC = srcs/main.c \
 	  srcs/exe/builtins/built_pwd.c \
 	  srcs/exe/builtins/built_unset.c \
 	  srcs/exe/builtins/built_export.c \
+	  srcs/exe/builtins/built_exit.c \
 	  srcs/exe/redirections/heredoc.c \
 	  srcs/exe/redirections/redirection_handler.c \
 	  srcs/init/shell_start.c \

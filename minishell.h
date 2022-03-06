@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/05 15:00:09 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/06 15:24:11 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int		built_echo(t_cmd cmd);
 int		built_env(t_envar *env);
 int		built_cd(t_cmd cmd, t_data *data);
 int		built_unset(t_cmd cmd, t_data *data);
+int		built_exit(t_cmd cmd, t_data *data);
 int		is_builtin(t_cmd cmd);
 int		exec_pipe(t_data *data);
 void    save_initial_fds(t_pipetools *pipes);

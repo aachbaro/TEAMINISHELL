@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:56:38 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/03 14:59:27 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/06 15:25:51 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ int	exe_builtin(t_data *data, int cmd)
 		ret = built_env(data->env);
 	else if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "cd", 2))
 		ret = built_cd(data->cmds[cmd], data);
-	else if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "export", 2))
+	else if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "export", 6))
 		ret = built_export(data->cmds[cmd], data);
 	else if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "exit", 4))
-		data->over = 1;
+		ret = built_exit(data->cmds[cmd], data);
 	else if (!ft_strncmp(data->cmds[cmd].line, "unset", 4))
 		ret = built_unset(data->cmds[cmd], data);
 	return (ret);
