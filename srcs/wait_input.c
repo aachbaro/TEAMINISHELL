@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/05 15:48:44 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/06 16:21:07 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	inputing(t_data *data)
 		if (prompt(data) == -1)
 			break ;
 		ret = input_to_exe(data);
-		if (data->cmds->line && !g_g.exit && !ret)
+		if (data->cmds && data->cmds->line && !ret)
 		{
 			if (data->cmds[1].line == NULL 
 					&& is_builtin(data->cmds[0]))

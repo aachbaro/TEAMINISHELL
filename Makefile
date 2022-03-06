@@ -9,6 +9,7 @@ SRC = srcs/main.c \
 	  srcs/parsing/tokenisation2.c \
 	  srcs/parsing/set_redirections.c \
 	  srcs/parsing/search_executable.c \
+	  srcs/parsing/pars_error.c \
 	  srcs/exe/exec_builtins.c \
 	  srcs/exe/exec_pipe.c \
 	  srcs/exe/builtins/built_cd.c \
@@ -44,7 +45,7 @@ CC = gcc #clang
 
 INC = -Iminishell.h
 
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 RM = rm -rf
 

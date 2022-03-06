@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/05 15:00:09 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/06 16:43:53 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ char		*get_path(char *cmd);
 char 		*get_possible_path(char *cmd, char *str);
 int		in_loop(t_data *data, int cmd, t_dblquote_parser *pars);
 int		merge_tokens2(t_tkn *cpy);
+int		check_empty_pipe(t_data *data);
 
 // ELSE
 int	prompt(t_data *data);
