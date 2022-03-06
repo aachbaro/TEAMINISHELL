@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:51:39 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/03 15:30:29 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/06 17:12:25 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,14 @@ int	main(int ac, char **av, char **envp)
 
 	g_g.exit = 0;
 	if (ac != 1 || !av)
+	{
+		ft_putstr_fd("minishell: wrong number of arguments\n", 2);
 		return (EXIT_FAILURE);
-	shell_start(&data, envp);
+	}
+	if (shell_start(&data, envp))
+	{
+		ft_putstr_fd("minishell: Error initiating minishell\n", 2);
+		return (EXIT_FAILURE);
+	}
 	return (inputing(&data));
 }

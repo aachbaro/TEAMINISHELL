@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/06 15:24:11 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/06 17:09:26 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ void	free_all(t_data *data);
 int	ft_error(char *msg, int exit_num);
 
 //INIT
-void	shell_start(t_data *data, char **env);
+int		shell_start(t_data *data, char **env);
 
 // TKN UTILS
 t_tkn	*tkn_new(char *content, int type);
