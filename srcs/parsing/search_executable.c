@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tkn_to_exe.c                                       :+:      :+:    :+:   */
+/*   search_executable.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 12:54:05 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/22 11:26:13 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/07 17:00:05 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ char	*get_path(char *cmd)
 	char	**tab;
 	int		i;
 
+	if (!cmd)
+		return (ft_strdup(""));
 	path = ft_strdup(getenv("PATH"));
 	if (!path)
 		return (NULL);
@@ -41,25 +43,18 @@ char	*get_path(char *cmd)
 	i = 0;
 	while (tab[i])
 	{
-		// Ici on chope un path a tester pour voir si lexecutable est la
 		path = get_possible_path(cmd, tab[i]);
 		if (!path)
 			return (NULL);
-		// Ensuite on test avec access si lexxecutable est bon
-		// si cest le cas on renvoie ce path
 		if (!access(path, F_OK))
 		{
 			del_tab(tab);
 			return (path);
 		}
-		// Sinon on test un autre path
 		free(path);
 		i++;
 	}
 	del_tab(tab);
-	// Si on a pas trouver le path on renvoie la commande de base
-	// Ca peut etre dans le cas ou cest un builtins ducoup on a juste besoin
-	// du nom de la commande
 	return (ft_strdup(cmd));
 }
 

@@ -10,6 +10,7 @@ SRC = srcs/main.c \
 	  srcs/parsing/set_redirections.c \
 	  srcs/parsing/search_executable.c \
 	  srcs/parsing/pars_error.c \
+	  srcs/parsing/parser_utils3.c \
 	  srcs/exe/exec_builtins.c \
 	  srcs/exe/exec_pipe.c \
 	  srcs/exe/builtins/built_cd.c \
