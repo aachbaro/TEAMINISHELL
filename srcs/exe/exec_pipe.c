@@ -70,7 +70,8 @@ void	child_process(t_pipetools *pipes, t_data *data, int i)
 	else
 		dup2(pipes->save_stdout, STDOUT_FILENO);
 	if (init_fds_redir(data->cmds[i], &pipes->redir) == -1
-			|| !data->cmds[i].path[0])
+			|| (!is_builtin(data->cmds[i])
+				&& !data->cmds[i].path[0]))
 		exit(0);
 	if (is_builtin(data->cmds[i]))
 	{
@@ -84,7 +85,7 @@ void	child_process(t_pipetools *pipes, t_data *data, int i)
 	}
 	else
 	{
-		if (data->cmds[i].path && execve(data->cmds[i].path,
+		if (execve(data->cmds[i].path,
 				data->cmds[i].args, lst_to_tab(data->env)) == -1)
 		{
 			perror(data->cmds[i].path);

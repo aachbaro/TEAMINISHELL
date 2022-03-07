@@ -25,7 +25,7 @@ char 	*get_possible_path(char *cmd, char *str)
 	return (ret);
 }
 
-char	*get_path(char *cmd)
+char	*get_path(char *cmd, t_envar *env)
 {
 	char	*path;
 	char	**tab;
@@ -33,36 +33,47 @@ char	*get_path(char *cmd)
 
 	if (!cmd)
 		return (ft_strdup(""));
-	path = ft_strdup(getenv("PATH"));
+	if (find_envar(env, "PATH"))
+		path = ft_strdup(find_envar(env, "PATH")->str);
+	else
+		path = NULL;
 	if (!path)
-		return (NULL);
+	{
+		g_g.exit = 127;
+		printf("%s: No such file or directory\n", cmd);
+		return (ft_strdup(""));
+	}
 	tab = ft_split(path, ':');
 	free(path);
 	if (!tab)
 		return (NULL);
 	i = 0;
-	while (tab[i])
+	if (cmd[0])
 	{
-		path = get_possible_path(cmd, tab[i]);
-		if (!path)
-			return (NULL);
-		if (!access(path, F_OK))
+		while (tab[i])
 		{
-			del_tab(tab);
-			return (path);
+			path = get_possible_path(cmd, tab[i]);
+			if (!path)
+				return (NULL);
+			if (!access(path, F_OK))
+			{
+				del_tab(tab);
+				return (path);
+			}
+			free(path);
+			i++;
 		}
-		free(path);
-		i++;
 	}
 	del_tab(tab);
 	printf("%s: Command not found\n", cmd);
+	g_g.exit = 127;
 	return (ft_strdup(""));
 }
 
 char	**get_args(t_cmd cmd)
 {
 	t_tkn	*cpy;
-	int		i;
+	int	i;
 	char	**tab;
 
 	cpy = cmd.tkn;

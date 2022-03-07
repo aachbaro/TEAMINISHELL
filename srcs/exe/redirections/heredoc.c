@@ -71,7 +71,7 @@ void	heredoc_loop(int fd, char *delim, t_data *data, int quotes)
 	while (!end)
 	{
 		input = readline("heredoc > ");
-		if (*input == EOF)
+		if (*input == 0)
 			break ;
 		if (ft_strncmp(input, delim, ft_strlen(input) + 1) == 0)
 			end = 1;
