@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:43:26 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/03 15:03:18 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/07 14:12:46 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	split_cmds(t_data *data, char *str)
 	int		i;
 
 	i = 0;
-	tab = ft_split(str, '|');
+	tab = split_pipe(str);
 	while (tab[i])
 		i++;
 	data->cmds = malloc(sizeof(t_cmd) * (i + 1));

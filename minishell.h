@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/06 17:19:08 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/07 13:01:55 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ typedef struct s_dblquote_parser
 	char	*str;
 	char	*tmp;
 	char	*tmp2;
+	int	smpl;
+	int	dbl;
+	int	k;
 }		t_dblquote_parser;
 
 typedef struct s_tkn
@@ -143,6 +146,7 @@ char 		*get_possible_path(char *cmd, char *str);
 int		in_loop(t_data *data, int cmd, t_dblquote_parser *pars);
 int		merge_tokens2(t_tkn *cpy);
 int		check_empty_pipe(t_data *data);
+char		**split_pipe(char *str);
 
 // ELSE
 int	prompt(t_data *data);
