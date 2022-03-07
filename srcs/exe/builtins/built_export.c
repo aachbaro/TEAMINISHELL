@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 12:28:31 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/24 20:42:49 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/07 12:57:41 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
  * Let you export a variable in your environnement
  */
 
-int		check_key(char *str)
+int	check_key(char *str)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	if (str[i] != '_' && !ft_isalpha(str[i]))
-		return (0); 
+		return (0);
 	while (str[i])
 	{
 		if (i > 0 && str[i] == '=')
@@ -36,7 +36,7 @@ int		check_key(char *str)
 
 void	handle_var(t_envar **env, t_envar *var, t_tkn *cpy)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = NULL;
 	var = find_envar(*(env), cpy->content);
@@ -55,16 +55,16 @@ void	handle_var(t_envar **env, t_envar *var, t_tkn *cpy)
 int	built_export(t_cmd cmd, t_data *data)
 {
 	t_tkn	*cpy;
-	t_envar *tmp;
+	t_envar	*tmp;
 
 	tmp = NULL;
-	if (cmd.tkn->next == NULL)	
-		display_env(data->env, 1); // here print env with declare -x
+	if (cmd.tkn->next == NULL)
+		display_env(data->env, 1);
 	cpy = cmd.tkn->next;
 	if (cpy && cpy->type > 3)
 	{
 		ft_putstr_fd("minishell: export: syntax error\n", 2);
-		return (EXIT_FAILURE); // msg erreur type export [name[=value]...]
+		return (EXIT_FAILURE);
 	}
 	while (cpy)
 	{

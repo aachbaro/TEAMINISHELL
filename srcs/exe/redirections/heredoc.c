@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:57:22 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/05 16:15:21 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/07 14:09:27 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 int	init_heredoc(t_tkn *tkn, int heredoc_id, t_data *data)
 {
-	int		fd;
+	int			fd;
 	t_pipetools	forktool;
 	char		*heredoc_name;
 
@@ -63,7 +63,7 @@ int	init_heredoc(t_tkn *tkn, int heredoc_id, t_data *data)
 
 void	heredoc_loop(int fd, char *delim, t_data *data, int quotes)
 {
-	int	end;
+	int		end;
 	char	*input;
 	char	*str;
 
@@ -91,7 +91,7 @@ void	heredoc_loop(int fd, char *delim, t_data *data, int quotes)
 	exit(0);
 }
 
-char	*filename_generator(int	heredoc_id)
+char	*filename_generator(int heredoc_id)
 {
 	char	*str;
 	char	*str2;
@@ -117,7 +117,7 @@ char	*filename_generator(int	heredoc_id)
 char	*treat_heredoc_input(char *input, t_data *data)
 {
 	t_dblquote_parser	pars;
-	char			*var;
+	char				*var;
 
 	pars.i = 0;
 	pars.str = NULL;
@@ -161,12 +161,11 @@ char	*treat_heredoc_input(char *input, t_data *data)
 		pars.i = pars.j;
 	}
 	return (pars.str);
-
 }
 
 char	*var_name(char *str)
 {
-	int	i;
+	int		i;
 	char	*var;
 
 	i = 2;

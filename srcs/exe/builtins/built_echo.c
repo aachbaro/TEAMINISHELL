@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:23:21 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/01 11:25:40 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/07 12:58:42 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_opt(char *content)
 int	built_echo(t_cmd cmd)
 {
 	t_tkn	*cpy;
-	int	opt;
+	int		opt;
 
 	cpy = cmd.tkn->next;
 	opt = 0;

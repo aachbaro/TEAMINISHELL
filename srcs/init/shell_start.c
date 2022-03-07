@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 15:21:01 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/06 17:11:43 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/07 12:51:27 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 
 int	shell_start(t_data *data, char **env)
 {
-	t_envar *tmp;
-	char *shlvl;
-	char *envstr;
+	t_envar	*tmp;
+	char	*shlvl;
+	char	*envstr;
 
 	data->cmds = NULL;
 	data->prev_input = NULL;

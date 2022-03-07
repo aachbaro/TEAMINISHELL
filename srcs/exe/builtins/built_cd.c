@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:26:43 by ababaei           #+#    #+#             */
-/*   Updated: 2022/02/24 20:45:41 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/07 12:56:05 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 int	built_cd(t_cmd cmd, t_data *data)
 {
 	t_tkn	*cpy;
-	t_envar *pwd;
-	t_envar *oldpwd;
-	int	i;
+	t_envar	*pwd;
+	t_envar	*oldpwd;
+	int		i;
 
 	cpy = cmd.tkn;
 	i = 0;

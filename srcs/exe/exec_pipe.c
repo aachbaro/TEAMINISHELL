@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:04:37 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/06 15:47:32 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/07 15:16:32 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	exec_pipe(t_data *data)
 {
-	int		i;
+	int			i;
 	t_pipetools	pipes;
 
 	i = 0;
 	save_initial_fds(&pipes);
-	while (data->cmds[i].line)
+	while (data->cmds && data->cmds[i].line) //added first test data->cmds
 	{
 		pipes.fds[0] = 0;
 		pipes.fds[1] = 1;
@@ -29,7 +29,7 @@ int	exec_pipe(t_data *data)
 		if (!ft_strncmp(get_cmd_name(data->cmds[i]), "./minishell", 11))
 			g_g.status = 3;
 		else
-			g_g.status = 1; // 1 for forked process
+			g_g.status = 1;
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGQUIT, &signal_handler);
 		if (pipes.pid == -1)
@@ -84,7 +84,7 @@ void	child_process(t_pipetools *pipes, t_data *data, int i)
 	else
 	{
 		if (data->cmds[i].path && execve(data->cmds[i].path,
-			data->cmds[i].args, lst_to_tab(data->env)) == -1)
+				data->cmds[i].args, lst_to_tab(data->env)) == -1)
 		{
 			perror(data->cmds[i].path);
 			free_all(data);
@@ -92,7 +92,6 @@ void	child_process(t_pipetools *pipes, t_data *data, int i)
 			close(pipes->redir.save_stdout);
 			close(pipes->save_stdin);
 			close(pipes->save_stdout);
-			//exit(0);
 		}
 	}
 }
@@ -115,7 +114,7 @@ void	parent_process(t_pipetools *pipes, t_data *data, int i)
 	restaure_fds_redir(&pipes->redir);
 }
 
-void	restaure_initial_fds(t_pipetools *pipes , int i)
+void	restaure_initial_fds(t_pipetools *pipes, int i)
 {
 	if (i > 1)
 	{

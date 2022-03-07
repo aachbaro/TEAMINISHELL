@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:56:57 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/02/22 11:57:05 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/07 14:09:57 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	init_redin(t_tkn tkn)
 int	init_redout(t_tkn tkn)
 {
 	int	fd;
-	
+
 	if (tkn.type == TYPE_REDOUT)
 		fd = open(tkn.content, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else

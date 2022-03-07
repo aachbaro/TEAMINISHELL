@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 16:30:16 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/06 17:13:54 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/07 15:25:53 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_empty_pipe(t_data *data)
 	int	filled;
 
 	i = 0;
-	filled = 0;
+	filled = 2;
 	while (data->usr_input[i])
 	{
 		if (data->usr_input[i] == '|' && filled == 0)

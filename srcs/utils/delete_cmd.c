@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:42:29 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/06 16:51:17 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/07 15:12:48 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,5 @@ void	del_cmd(t_data *data)
 		i++;
 	}
 	free(data->cmds);
+	data->cmds = NULL; //rajouter pour eviter un heap use after free, mais segv mtn
 }

@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/06 17:40:13 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/07 15:08:33 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	inputing(t_data *data)
 {
 	int	ret;
 
-	ret = 0;
 	while (!data->over)
 	{
 		signal(SIGQUIT, SIG_IGN);
@@ -37,8 +36,7 @@ int	inputing(t_data *data)
 		ret = input_to_exe(data);
 		if (data->cmds && data->cmds->line && !ret)
 		{
-			if (data->cmds[1].line == NULL
-				&& is_builtin(data->cmds[0]))
+			if (data->cmds[1].line == NULL && is_builtin(data->cmds[0]))
 				exe_simple_cmd(data);
 			else
 				exec_pipe(data);
