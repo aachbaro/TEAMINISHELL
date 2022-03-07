@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:04:37 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/02 16:53:40 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/07 18:22:40 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int	tkn_var(t_data *data, int start, int cmd)
 	else
 		new = tkn_new(var, TYPE_VAR);
 	free(dup);
+	free(var);
 	if (!new)
 		return (-1);
 	if (data->cmds[cmd].line[i] == ' ')
