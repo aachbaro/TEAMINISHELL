@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 12:54:05 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/07 18:13:56 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/08 12:31:18 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ char	*get_path(char *cmd, t_envar *env)
 
 	if (!cmd)
 		return (ft_strdup(""));
+	if (!access(cmd, F_OK))
+		return (ft_strdup(cmd));
 	if (find_envar(env, "PATH"))
-		path = ft_strdup(find_envar(env, "PATH")->str);
+		path = ft_strdup(find_envar(env, "PATH")->value);
 	else
 		path = NULL;
 	if (!path)
