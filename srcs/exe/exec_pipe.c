@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:04:37 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/08 12:17:29 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:22:46 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void	child_process(t_pipetools *pipes, t_data *data, int i)
 	else
 		dup2(pipes->save_stdout, STDOUT_FILENO);
 	if (init_fds_redir(data->cmds[i], &pipes->redir) == -1
-			|| !data->cmds[i].path[0])
+			|| (!is_builtin(data->cmds[i])
+				&& !data->cmds[i].path[0]))
 	{
 		free_all(data);
 		close(pipes->redir.save_stdin);
