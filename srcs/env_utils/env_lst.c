@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 10:54:20 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/07 20:43:00 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:19:10 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	remove_var(t_envar **env, char *key)
 
 	curr = *env;
 	prev = *env;
-	while (*env)
+	while (curr)
 	{
 		if (ft_strcmp(curr->key, key) == 0)
 		{
