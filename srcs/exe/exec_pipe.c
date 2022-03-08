@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:04:37 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/08 14:22:46 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/08 16:23:47 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	exec_pipe(t_data *data)
 {
-	int			i;
+	int		i;
 	t_pipetools	pipes;
 
 	i = 0;
@@ -68,7 +68,10 @@ void	child_process(t_pipetools *pipes, t_data *data, int i)
 		close(pipes->fds[1]);
 	}
 	else
+	{
 		dup2(pipes->save_stdout, STDOUT_FILENO);
+		close(pipes->save_stdout);
+	}
 	if (init_fds_redir(data->cmds[i], &pipes->redir) == -1
 			|| (!is_builtin(data->cmds[i])
 				&& !data->cmds[i].path[0]))
@@ -118,6 +121,8 @@ void	parent_process(t_pipetools *pipes, t_data *data, int i)
 		pipes->old_fds[0] = pipes->fds[0];
 		pipes->old_fds[1] = pipes->fds[1];
 	}
+	close(pipes->fds[0]);
+	close(pipes->fds[1]);
 	wait(&pipes->status);
 	if (WIFEXITED(pipes->status))
 		g_g.exit = WEXITSTATUS(pipes->status);
