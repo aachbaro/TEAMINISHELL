@@ -6,7 +6,7 @@
 /*   By: ababaei <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 12:00:42 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/08 21:26:27 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/08 23:19:02 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,18 @@ void	handle_int(int sig)
 	if (g_g.status == 1)
 	{
 		ft_putchar_fd('\n', STDIN_FILENO);
+		g_g.exit = 128 + sig;
 		return ;
 	}
 	else if (g_g.status == 2)
 	{
+		rl_clear_history();
 		g_g.exit = 128 + sig;
 		exit(g_g.exit);
 	}
 	else if (g_g.status == 3)
 		return ;
-	else
+	else if (g_g.status == 0)
 	{
 		g_g.exit = 128 + sig;
 		ft_putchar_fd('\n', STDIN_FILENO);

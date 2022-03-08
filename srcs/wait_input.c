@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/08 13:58:04 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/08 23:19:17 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	inputing(t_data *data)
 int	prompt(t_data *data)
 {
 	data->usr_input = readline("8=o-- ");
-	printf("DEBUG::%s::\n", data->usr_input);
+	//printf("DEBUG::%s::\n", data->usr_input);
 	if (!data->usr_input)
 		return (-1);
 	if (!data->prev_input || (ft_strncmp(data->usr_input, data->prev_input,
