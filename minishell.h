@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/07 13:01:55 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/08 21:15:14 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ void	delst(void	*content);
 void	del_tab(char **tab);
 void	del_cmd(t_data *data);
 void	free_all(t_data *data);
-int	ft_error(char *msg, int exit_num);
+int		ft_error(char *msg, int exit_num);
 
 //INIT
 int		shell_start(t_data *data, char **env);

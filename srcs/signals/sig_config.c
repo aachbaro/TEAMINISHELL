@@ -6,7 +6,7 @@
 /*   By: ababaei <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 12:00:42 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/07 14:50:32 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/08 21:26:27 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	handle_int(int sig)
 	else if (g_g.status == 2)
 	{
 		g_g.exit = 128 + sig;
-		exit(0);
+		exit(g_g.exit);
 	}
 	else if (g_g.status == 3)
 		return ;
