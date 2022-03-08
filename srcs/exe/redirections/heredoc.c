@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:57:22 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/07 14:09:27 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/08 15:21:28 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,9 @@ int	init_heredoc(t_tkn *tkn, int heredoc_id, t_data *data)
 		{
 			unlink(heredoc_name);
 			close(fd);
+			free(heredoc_name);
 			return (130);
 		}
-		else if (forktool.status == 139)
-			ft_putstr_fd("warning: here-document delimited by end-of-file\n", 1);
 	}
 	close(fd);
 	free(tkn->content);
@@ -71,8 +70,11 @@ void	heredoc_loop(int fd, char *delim, t_data *data, int quotes)
 	while (!end)
 	{
 		input = readline("heredoc > ");
-		if (*input == 0)
-			break ;
+		if (!input)
+		{
+			ft_putstr_fd("here-doc delimited by end-of-file\n", 1);
+			break;
+		}
 		if (ft_strncmp(input, delim, ft_strlen(input) + 1) == 0)
 			end = 1;
 		else
