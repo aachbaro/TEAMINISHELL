@@ -21,8 +21,8 @@ int	exec_pipe(t_data *data)
 	save_initial_fds(&pipes);
 	while (data->cmds && data->cmds[i].line)
 	{
-		pipes.fds[0] = 0;
-		pipes.fds[1] = 1;
+	//	pipes.fds[0] = 0;
+	//	pipes.fds[1] = 1;
 		if (data->cmds[i + 1].line)
 			pipe(pipes.fds);
 		pipes.pid = fork();
@@ -121,8 +121,8 @@ void	parent_process(t_pipetools *pipes, t_data *data, int i)
 		pipes->old_fds[0] = pipes->fds[0];
 		pipes->old_fds[1] = pipes->fds[1];
 	}
-	close(pipes->fds[0]);
-	close(pipes->fds[1]);
+	//close(pipes->fds[0]);
+	//close(pipes->fds[1]);
 	wait(&pipes->status);
 	if (WIFEXITED(pipes->status))
 		g_g.exit = WEXITSTATUS(pipes->status);
