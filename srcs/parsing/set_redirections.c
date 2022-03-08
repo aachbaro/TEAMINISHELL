@@ -26,7 +26,7 @@ int	redir_in_tkns(t_data *data)
 	{
 		if (set_redir(&data->cmds[i]) == -1)
 			return (-1);
-		if (set_heredoc(&data->cmds[i], &data->heredoc_id, data) == -1)
+		if (set_heredoc(&data->cmds[i], &data->heredoc_id, data))
 			return (-1);
 		i++;
 	}
