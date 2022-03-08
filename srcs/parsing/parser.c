@@ -105,9 +105,11 @@ int	tkn_to_exe(t_data *data, int cmd)
 	char	*name;
 
 	name = get_cmd_name(data->cmds[cmd]);
+	if (is_builtin(data->cmds[cmd]))
+		return (0);
 	if (data->cmds[cmd].tkn)
 	{
-		data->cmds[cmd].path = get_path(name);
+		data->cmds[cmd].path = get_path(name, data->env);
 		if (!data->cmds[cmd].path)
 			return (ft_error("Error: malloc failed\n", -1));
 		data->cmds[cmd].args = get_args(data->cmds[cmd]);

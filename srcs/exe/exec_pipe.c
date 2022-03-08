@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 12:04:37 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/07 18:44:03 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/08 12:17:29 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	child_process(t_pipetools *pipes, t_data *data, int i)
 	}
 	else
 	{
-		if (data->cmds[i].path && execve(data->cmds[i].path,
+		if (execve(data->cmds[i].path,
 				data->cmds[i].args, lst_to_tab(data->env)) == -1)
 		{
 			perror(data->cmds[i].path);

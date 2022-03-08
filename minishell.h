@@ -141,7 +141,7 @@ void		heredoc_loop(int fd, char *delim, t_data *data, int quotes);
 char		*treat_heredoc_input(char *input, t_data *data);
 char		*var_name(char *str);
 char		**get_args(t_cmd cmd);
-char		*get_path(char *cmd);
+char		*get_path(char *cmd, t_envar *env);
 char 		*get_possible_path(char *cmd, char *str);
 int		in_loop(t_data *data, int cmd, t_dblquote_parser *pars);
 int		merge_tokens2(t_tkn *cpy);

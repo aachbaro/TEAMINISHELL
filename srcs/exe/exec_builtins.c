@@ -64,7 +64,7 @@ int	exe_builtin(t_data *data, int cmd)
 		ret = built_export(data->cmds[cmd], data);
 	else if (!ft_strncmp(get_cmd_name(data->cmds[cmd]), "exit", 4))
 		ret = built_exit(data->cmds[cmd], data);
-	else if (!ft_strncmp(data->cmds[cmd].line, "unset", 4))
+	else if (!ft_strncmp(data->cmds[cmd].line, "unset", 5))
 		ret = built_unset(data->cmds[cmd], data);
 	return (ret);
 }

@@ -17,6 +17,27 @@
  * This function changes active directory
  */
 
+char	*get_cd_param(t_cmd cmd)
+{
+	t_tkn	*cpy;
+	int	command_passed;
+
+	cpy = cmd.tkn;
+	command_passed = 0;
+	while (cpy)
+	{
+		if (cpy->type <= TYPE_VAR)
+		{
+			if (command_passed)
+				return (cpy->content);
+			else
+				command_passed = 1;
+		}
+		cpy = cpy->next;
+	}
+	return (NULL);
+}
+
 int	built_cd(t_cmd cmd, t_data *data)
 {
 	t_tkn	*cpy;
@@ -28,9 +49,10 @@ int	built_cd(t_cmd cmd, t_data *data)
 	i = 0;
 	pwd = find_envar(data->env, "PWD");
 	oldpwd = find_envar(data->env, "OLDPWD");
-	while (cpy && cpy->type < TYPE_QUOTE)
+	while (cpy)
 	{
-		i++;
+		if (cpy->type <= TYPE_VAR)
+			i++;
 		cpy = cpy->next;
 	}
 	if (i != 2)
@@ -39,7 +61,7 @@ int	built_cd(t_cmd cmd, t_data *data)
 		return (EXIT_FAILURE);
 	}
 	change_env(&oldpwd, ft_strjoin("OLDPWD=", getcwd(NULL, 10000)));
-	if (chdir(cmd.tkn->next->content) == -1)
+	if (chdir(get_cd_param(cmd)) == -1)
 		perror("cd");
 	change_env(&pwd, ft_strjoin("PWD=", (getcwd(NULL, 10000))));
 	return (EXIT_SUCCESS);
