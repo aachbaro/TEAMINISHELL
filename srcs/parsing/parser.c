@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 16:46:10 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/08 13:55:54 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/08 15:17:34 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ int	tkn_to_exe(t_data *data, int cmd)
 		data->cmds[cmd].args = get_args(data->cmds[cmd]);
 		if (!data->cmds[cmd].args)
 			return (ft_error("Error: malloc failed\n", -1));
-		printf("TiTO\n");
 	}
 	return (0);
 }
