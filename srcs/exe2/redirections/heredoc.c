@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:57:22 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/08 15:21:28 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/09 20:05:36 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,42 +19,27 @@
 
 int	init_heredoc(t_tkn *tkn, int heredoc_id, t_data *data)
 {
-	int			fd;
-	t_pipetools	forktool;
+	t_pipetools	fork;
 	char		*heredoc_name;
 
 	heredoc_name = filename_generator(heredoc_id);
-	if (!heredoc_name)
+	if (!heredoc_name || init_heredoc2(&heredoc_name, &fork) == -1)
 		return (-1);
-	fd = open(heredoc_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if (fd == -1)
-	{
-		free(heredoc_name);
-		return (-1);
-	}
-	forktool.pid = fork();
-	if (forktool.pid == -1)
-	{
-		close(fd);
-		return (-1);
-	}
-	else if (forktool.pid == 0)
+	if (fork.pid == 0)
 	{
 		g_g.status = 2;
-		heredoc_loop(fd, tkn->content, data, tkn->quotes);
+		free(heredoc_name);
+		heredoc_loop(fork.fds[0], tkn->content, data, tkn->quotes);
 	}
-	else
+	wait(&fork.status);
+	if (g_g.exit == 130)
 	{
-		wait(&forktool.status);
-		if (g_g.exit == 130)
-		{
-			unlink(heredoc_name);
-			close(fd);
-			free(heredoc_name);
-			return (130);
-		}
+		unlink(heredoc_name);
+		close(fork.fds[0]);
+		free(heredoc_name);
+		return (130);
 	}
-	close(fd);
+	close(fork.fds[0]);
 	free(tkn->content);
 	tkn->content = heredoc_name;
 	return (0);
@@ -64,32 +49,24 @@ void	heredoc_loop(int fd, char *delim, t_data *data, int quotes)
 {
 	int		end;
 	char	*input;
-	char	*str;
 
 	end = 0;
-	while (!end)
+	while (!end && !g_g.exit)
 	{
 		input = readline("heredoc > ");
 		if (!input)
 		{
 			ft_putstr_fd("here-doc delimited by end-of-file\n", 1);
-			break;
+			break ;
 		}
 		if (ft_strncmp(input, delim, ft_strlen(input) + 1) == 0)
 			end = 1;
 		else
-		{
-			if (!quotes)
-				str = treat_heredoc_input(input, data);
-			else
-				str = ft_strdup(input);
-			ft_putstr_fd(str, fd);
-			ft_putchar_fd('\n', fd);
-			free(str);
-		}
+			heredoc_loop2(fd, input, quotes, data);
 		free(input);
 	}
 	close(fd);
+	free_all(data);
 	exit(0);
 }
 
@@ -119,7 +96,6 @@ char	*filename_generator(int heredoc_id)
 char	*treat_heredoc_input(char *input, t_data *data)
 {
 	t_dblquote_parser	pars;
-	char				*var;
 
 	pars.i = 0;
 	pars.str = NULL;
@@ -130,33 +106,13 @@ char	*treat_heredoc_input(char *input, t_data *data)
 		pars.j = pars.i;
 		while (input[pars.j] && input[pars.j] != '$')
 			pars.j++;
-		var = ft_strndup(input + pars.i, pars.j - pars.i);
-		if (!var)
+		pars.k = 0;
+		if (treat_hdinput2(input, data, &pars))
 			return (NULL);
-		if (pars.str)
-			pars.tmp = ft_strjoin(pars.str, var);
-		else
-			pars.tmp = ft_strdup(var);
-		free(var);
-		if (pars.str)
-			free(pars.str);
-		if (input[pars.j] == '$')
-		{
-			var = var_name(input + pars.j - 1);
-			if (!var)
-				return (NULL);
-			pars.tmp2 = find_var(var, data->env, data->exit_status);
-			pars.j += ft_strlen(var);
-			free(var);
-			if (!pars.tmp2)
-				return (NULL);
-		}
-		else
-		{
+		if (input[pars.j] != '$' && !pars.k)
 			pars.tmp2 = ft_strdup("");
-			if (!pars.tmp2)
-				return (NULL);
-		}
+		if (!pars.tmp2)
+			return (NULL);
 		pars.str = ft_strjoin(pars.tmp, pars.tmp2);
 		free(pars.tmp);
 		free(pars.tmp2);

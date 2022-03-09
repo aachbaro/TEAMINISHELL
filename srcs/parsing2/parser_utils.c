@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:43:26 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/07 18:02:00 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/09 17:00:51 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,10 @@ int	merge_tokens(t_cmd *cmd)
 	while (cpy)
 	{
 		if (!cpy->space && cpy->next && cpy->next->type <= TYPE_VAR
-				&& cpy->type <= TYPE_VAR)
+			&& cpy->type <= TYPE_VAR)
 		{
 			if (merge_tokens2(cpy) == -1)
 				return (-1);
-
 		}
 		else
 			cpy = cpy->next;

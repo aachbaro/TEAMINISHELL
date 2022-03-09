@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:39:44 by ababaei           #+#    #+#             */
-/*   Updated: 2022/01/14 16:49:50 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/09 19:46:40 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,3 @@ char	*ft_strndup(const char *s, int n)
 	cpy[i] = 0;
 	return (cpy);
 }
-

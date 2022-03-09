@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:44:49 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/08 14:23:54 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/09 19:41:29 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 void	free_env_tab(char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (env)
@@ -54,4 +54,14 @@ void	free_all(t_data *data)
 		data->env = cpy;
 	}
 	free_env_tab(data->in_env);
+}
+
+void	exit_child(t_data *data, t_pipetools *pipes)
+{
+	free_all(data);
+	close(pipes->redir.save_stdin);
+	close(pipes->redir.save_stdout);
+	close(pipes->save_stdin);
+	close(pipes->save_stdout);
+	exit(0);
 }

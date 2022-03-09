@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/05 16:19:37 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/09 20:27:48 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@ int	set_redir(t_cmd *cmd)
 			if (!cpy->content)
 				return (-1);
 			if (cpy->next->next)
-			{
-				cpy->next->next->prev = cpy->next->prev;
 				cpy->next = cpy->next->next;
-			}
 			else
 				cpy->next = NULL;
 			free(tmp->content);
@@ -66,8 +63,8 @@ int	set_redir(t_cmd *cmd)
 
 int	set_heredoc(t_cmd *cmd, int *heredoc_id, t_data *data)
 {
-	t_tkn *cpy;
-	int	hd_id;
+	t_tkn	*cpy;
+	int		hd_id;
 
 	cpy = cmd->tkn;
 	hd_id = *heredoc_id;
@@ -75,8 +72,10 @@ int	set_heredoc(t_cmd *cmd, int *heredoc_id, t_data *data)
 	{
 		if (cpy->type == TYPE_HRDOC)
 		{
+			g_g.status = 1;
 			if (init_heredoc(cpy, hd_id, data))
 				return (-1);
+			g_g.status = 0;
 			hd_id++;
 		}
 		cpy = cpy->next;

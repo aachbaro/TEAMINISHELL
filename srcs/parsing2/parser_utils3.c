@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 17:25:12 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/07 13:59:23 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/09 17:01:52 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	is_pipe_sep(char c, t_dblquote_parser *p)
 char	**split_pipe(char *str)
 {
 	t_dblquote_parser	p;
-	char			**tab;
+	char				**tab;
 
 	p.i = 0;
 	p.k = 0;

@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:37:04 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/03 16:11:25 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/09 13:45:52 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 char	*recup_var(t_data *data, int start, int cmd)
 {
-	int	i;
 	char	*dup;
 	char	*ret;
+	int		i;
 
 	i = start + 1;
 	while (!ft_strchr(" <>$\"'", data->cmds[cmd].line[i])
-			&& data->cmds[cmd].line[i])
+		&& data->cmds[cmd].line[i])
 		i++;
 	dup = ft_strndup(data->cmds[cmd].line + start + 1, i - start);
 	if (!dup)
@@ -44,8 +44,8 @@ char	*find_var(char *var, t_envar *env, int exit_status)
 	while (cpy)
 	{
 		if (!ft_strncmp(var + 1, cpy->str, ft_strlen(var + 1))
-				&& cpy->str[ft_strlen(var + 1)] == '=')
-			break;
+			&& cpy->str[ft_strlen(var + 1)] == '=')
+			break ;
 		cpy = cpy->next;
 	}
 	if (cpy)

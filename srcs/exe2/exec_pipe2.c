@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   exec_pipe2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/02 14:09:10 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/09 14:04:17 by aachbaro         ###   ########.fr       */
+/*   Created: 2022/03/09 17:26:39 by aachbaro          #+#    #+#             */
+/*   Updated: 2022/03/09 21:05:55 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	ft_error(char *msg, int exit_num)
+void	child_process_init(t_pipetools *pipes, t_data *data, int i)
 {
-	if (msg)
-		ft_putstr_fd(msg, 2);
-	g_g.exit = exit_num;
-	return (EXIT_FAILURE);
-}
-
-int	expand_exit(int exit, int ret)
-{
-	g_g.exit = exit;
-	return (ret);
+	if (i)
+	{
+		dup2(pipes->old_fds[0], 0);
+		close(pipes->old_fds[0]);
+		close(pipes->old_fds[1]);
+	}
+	if (data->cmds[i + 1].line)
+	{
+		close(pipes->fds[0]);
+		dup2(pipes->fds[1], 1);
+		close(pipes->fds[1]);
+	}
+	else
+	{
+		dup2(pipes->save_stdout, STDOUT_FILENO);
+		close(pipes->save_stdout);
+	}
 }

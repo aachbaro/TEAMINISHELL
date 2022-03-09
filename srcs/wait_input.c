@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 14:51:59 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/08 23:19:17 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/09 21:05:53 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,17 @@ int	inputing(t_data *data)
 		data->exit_status = g_g.exit;
 		free(data->usr_input);
 	}
-	free_all(data);
-	return (g_g.exit);
+	return (free_all(data), g_g.exit);
 }
 
 int	prompt(t_data *data)
 {
 	data->usr_input = readline("8=o-- ");
-	//printf("DEBUG::%s::\n", data->usr_input);
 	if (!data->usr_input)
+	{
+		ft_putchar_fd('\n', 1);
 		return (-1);
+	}
 	if (!data->prev_input || (ft_strncmp(data->usr_input, data->prev_input,
 				ft_strlen(data->usr_input))
 			|| ft_strlen(data->prev_input) != ft_strlen(data->usr_input)))

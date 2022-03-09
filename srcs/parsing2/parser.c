@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 16:46:10 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/08 15:17:34 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/09 17:07:14 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,9 @@ int	input_to_tokens(t_data *data)
 
 	i = 0;
 	if (check_quote(data->usr_input) || check_empty_pipe(data))
-	{
-		g_g.exit = 2;
-		return (-1);
-	}
+		return (expand_exit(2, -1));
 	if (split_cmds(data, data->usr_input) == -1)
-	{
-		g_g.exit = -1;
-		return (-1);
-	}
+		return (expand_exit(-1, -1));
 	empty_input(data);
 	while (data->cmds[i].line)
 	{
@@ -64,9 +58,7 @@ int	input_to_tokens(t_data *data)
 			return (-1);
 		i++;
 	}
-	if (spaces_between_tkns(data) == -1)
-		return (ft_error("1Error: malloc failed\n", -1));
-	if (redir_in_tkns(data))
+	if (spaces_between_tkns(data) || redir_in_tkns(data))
 		return (-1);
 	return (0);
 }

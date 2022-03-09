@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:56:57 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/07 14:09:57 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/09 19:38:43 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ int	get_fds_redir(t_cmd cmd, t_redirtools *redir)
 	t_tkn	*cpy;
 
 	cpy = cmd.tkn;
-	redir->save_stdin = dup(STDIN_FILENO);
-	redir->save_stdout = dup(STDOUT_FILENO);
-	redir->fd_in = -42;
-	redir->fd_out = -42;
+	init_redirtool(redir);
 	while (cpy)
 	{
 		if (cpy->type == TYPE_REDIN || cpy->type == TYPE_HRDOC)

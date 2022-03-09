@@ -2,26 +2,28 @@ NAME = minishell
 
 SRC = srcs/main.c \
 	  srcs/wait_input.c \
-	  srcs/parsing/parser.c \
-	  srcs/parsing/parser_utils.c \
-	  srcs/parsing/parser_utils2.c \
-	  srcs/parsing/tokenisation.c \
-	  srcs/parsing/tokenisation2.c \
-	  srcs/parsing/set_redirections.c \
-	  srcs/parsing/search_executable.c \
-	  srcs/parsing/pars_error.c \
-	  srcs/parsing/parser_utils3.c \
-	  srcs/exe/exec_builtins.c \
-	  srcs/exe/exec_pipe.c \
-	  srcs/exe/builtins/built_cd.c \
-	  srcs/exe/builtins/built_echo.c \
-	  srcs/exe/builtins/built_env.c \
-	  srcs/exe/builtins/built_pwd.c \
-	  srcs/exe/builtins/built_unset.c \
-	  srcs/exe/builtins/built_export.c \
-	  srcs/exe/builtins/built_exit.c \
-	  srcs/exe/redirections/heredoc.c \
-	  srcs/exe/redirections/redirection_handler.c \
+	  srcs/parsing2/parser.c \
+	  srcs/parsing2/parser_utils.c \
+	  srcs/parsing2/parser_utils2.c \
+	  srcs/parsing2/tokenisation.c \
+	  srcs/parsing2/tokenisation2.c \
+	  srcs/parsing2/set_redirections.c \
+	  srcs/parsing2/search_executable.c \
+	  srcs/parsing2/pars_error.c \
+	  srcs/parsing2/parser_utils3.c \
+	  srcs/exe2/exec_builtins.c \
+	  srcs/exe2/exec_pipe.c \
+	  srcs/exe2/exec_pipe2.c \
+	  srcs/exe2/builtins/built_cd.c \
+	  srcs/exe2/builtins/built_echo.c \
+	  srcs/exe2/builtins/built_env.c \
+	  srcs/exe2/builtins/built_pwd.c \
+	  srcs/exe2/builtins/built_unset.c \
+	  srcs/exe2/builtins/built_export.c \
+	  srcs/exe2/builtins/built_exit.c \
+	  srcs/exe2/redirections/heredoc.c \
+	  srcs/exe2/redirections/heredoc2.c \
+	  srcs/exe2/redirections/redirection_handler.c \
 	  srcs/init/shell_start.c \
 	  srcs/utils/delete_cmd.c \
 	  srcs/utils/delete_tab.c \
@@ -47,7 +49,7 @@ CC = gcc #clang
 
 INC = -Iminishell.h
 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 
 RM = rm -rf
 
