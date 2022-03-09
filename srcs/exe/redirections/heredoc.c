@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:57:22 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/09 16:39:51 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/09 18:04:52 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	heredoc_loop(int fd, char *delim, t_data *data, int quotes)
 		}
 		free(input);
 	}
+	free_all(data);
 	close(fd);
 	exit(0);
 }
