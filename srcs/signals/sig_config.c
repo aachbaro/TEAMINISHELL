@@ -31,7 +31,8 @@ void	handle_int(int sig)
 	{
 		rl_clear_history();
 		g_g.exit = 128 + sig;
-		//ft_putchar_fd(0, STDIN_FILENO);
+		free_all(g_g.data);
+		//ft_putchar_fd('\n', STDIN_FILENO);
 		//ft_putchar_fd('\n', STDIN_FILENO);
 		exit(g_g.exit);
 	}

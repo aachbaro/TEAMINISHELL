@@ -89,7 +89,7 @@ void	parent_process(t_pipetools *pipes, t_data *data, int i)
 		pipes->old_fds[1] = pipes->fds[1];
 	}
 	wait(&pipes->status);
-	if (WIFEXITED(pipes->status))
+	if (WIFEXITED(pipes->status) && !g_g.exit)
 		g_g.exit = WEXITSTATUS(pipes->status);
 	restaure_fds_redir(&pipes->redir);
 }
