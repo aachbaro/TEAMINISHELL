@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:26:43 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/09 17:43:35 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/14 23:52:21 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,18 @@ char	*get_cd_param(t_cmd cmd)
 	return (NULL);
 }
 
+void	change_pwd(t_envar **env, char *to)
+{
+	char	*pwd;
+	char	*joined;
+
+	pwd = getcwd(NULL, 10000);
+	joined = ft_strjoin(to, pwd);
+	change_env(env, joined);
+	free(pwd);
+	free(joined);
+}	 
+
 int	built_cd(t_cmd cmd, t_data *data)
 {
 	t_tkn	*cpy;
@@ -60,9 +72,9 @@ int	built_cd(t_cmd cmd, t_data *data)
 		ft_putstr_fd("Shell: cd: Wrong number of arguments\n", 2);
 		return (EXIT_FAILURE);
 	}
-	change_env(&oldpwd, ft_strjoin("OLDPWD=", getcwd(NULL, 10000)));
+	change_pwd(&oldpwd, "OLDPWD=");
 	if (chdir(get_cd_param(cmd)) == -1)
 		perror("cd");
-	change_env(&pwd, ft_strjoin("PWD=", (getcwd(NULL, 10000))));
+	change_pwd(&pwd, "PWD=");
 	return (EXIT_SUCCESS);
 }
