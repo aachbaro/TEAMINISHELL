@@ -6,7 +6,7 @@
 /*   By: ababaei <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 12:00:42 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/14 22:25:27 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/15 00:02:26 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
  * CTRL-\ is SIGQUIT
  * CTRL-d is not a signal but rather send an EOF 
  */
+
 void	handle_int(int sig)
 {
 	if (g_g.status == 1)
@@ -32,9 +33,7 @@ void	handle_int(int sig)
 		rl_clear_history();
 		g_g.exit = 128 + sig;
 		free_all(g_g.data);
-		//ft_putchar_fd('\n', STDIN_FILENO);
-		//ft_putchar_fd('\n', STDIN_FILENO);
-		//exit(g_g.exit);
+		return ;
 	}
 	else if (g_g.status == 3)
 		return ;
