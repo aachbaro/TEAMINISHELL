@@ -53,6 +53,7 @@ void	heredoc_loop(int fd, char *delim, t_data *data, int quotes)
 	end = 0;
 	while (!end && !g_g.exit)
 	{
+		g_g.data = data;
 		input = readline("heredoc > ");
 		if (!input)
 		{

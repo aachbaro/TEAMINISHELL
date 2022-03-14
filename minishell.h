@@ -107,6 +107,7 @@ typedef struct s_glob
 {
 	int	exit;
 	int	status;
+	t_data	*data;
 }	t_glob;
 
 extern t_glob	g_g;
