@@ -38,7 +38,7 @@ char	*find_var(char *var, t_envar *env, int exit_status)
 
 	cpy = env;
 	if (!ft_strncmp(var, "$", 1) && ft_strlen(var) == 1)
-		return ("$");
+		return (ft_strdup("$"));
 	if (!ft_strncmp(var, "$?", ft_strlen(var)))
 		return (ft_itoa(exit_status));
 	while (cpy)
