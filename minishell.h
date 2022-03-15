@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:39:23 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/09 20:02:50 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/15 12:56:13 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ typedef struct s_data
 
 typedef struct s_glob
 {
-	int	exit;
-	int	status;
+	int		exit;
+	int		status;
 	t_data	*data;
 }	t_glob;
 
