@@ -33,6 +33,7 @@ void	handle_int(int sig)
 		rl_clear_history();
 		g_g.exit = 128 + sig;
 		free_all(g_g.data);
+		exit(0);
 		return ;
 	}
 	else if (g_g.status == 3)

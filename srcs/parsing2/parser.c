@@ -58,7 +58,8 @@ int	input_to_tokens(t_data *data)
 			return (-1);
 		i++;
 	}
-	if (spaces_between_tkns(data) || redir_in_tkns(data))
+	if (chckinfsup(data) || spaces_between_tkns(data)
+		|| redir_in_tkns(data))
 		return (-1);
 	return (0);
 }

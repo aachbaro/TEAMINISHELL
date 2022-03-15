@@ -132,6 +132,8 @@ int		input_to_tokens(t_data *data);
 int		redir_in_tkns(t_data *data);
 int		set_redir(t_cmd *cmd);
 void	init_redirtool(t_redirtools *redir);
+int		chckinfsup(t_data *data);
+int		chckcmdinfsup(t_cmd *cmd);
 int		spaces_between_tkns(t_data *data);
 int		merge_tokens(t_cmd *cmd);
 int		inputing(t_data *data);

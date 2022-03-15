@@ -39,3 +39,45 @@ int	check_empty_pipe(t_data *data)
 		return (ft_putstr_fd("error: line ending with '|'\n", 1), -1);
 	return (0);
 }
+
+
+int	chckinfsup(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->cmds[i].line)
+	{
+		if (chckcmdinfsup(&data->cmds[i]))
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
+int	chckcmdinfsup(t_cmd *cmd)
+{
+	t_tkn *cpy;
+
+	cpy = cmd->tkn;
+
+	while (cpy)
+	{
+		if (cpy->type > TYPE_VAR
+			&& (!cpy->next || cpy->next->type > TYPE_VAR))
+		{
+			ft_putstr_fd("Syntax error near unexpected token `", 1);
+			if (!cpy->next)
+				ft_putstr_fd("newline'\n", 1);
+			else
+			{
+				ft_putstr_fd(cpy->next->content, 1);
+				ft_putstr_fd("'\n", 1);
+			}
+			g_g.exit = 2; 
+			return (-1);
+		}
+		cpy = cpy->next;
+	}
+	return (0);
+}
