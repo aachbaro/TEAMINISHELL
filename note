@@ -1,2 +1,0 @@
-In non-interactive mode ^C then echo $? doesnt print 130 idk why
-cat | cat | ls execute but not in the right side

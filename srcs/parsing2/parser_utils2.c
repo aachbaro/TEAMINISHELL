@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 11:37:04 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/09 13:45:52 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/15 14:07:49 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	in_loop(t_data *data, int cmd, t_dblquote_parser *pars)
 {
 	pars->tmp2 = ft_strdup(pars->str);
 	free(pars->str);
-	if (!pars->tmp)
+	if (!pars->tmp2)
 		return (-1);
 	pars->j = pars->i;
 	if (get_tmp_dbl(data, cmd, pars) == -1)

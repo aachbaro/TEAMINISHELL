@@ -6,7 +6,7 @@
 /*   By: ababaei <ababaei@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:26:43 by ababaei           #+#    #+#             */
-/*   Updated: 2022/03/14 23:52:21 by ababaei          ###   ########.fr       */
+/*   Updated: 2022/03/15 12:57:06 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	change_pwd(t_envar **env, char *to)
 	change_env(env, joined);
 	free(pwd);
 	free(joined);
-}	 
+}
 
 int	built_cd(t_cmd cmd, t_data *data)
 {

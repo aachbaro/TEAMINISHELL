@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 16:30:16 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/09 16:59:40 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/15 12:58:29 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	check_empty_pipe(t_data *data)
 	return (0);
 }
 
-
 int	chckinfsup(t_data *data)
 {
 	int	i;
@@ -57,10 +56,9 @@ int	chckinfsup(t_data *data)
 
 int	chckcmdinfsup(t_cmd *cmd)
 {
-	t_tkn *cpy;
+	t_tkn	*cpy;
 
 	cpy = cmd->tkn;
-
 	while (cpy)
 	{
 		if (cpy->type > TYPE_VAR
@@ -74,7 +72,7 @@ int	chckcmdinfsup(t_cmd *cmd)
 				ft_putstr_fd(cpy->next->content, 1);
 				ft_putstr_fd("'\n", 1);
 			}
-			g_g.exit = 2; 
+			g_g.exit = 2;
 			return (-1);
 		}
 		cpy = cpy->next;

@@ -1,1 +1,0 @@
-/home/noxen/Documents/TEAMINISHELL

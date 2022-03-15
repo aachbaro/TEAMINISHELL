@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 16:46:10 by aachbaro          #+#    #+#             */
-/*   Updated: 2022/03/09 17:07:14 by aachbaro         ###   ########.fr       */
+/*   Updated: 2022/03/15 14:12:27 by ababaei          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	cmd_to_tokens(char *str, t_data *data, int cmd)
 		else
 			j = tkn_alnum(data, i, cmd);
 		if (j == -1)
-			return (ft_error("Error: malloc failed\n", -1));
+			return (ft_error("Error: malloc failed\n", 1));
 		i += j;
 	}
 	return (0);
@@ -104,10 +104,10 @@ int	tkn_to_exe(t_data *data, int cmd)
 	{
 		data->cmds[cmd].path = get_path(name, data->env);
 		if (!data->cmds[cmd].path)
-			return (ft_error("Error: malloc failed\n", -1));
+			return (ft_error("Error: malloc failed\n", 1));
 		data->cmds[cmd].args = get_args(data->cmds[cmd]);
 		if (!data->cmds[cmd].args)
-			return (ft_error("Error: malloc failed\n", -1));
+			return (ft_error("Error: malloc failed\n", 1));
 	}
 	return (0);
 }
